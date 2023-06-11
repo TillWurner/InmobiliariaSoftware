@@ -45,8 +45,8 @@
 
             <hr class="linea-division">
             <ul class="list-unstyled margin-icon-sidebar">
-                <li class="{{ Request::is('inicio') ? 'active' : '' }}">
-                    <a href="/inicio"><i class="fas fa-home"></i> Inicio</a>
+                <li class="{{ Request::is('home') ? 'active' : '' }}">
+                    <a href="/home"><i class="fas fa-home"></i> Inicio</a>
                 </li>
                 <li class="{{ Request::is('gerentes') ? 'active' : '' }}">
                     <a href="/gerentes"><i class="fas fa-user-tie"></i> Gerentes</a>
