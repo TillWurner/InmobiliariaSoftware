@@ -22,6 +22,34 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Nombre 1</td>
+                        <td>correo1@example.com</td>
+                        <td>1234567891</td>
+                        <td>Carnet 1</td>
+                        <td>
+                            <form action="#" method="POST">
+                                <a href="#" class="btn btn-link"><ion-icon name="enter-outline"></ion-icon></a>
+                                <button type="submit" class="btn btn-link"><ion-icon
+                                        name="trash-outline"></ion-icon></button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Nombre 2</td>
+                        <td>correo2@example.com</td>
+                        <td>1234567892</td>
+                        <td>Carnet 2</td>
+                        <td>
+                            <form action="#" method="POST">
+                                <a href="#" class="btn btn-link"><ion-icon name="enter-outline"></ion-icon></a>
+                                <button type="submit" class="btn btn-link"><ion-icon
+                                        name="trash-outline"></ion-icon></button>
+                            </form>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -37,7 +65,6 @@
                 <form class="container" method="POST" action="#" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        {{--  <form> --}}
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Nombre:</label>
                             <input name="nombre" type="text" class="form-control" id="recipient-name">
@@ -54,16 +81,18 @@
                             <label for="message-text" class="col-form-label">Carnet:</label>
                             <textarea name="descripcion" class="form-control" id="message-text"></textarea>
                         </div>
-                        {{-- </form> --}}
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-info ">
-                            <!-- {{ __('Guardar') }}-->
-                        </button>
-                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                      <button type="submit" class="btn btn-info">
+                          Guardar
+                      </button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                          Cerrar
+                      </button>
+                  </div>
                 </form>
             </div>
         </div>
     </div>
+
 @endsection
