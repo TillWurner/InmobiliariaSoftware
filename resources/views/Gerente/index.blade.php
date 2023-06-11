@@ -19,8 +19,30 @@
             <th scope="col">Acciones</th>
           </tr>
         </thead>
+      
         <tbody>
-        </tbody>
+          @php
+          $personas = [
+              ['nombre' => 'Persona 1', 'correo' => 'persona1@example.com', 'telefono' => '1234567890', 'carnet' => 'Carnet 1'],
+              ['nombre' => 'Persona 2', 'correo' => 'persona2@example.com', 'telefono' => '0987654321', 'carnet' => 'Carnet 2']
+          ];
+          @endphp
+          @foreach($personas as $key => $persona)
+          <tr>
+            <th scope="row">{{ $key + 1 }}</th>
+            <td class="tabla-celda" >{{ $persona['nombre'] }}</td>
+            <td class="tabla-celda" >{{ $persona['correo'] }}</td>
+            <td class="tabla-celda" >{{ $persona['telefono'] }}</td>
+            <td class="tabla-celda" >{{ $persona['carnet'] }}</td>
+            <td>
+                <form action="#" method="POST">
+                    <a href=# class="btn btn-link"><ion-icon name="enter-outline"></ion-icon></a>
+                    <button type="submit" class="btn btn-link"><ion-icon name="trash-outline"></ion-icon></button>
+                </form>
+            </td>
+          </tr>
+          @endforeach
+      </tbody> 
   </table>
 </div>
 </body>
@@ -29,35 +51,30 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Gerente!</h1>
-            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Close</button> --}}
           </div>
           <form  class="container" method="POST" action="#" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
-             {{--  <form> --}}
                 <div class="mb-3">
                   <label for="recipient-name" class="col-form-label">Nombre:</label>
                   <input name="nombre"  type="text" class="form-control" id="recipient-name">
                 </div>
                 <div class="mb-3">
                   <label for="message-text" class="col-form-label">Correo:</label>
-                  <textarea name="descripcion" class="form-control" id="message-text"></textarea>
+                  <textarea name="correo" class="form-control" id="message-text"></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="message-text" class="col-form-label">Telefono:</label>
-                    <textarea name="descripcion" class="form-control" id="message-text"></textarea>
+                    <textarea name="telefono" class="form-control" id="message-text"></textarea>
                   </div>
                   <div class="mb-3">
                     <label for="message-text" class="col-form-label">Carnet:</label>
-                    <textarea name="descripcion" class="form-control" id="message-text"></textarea>
+                    <textarea name="carnet" class="form-control" id="message-text"></textarea>
                   </div>
-              {{-- </form> --}}
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button type="submit" class="btn btn-info ">
-               <!-- {{ __('Guardar') }}-->
-            </button>
+              <button type="submit" class="btn btn-info">Guardar</button>
             </div>
           </form>
         </div>
