@@ -1,11 +1,12 @@
-body{
-    background-image: url('/gerentecss/img/fondo2.jpeg');
+body {
+    background-image: url('/gerentecss/img/fondo2.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    
-} 
-.table{
+
+}
+
+.table {
 
     height: 30vh;
     padding-top: 30px;
@@ -13,18 +14,23 @@ body{
     padding-bottom: 50px;
     padding-left: 280px;
 }
-#tablita th,td {
+
+#tablita th,
+td {
     padding: 20px;
     width: 150px;
 }
+
 .btn.btn-secondary {
-    position: absolute;     /*Ambos el position y el right o otro deben estar juntos*/
+    position: absolute;
+    /*Ambos el position y el right o otro deben estar juntos*/
     top: 28%;
     right: 10%;
-    background-color:  #beaf87;
-    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    background-color: #beaf87;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
 }
-.title2{
+
+.title2 {
     padding-top: 50px;
     /*background: #ccc;*/
     width: fit-content;
@@ -34,12 +40,14 @@ body{
     right: 70%;
     color: rgb(0, 0, 0);
 }
-.container{
+
+.container {
     width: 100%;
     display: flex;
-    max-width: 1100px; 
+    max-width: 1100px;
 }
-.card{
+
+.card {
     bottom: 10%;
     left: 39%;
     width: 100%;
@@ -47,28 +55,34 @@ body{
     margin: 20px;
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
 }
-.card-body{
-    background-color:  #7c7c7c;
+
+.card-body {
+    background-color: #7c7c7c;
 }
+
 .btn.btn-primary {
-    background-color:  #4762bc;
-    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    background-color: #4762bc;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
 }
-.btn-close{
+
+.btn-close {
     width: 50px;
     height: 30px;
     margin: 5px;
 }
-.btn.btn-link{
+
+.btn.btn-link {
     font-size: 22px;
     color: blanchedalmond;
 }
+
 .modal-content {
-    background-color:  #7c7c7c;
+    background-color: #7c7c7c;
 }
-#cerrar{
+
+#cerrar {
     color: black;
     /* margin: 90px; */
     top: 30%;
@@ -76,12 +90,13 @@ body{
     left: 75%;
     right: 5%;
 }
-#guardar{
+
+#guardar {
     color: black;
-   /*  margin: 10px; */
-   margin: 0 auto;
+    /*  margin: 10px; */
+    margin: 0 auto;
     /* top: 10%; */
-   /*  padding-bottom: 30px; */
+    /*  padding-bottom: 30px; */
     /* padding-top: 30px; */
     /* bottom: 30%; */
     position: relative;
@@ -89,16 +104,18 @@ body{
     left: 0%;
     right: 5%;
 }
+
 table {
     width: 100%;
-  }
-  
-  th, td {
+}
+
+th,
+td {
     padding: 10px;
     text-align: left;
-  }
-  
-  thead {
+}
+
+thead {
     background-color: #333;
     color: #fff;
   }
