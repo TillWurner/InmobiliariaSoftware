@@ -48,8 +48,8 @@
                 <li class="{{ Request::is('inicio') ? 'active' : '' }}">
                     <a href="/inicio"><i class="fas fa-home"></i> Inicio</a>
                 </li>
-                <li class="{{ Request::is('#') ? 'active' : '' }}">
-                    <a href="#"><i class="fas fa-user-tie"></i> Gerentes</a>
+                <li class="{{ Request::is('gerentes') ? 'active' : '' }}">
+                    <a href="/gerentes"><i class="fas fa-user-tie"></i> Gerentes</a>
                 </li>
                 <li class="{{ Request::is('#') ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-user-tie"></i> Asesores</a>
@@ -111,7 +111,8 @@
             </nav>
 
             @yield('contenido')
-
+            
+            </div>
         </div>
     </div>
 

@@ -30,9 +30,10 @@ a:focus {
     transition: all 0.3s;
 }
 
+
 .navbar {
     padding: 15px 10px;
-    background: #ecebe6;
+    background: #beaf87;
     border: none;
     border-radius: 0;
     margin-bottom: 20px;
