@@ -75,25 +75,18 @@
                                                 <div class="profile-picture">
                                                     <img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png"
                                                         alt="Foto de perfil" id="profile-picture">
-                                                    <label for="file-upload" class="file-upload-label">
-                                                        <span class="upload-icon">
-                                                            <i class="fas fa-camera"></i>
-                                                        </span>
-                                                    </label>
-                                                    <input type="file" id="file-upload" class="file-upload-input"
-                                                        accept="image/*">
                                                 </div>
                                             </div>
                                             <hr class="hr-division">
                                             <h3 class="text-center">Datos del Inmueble</h3>
                                             <hr class="hr-division">
                                             <div class="profile-info">
-                                                <div class="form-group">
+                                                <div class="form-group form-group-edit">
                                                     <label for="titulo" class="col-form-label">Propietario:</label>
                                                     <input type="text" class="form-control"
                                                         value="Propietario {{ $loop->iteration }}" readonly>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group form-group-edit">
                                                     <label for="recipient-name" class="col-form-label">Direccion:</label>
                                                     <input name="direccion" type="text" class="form-control"
                                                         id="recipient-name" value="{{ $imagen['direccion'] }}"
@@ -101,7 +94,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
+                                                        <div class="form-group form-group-edit">
                                                             <label for="tamaño" class="col-form-label">Tamaño
                                                                 (mts²)
                                                                 :</label>
@@ -111,7 +104,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
+                                                        <div class="form-group form-group-edit">
                                                             <label for="tamaño" class="col-form-label">Precio
                                                                 ($us):</label>
                                                             <input name="precio" type="text" class="form-control"
@@ -120,9 +113,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="titulo" class="col-form-label">Estado:</label>
+                                                <div class="form-group form-group-edit">
+                                                    <label for="estado" class="col-form-label">Estado:</label>
                                                     <input type="text" class="form-control" value="En Venta" readonly>
+                                                </div>
+                                                <div class="form-group form-group-edit">
+                                                    <label for="descripcion" class="col-form-label">Descripcion:</label>
+                                                    <textarea type="text" class="form-control" value="En Venta" rows="2" readonly>Proident est culpa culpa sint dolor elit consequat velit.
+                                                    </textarea>
                                                 </div>
                                                 <div class="btn-container">
                                                     <button type="button"

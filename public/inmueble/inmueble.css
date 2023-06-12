@@ -242,6 +242,9 @@
 
 .img-smaller {
     width: 200px;
-    /* Ajusta el valor según el tamaño deseado */
     height: auto;
+}
+
+.form-group-edit {
+    margin-bottom: 0.5rem;
 }
