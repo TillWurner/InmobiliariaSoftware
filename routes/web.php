@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\HomeController;
 
@@ -32,3 +33,4 @@ Route::get('/contactus', [ContactusController::class, 'contactus'])->name('conta
 Route::get('/gerentes', [GerenteController::class, 'gerentes'])->name('gerentes');
 Route::get('/perfil', [GerenteController::class, 'perfil'])->name('perfil_gerente');
 
+Route::get('/asesores', [AsesorController::class, 'asesores'])->name('asesores');
