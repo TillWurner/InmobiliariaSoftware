@@ -53,8 +53,8 @@
                 <li class="{{ Request::is('gerentes') ? 'active' : '' }}">
                     <a href="/gerentes"><i class="fas fa-user-tie"></i> Gerentes</a>
                 </li>
-                <li class="{{ Request::is('#') ? 'active' : '' }}">
-                    <a href="#"><i class="fas fa-user-tie"></i> Asesores</a>
+                <li class="{{ Request::is('asesores') ? 'active' : '' }}">
+                    <a href="/asesores"><i class="fas fa-user-tie"></i> Asesores</a>
                 </li>
                 <li class="{{ Request::is('#') ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-user"></i> Propietarios</a>
