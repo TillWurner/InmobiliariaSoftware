@@ -1,0 +1,247 @@
+.btn-nuevo {
+    position: relative;
+    top: -53px;
+    left: 950px;
+    background-color: #beaf87;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.title2 {
+    padding-top: 30px;
+    padding-bottom: 0px;
+    width: fit-content;
+    margin: 0 auto;
+    top: 50%;
+    bottom: 70%;
+    right: 70%;
+    color: rgb(0, 0, 0);
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    max-width: 1100px;
+    padding-bottom: 50px;
+}
+
+/* IMAGENES */
+
+.image-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.info1 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    padding: 10px;
+}
+
+.info2 {
+    position: absolute;
+    bottom: 20;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    padding: 10px;
+}
+
+.brillo-imagen {
+    filter: brightness(1.2);
+}
+
+.bloque {
+    text-align: left;
+}
+
+.costo {
+    margin-left: 4px;
+    font-size: 14px;
+}
+
+.direccion {
+    text-align: left;
+    margin-top: -0px;
+    margin-left: 0px;
+    font-size: 14px;
+}
+
+.tamaño {
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.titulo {
+    font-weight: bold;
+}
+
+.zoom-image {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+/* .zoom-image:hover {
+    transform: scale(1.2);
+    z-index: 9999;
+} */
+
+.zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+
+/* MODAL */
+
+.modal-content {
+    background-color: #ffffff;
+}
+
+.modal-edit {
+    width: 200%;
+    margin-left: -50%;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0%;
+    padding: 15px 0px;
+    margin-right: 30px;
+}
+
+.modal-body {
+    transition: all 0.5s ease;
+}
+
+.show-left-only .datos-transacciones:last-child {
+    display: none;
+}
+
+.modal-footer button {
+    margin-left: 10px;
+}
+
+.guardar {
+    position: relative;
+    bottom: -60%;
+    margin-left: 10px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cerrar {
+    position: relative;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+#btn-guardar {
+    display: none;
+}
+
+.form-group-edit {
+    margin-bottom: 0rem;
+}
+
+/* CARGAR FOTO MODAL */
+
+.profile-picture-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-picture {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.upload-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.upload-icon:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.upload-icon i {
+    font-size: 24px;
+}
+
+.file-upload-label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.file-upload-input {
+    display: none;
+}
+
+/* OTROS */
+
+.btn-container {
+    text-align: center;
+}
+
+
+.btn-center {
+    display: inline-block;
+}
+
+.hr-division {
+    border-width: 5px;
+    border-color: #333;
+}
+
+.img-smaller {
+    width: 200px;
+    /* Ajusta el valor según el tamaño deseado */
+    height: auto;
+}
