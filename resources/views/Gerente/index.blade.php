@@ -43,11 +43,8 @@
                         <td>1234567892</td>
                         <td>Carnet 2</td>
                         <td>
-                            <form action="#" method="POST">
-                                <a href="#" class="btn btn-link"><ion-icon name="enter-outline"></ion-icon></a>
-                                <button type="submit" class="btn btn-link"><ion-icon
-                                        name="trash-outline"></ion-icon></button>
-                            </form>
+                                <a href="{{ route('perfil_gerente') }}" class="btn btn-link"><ion-icon name="enter-outline"></ion-icon></a>
+                                <button type="submit" class="btn btn-link"><ion-icon name="trash-outline"></ion-icon></button>
                         </td>
                     </tr>
                 </tbody>

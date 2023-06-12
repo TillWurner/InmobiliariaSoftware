@@ -10,4 +10,12 @@ class GerenteController extends Controller
     {
         return view('Gerente.index');
     }
+
+    public function perfil(){
+
+        return view('Gerente.profile');
+    }
+
+
+
 }

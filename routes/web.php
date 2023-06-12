@@ -30,3 +30,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 /* Route::get('/welcome', [App\Http\Controllers\HomeController::class, 'main'])->name('base'); */
 Route::get('/contactus', [ContactusController::class, 'contactus'])->name('contactus');
 Route::get('/gerentes', [GerenteController::class, 'gerentes'])->name('gerentes');
+Route::get('/perfil', [GerenteController::class, 'perfil'])->name('perfil_gerente');
+
