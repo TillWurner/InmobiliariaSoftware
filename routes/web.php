@@ -3,7 +3,7 @@
 use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\PropietarioController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +31,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 /* Route::get('/welcome', [App\Http\Controllers\HomeController::class, 'main'])->name('base'); */
 Route::get('/contactus', [ContactusController::class, 'contactus'])->name('contactus');
 Route::get('/gerentes', [GerenteController::class, 'gerentes'])->name('gerentes');
+Route::get('/propietarios', [PropietarioController::class, 'propietarios'])->name('propietarios');
 Route::get('/perfil', [GerenteController::class, 'perfil'])->name('perfil_gerente');
 
 Route::get('/asesores', [AsesorController::class, 'asesores'])->name('asesores');

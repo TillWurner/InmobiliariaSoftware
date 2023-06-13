@@ -1,0 +1,224 @@
+body {
+    background-image: url('/gerentecss/img/fondo2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+.table {
+    height: 30vh;
+    padding-top: 30px;
+    padding-right: 80px;
+    padding-bottom: 50px;
+    padding-left: 280px;
+}
+
+#tablita th,
+td {
+    padding: 20px;
+    width: 200px;
+}
+
+.btn-nuevo {
+    position: absolute;
+    top: 28%;
+    right: 10%;
+    background-color: #beaf87;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.title2 {
+    padding-top: 50px;
+    width: fit-content;
+    margin: 0 auto;
+    top: 50%;
+    bottom: 70%;
+    right: 70%;
+    color: rgb(0, 0, 0);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    max-width: 1100px;
+    padding-bottom: 40px;
+}
+
+.card {
+    bottom: 10%;
+    left: 39%;
+    width: 100%;
+    height: 20%;
+    margin: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    background-color: #7c7c7c;
+}
+
+.btn.btn-primary {
+    background-color: #4762bc;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-close {
+    width: 50px;
+    height: 30px;
+    margin: 5px;
+}
+
+.btn.btn-link {
+    font-size: 22px;
+    color: blanchedalmond;
+}
+
+table {
+    width: 100%;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+thead {
+    background-color: #333;
+    color: #fff;
+}
+
+tbody {
+    background-color: #333;
+}
+
+/* MODAL */
+
+.modal-content {
+    background-color: #7c7c7c;
+}
+
+.modal-edit {
+    width: 200%;
+    margin-left: -50%;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0%;
+    padding: 15px 0px;
+    margin-right: 30px;
+}
+
+.modal-body {
+    transition: all 0.5s ease;
+}
+
+.show-left-only .datos-transacciones:last-child {
+    display: none;
+}
+
+.modal-footer button {
+    margin-left: 10px;
+}
+
+.guardar {
+    position: relative;
+    bottom: -60%;
+    margin-left: 10px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cerrar {
+    position: relative;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+#btn-guardar {
+    display: none;
+}
+
+.form-group-edit {
+    margin-bottom: 0rem;
+}
+
+/* CARGAR FOTO MODAL */
+
+.profile-picture-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-picture {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.upload-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.upload-icon:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.upload-icon i {
+    font-size: 24px;
+}
+
+.file-upload-label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.file-upload-input {
+    display: none;
+}
+
+/* OTROS */
+
+.hr-division {
+    border-color: #ffffff6c;
+}
+
+.btn-container {
+    text-align: center;
+}
+
+.btn-center {
+    display: inline-block;
+}

@@ -56,8 +56,8 @@
                 <li class="{{ Request::is('asesores') ? 'active' : '' }}">
                     <a href="/asesores"><i class="fas fa-user-tie"></i> Asesores</a>
                 </li>
-                <li class="{{ Request::is('#') ? 'active' : '' }}">
-                    <a href="#"><i class="fas fa-user"></i> Propietarios</a>
+                <li class="{{ Request::is('propietarios') ? 'active' : '' }}">
+                    <a href="/propietarios"><i class="fas fa-user"></i> Propietarios</a>
                 </li>
                 <li class="{{ Request::is('#') ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-building"></i> Inmuebles</a>
