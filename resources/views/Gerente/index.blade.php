@@ -156,19 +156,6 @@
                                             accept="image/*">
                                     </div>
                                 </div>
-                                <!--
-                                <hr class="hr-division">
-                                <div class="datos-transacciones"><br>
-                                    <h6 class="text-center">Total de Transacciones Realizadas</h6>
-                                    <p class="text-center text-white">10 transacciones</p>
-                                    <h6 class="text-center">Transacciones en Procesos</h6>
-                                    <p class="text-center text-white">3 Transacciones</p>
-                                    <div class="btn-container">
-                                        <button type="button" class="btn btn-primary btn-sm btn-center">Ver
-                                            Propiedades</button>
-                                    </div>
-                                </div>
-                            -->
                             </div>
                             <div class="col-md-6">
                                 <h3 class="text-center">Datos Personales</h3>
