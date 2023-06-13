@@ -65,8 +65,8 @@
                 <li class="{{ Request::is('#') ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-folder"></i> Documentos</a>
                 </li>
-                <li class="{{ Request::is('#') ? 'active' : '' }}">
-                    <a href="#"><i class="fas fa-handshake"></i> Transacciones</a>
+                <li class="{{ Request::is('transacciones') ? 'active' : '' }}">
+                    <a href="/transacciones"><i class="fas fa-handshake"></i> Transacciones</a>
                 </li>
                 <li class="{{ Request::is('#') ? 'active' : '' }}">
                     <a href="#"><i class="fas fa-file"></i> Reportes</a>

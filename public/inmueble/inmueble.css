@@ -112,7 +112,11 @@
 /* MODAL */
 
 .modal-content {
-    background-color: #ffffff;
+    background-color: #7c7c7c;
+}
+
+.modal-header {
+    border-bottom: 1px solid #000 !important;
 }
 
 .modal-edit {

@@ -18,7 +18,6 @@
 @extends('layouts.sidebar')
 @section('contenido')
     <link rel="stylesheet" href={{ asset('inmueble/inmueble.css') }}>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <div class="title2">
         <h1>Listado de Inmuebles</h1>
     </div>
@@ -56,7 +55,7 @@
                     <div class="modal-dialog modal-xl" role="document">
                         <div class="modal-content modal-edit">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="modalLabel{{ $loop->iteration }}">Información del Asesor
+                                <h1 class="modal-title fs-5" id="modalLabel{{ $loop->iteration }}">Información del Inmueble
                                 </h1>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -121,10 +120,9 @@
                                                     <label for="descripcion" class="col-form-label">Descripcion:</label>
                                                     <textarea type="text" class="form-control" value="En Venta" rows="2" readonly>Proident est culpa culpa sint dolor elit consequat velit.
                                                     </textarea>
-                                                </div>
+                                                </div><br>
                                                 <div class="btn-container">
-                                                    <button type="button"
-                                                        class="btn btn-outline-danger btn-sm btn-center">
+                                                    <button type="button" class="btn btn-danger btn-sm btn-center">
                                                         Eliminar Inmueble</button>
                                                 </div>
                                             </div>
@@ -151,44 +149,50 @@
                                                 </div>
                                             </div><br>
                                             <div class="btn-container">
-                                                <button type="button"
-                                                    class="btn btn-outline-primary btn-sm btn-center">Ver todas
+                                                <button type="button" class="btn btn-primary btn-sm btn-center">Ver todas
                                                     las fotos</button>
                                             </div>
                                             <hr class="hr-division">
-                                            <h3 class="text-center">Asesor Asignado</h3>
-                                            <hr class="hr-division">
-                                            <p class="text-center">[no tiene asignado un asesor]</p>
+                                            {{-- <h3 class="text-center">Asesor Asignado</h3>
+                                            <hr class="hr-division"> --}}
+                                            <h6 class="text-center">[no tiene asignado un asesor]</h6>
                                             <div class="btn-container">
-                                                <button type="button" class="btn btn-outline-primary btn-sm btn-center">
+                                                <button type="button" class="btn btn-primary btn-sm btn-center">
                                                     Asignar asesor</button>
                                                 {{-- En caso que tenga asignado un asesor --}}
                                                 {{-- <button type="button" class="btn btn-primary btn-sm btn-center">
                                                     Ver Asesor</button> --}}
                                             </div>
                                             <hr class="hr-division">
-                                            <h3 class="text-center">Otras Opciones</h3>
+                                            <h5 class="text-center">Otras Opciones</h5>
                                             <hr class="hr-division">
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="btn-container">
-                                                        <button type="button"
-                                                            class="btn btn-outline-primary btn-sm btn-center">
-                                                            Documentos</button>
+                                                        <button type="button" class="btn btn-primary btn-sm btn-center">
+                                                            Ver Documentos</button>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="btn-container">
-                                                        <button type="button"
-                                                            class="btn btn-outline-primary btn-sm btn-center">
-                                                            Transacciones</button>
+                                                        <a type="button" href="#"
+                                                            class="btn btn-primary btn-sm btn-center">
+                                                            Ver Transacciones</a>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-md-6">
                                                     <div class="btn-container">
-                                                        <button type="button"
-                                                            class="btn btn-outline-primary btn-sm btn-center">
-                                                            Reportes</button>
+                                                        <button type="button" class="btn btn-primary btn-sm btn-center">
+                                                            Agregar Documento</button>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="btn-container">
+                                                        <a type="button" href="/transacciones?x={{ $i }}"
+                                                            class="btn btn-primary btn-sm btn-center">
+                                                            Iniciar Nueva Transaccion</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -369,10 +373,6 @@
             </div>
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 
     <script>
         var btnModificar = document.getElementsByClassName("btn-modificar");
