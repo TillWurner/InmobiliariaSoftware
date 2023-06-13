@@ -62,14 +62,14 @@
                 <li class="{{ Request::is('inmuebles') ? 'active' : '' }}">
                     <a href="/inmuebles"><i class="fas fa-building"></i> Inmuebles</a>
                 </li>
-                <li class="{{ Request::is('#') ? 'active' : '' }}">
-                    <a href="#"><i class="fas fa-folder"></i> Documentos</a>
+                <li class="{{ Request::is('documentos') ? 'active' : '' }}">
+                    <a href="/documentos"><i class="fas fa-folder"></i> Documentos</a>
                 </li>
                 <li class="{{ Request::is('transacciones') ? 'active' : '' }}">
                     <a href="/transacciones"><i class="fas fa-handshake"></i> Transacciones</a>
                 </li>
-                <li class="{{ Request::is('#') ? 'active' : '' }}">
-                    <a href="#"><i class="fas fa-file"></i> Reportes</a>
+                <li class="{{ Request::is('reportes') ? 'active' : '' }}">
+                    <a href="/reportes"><i class="fas fa-file"></i> Reportes</a>
                 </li>
             </ul>
             <hr class="linea-division">

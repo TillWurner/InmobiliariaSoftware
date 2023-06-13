@@ -15,10 +15,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Telefono</th>
                     <th scope="col">Carnet</th>
-                    <th scope="col">Codigo</th>
+                    <th scope="col">Telefono</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -26,10 +24,8 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>Propietario 1</td>
-                    <td>correo1@example.com</td>
                     <td>77777777</td>
                     <td>888888</td>
-                    <td>123ABC</td>
                     <td>
                         <form action="#" method="POST">
                             <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2">
@@ -45,10 +41,8 @@
                 <tr>
                     <th scope="row">2</th>
                     <td>Propietario 2</td>
-                    <td>correo2@example.com</td>
                     <td>66666666</td>
                     <td>9999999</td>
-                    <td>ABC123</td>
                     <td>
                         <form action="#" method="POST">
                             <a href="#" class="btn btn-link">
@@ -64,13 +58,13 @@
         </table>
     </div>
 
-    {{-- MODAL NUEVO ASESOR --}}
+    {{-- MODAL NUEVO PROPIETARIO --}}
     <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Asesor!</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Propietario!</h1>
                 </div>
                 <form class="container" method="POST" action="#" enctype="multipart/form-data">
                     @csrf
@@ -94,30 +88,14 @@
                                 required>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Correo:</label>
-                            <input type="email" name="descripcion" class="form-control" id="message-text"
-                                placeholder="correo@example.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Contraseña:</label>
-                            <input name="password" type="password" class="form-control" id="recipient-name" maxlength="10"
-                                required>
+                            <label for="message-text" class="col-form-label">Carnet:</label>
+                            <input type="text" name="descripcion" class="form-control" id="message-text"
+                                maxlength="7">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Telefono:</label>
                             <input name="tel" class="form-control" id="message-text" maxlength="8"
                                 pattern="[0-9]{1,8}">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Carnet:</label>
-                            <input type="text" name="descripcion" class="form-control" id="message-text"
-                                maxlength="7">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Carnet:</label>
-                            <input type="text" name="descripcion" class="form-control" id="message-text"
-                                maxlength="7">
                         </div>
 
                     </div>
@@ -138,7 +116,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content modal-edit">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Información del Asesor</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Información del Propietario</h1>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -164,6 +142,7 @@
                                             accept="image/*">
                                     </div>
                                 </div>
+                                <!--
                                 <hr class="hr-division">
                                 <div class="datos-transacciones"><br>
                                     <h6 class="text-center">Total de Transacciones Realizadas</h6>
@@ -175,6 +154,7 @@
                                             Propiedades</button>
                                     </div>
                                 </div>
+                            -->
                             </div>
                             <div class="col-md-6">
                                 <h3 class="text-center">Datos Personales</h3>
@@ -183,17 +163,7 @@
                                     <div class="form-group form-group-edit">
                                         <label for="recipient-name" class="col-form-label">Nombre:</label>
                                         <input name="nombre" type="text" class="form-control" id="recipient-name"
-                                            value="Asesor 1" required readonly>
-                                    </div>
-                                    <div class="form-group form-group-edit">
-                                        <label for="message-text" class="col-form-label">Correo:</label>
-                                        <input type="email" name="correo" class="form-control" id="message-text"
-                                            value="correo1@example.com" required readonly>
-                                    </div>
-                                    <div class="form-group form-group-edit">
-                                        <label for="message-text" class="col-form-label">Teléfono:</label>
-                                        <input type="tel" name="telefono" class="form-control" id="message-text"
-                                            value="77777777" readonly>
+                                            value="Propietario 1" required readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Carnet:</label>
@@ -201,9 +171,9 @@
                                             value="8888888" readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
-                                        <label for="message-text" class="col-form-label">Código:</label>
-                                        <input type="text" name="codigo" class="form-control" id="message-text"
-                                            value="123ABC" readonly>
+                                        <label for="message-text" class="col-form-label">Teléfono:</label>
+                                        <input type="tel" name="telefono" class="form-control" id="message-text"
+                                            value="77777777" readonly>
                                     </div>
                                     <br>
                                 </div>

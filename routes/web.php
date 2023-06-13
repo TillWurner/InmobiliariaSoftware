@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AsesorController;
+use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\InmuebleController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\TransaccionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -38,3 +40,5 @@ Route::get('/perfil', [GerenteController::class, 'perfil'])->name('perfil_gerent
 Route::get('/inmuebles', [InmuebleController::class, 'inmuebles'])->name('inmuebles');
 Route::get('/asesores', [AsesorController::class, 'asesores'])->name('asesores');
 Route::get('/transacciones', [TransaccionController::class, 'transacciones'])->name('transacciones');
+Route::get('/reportes', [ReporteController::class, 'reportes'])->name('reportes');
+Route::get('/documentos', [DocumentoController::class, 'documentos'])->name('documentos');

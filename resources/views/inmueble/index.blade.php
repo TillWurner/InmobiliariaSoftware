@@ -184,8 +184,9 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="btn-container">
-                                                        <button type="button" class="btn btn-primary btn-sm btn-center">
-                                                            Agregar Documento</button>
+                                                        <a type="button" href="/documentos?x={{ $i }}"
+                                                            class="btn btn-primary btn-sm btn-center">
+                                                            Agregar Documento</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -193,6 +194,13 @@
                                                         <a type="button" href="/transacciones?x={{ $i }}"
                                                             class="btn btn-primary btn-sm btn-center">
                                                             Iniciar Nueva Transaccion</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="btn-container">
+                                                        <a type="button" href="/reportes?x={{ $i }}"
+                                                            class="btn btn-primary btn-sm btn-center">
+                                                            Agregar Reporte</a>
                                                     </div>
                                                 </div>
                                             </div>
