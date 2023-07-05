@@ -23,43 +23,29 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Asesor 1</td>
-                    <td>correo1@example.com</td>
-                    <td>77777777</td>
-                    <td>888888</td>
-                    <td>123ABC</td>
-                    <td>
-                        <form action="#" method="POST">
-                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2">
-                                <ion-icon name="enter-outline"></ion-icon>
-                            </a>
-                            <button type="submit" class="btn btn-link">
-                                <ion-icon name="trash-outline"></ion-icon>
-                            </button>
-                        </form>
+                @foreach ($asesores as $i => $asesor)
+                    <tr>
+                        <th scope="row">{{ $i + 1 }}</th>
+                        <td>{{ $asesor->nombre }}</td>
+                        <td>{{ $asesor->correo }}</td>
+                        <td>{{ $asesor->telefono }}</td>
+                        <td>{{ $asesor->carnet }}</td>
+                        <td>{{ $asesor->codigo }}</td>
+                        <td>
+                            <form action="{{ route('eliminarAsesor', $asesor->id) }}" method="POST">
+                                @csrf
+                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
+                                    data-id="{{ $asesor->id }}">
+                                    <ion-icon name="enter-outline"></ion-icon>
+                                </a>
+                                <button type="submit" class="btn btn-link">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button>
+                            </form>
 
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Asesor 2</td>
-                    <td>correo2@example.com</td>
-                    <td>66666666</td>
-                    <td>9999999</td>
-                    <td>ABC123</td>
-                    <td>
-                        <form action="#" method="POST">
-                            <a href="#" class="btn btn-link">
-                                <ion-icon name="enter-outline"></ion-icon>
-                            </a>
-                            <button type="submit" class="btn btn-link">
-                                <ion-icon name="trash-outline"></ion-icon>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -72,7 +58,8 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Asesor!</h1>
                 </div>
-                <form class="container" method="POST" action="#" enctype="multipart/form-data">
+                <form class="container" method="POST" action="{{ route('registrarAsesor') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="profile-picture-container">
@@ -95,37 +82,35 @@
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Correo:</label>
-                            <input type="email" name="descripcion" class="form-control" id="message-text"
+                            <input type="email" name="correo" class="form-control" id="message-text"
                                 placeholder="correo@example.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                                 required>
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Contraseña:</label>
-                            <input name="password" type="password" class="form-control" id="recipient-name" maxlength="10"
+                            <input name="contrasena" type="password" class="form-control" id="recipient-name" maxlength="10"
                                 required>
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Telefono:</label>
-                            <input name="tel" class="form-control" id="message-text" maxlength="8"
+                            <input name="telefono" class="form-control" id="message-text" maxlength="8"
                                 pattern="[0-9]{1,8}">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Carnet:</label>
-                            <input type="text" name="descripcion" class="form-control" id="message-text"
-                                maxlength="7">
+                            <input type="text" name="carnet" class="form-control" id="message-text" maxlength="7">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Carnet:</label>
-                            <input type="text" name="descripcion" class="form-control" id="message-text"
-                                maxlength="7">
+                            <label for="message-text" class="col-form-label">Codigo:</label>
+                            <input type="text" name="codigo" class="form-control" id="message-text" maxlength="7">
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-success">
                             Guardar
                         </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div>
@@ -144,8 +129,11 @@
                     </button>
                 </div>
 
-                <form class="container" method="POST" action="#" enctype="multipart/form-data">
+                <form class="container" method="POST" action="{{ route('modificarAsesor', ['id' => 'idCapturado']) }}"
+                    enctype="multipart/form-data" data-route="{{ route('modificarAsesor', ['id' => 'idCapturado']) }}">
+
                     @csrf
+                    @method('PUT')
                     <div class="modal-body show-left-only">
                         <div class="row">
                             <div class="col-md-6">
@@ -182,28 +170,28 @@
                                 <div class="profile-info">
                                     <div class="form-group form-group-edit">
                                         <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                        <input name="nombre" type="text" class="form-control" id="recipient-name"
-                                            value="Asesor 1" required readonly>
+                                        <input name="nombre" type="text" class="form-control" id="nombre"
+                                            value="" required readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Correo:</label>
                                         <input type="email" name="correo" class="form-control" id="message-text"
-                                            value="correo1@example.com" required readonly>
+                                            value="" required readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Teléfono:</label>
                                         <input type="tel" name="telefono" class="form-control" id="message-text"
-                                            value="77777777" readonly>
+                                            value="" readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Carnet:</label>
                                         <input type="text" name="carnet" class="form-control" id="message-text"
-                                            value="8888888" readonly>
+                                            value="" readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Código:</label>
                                         <input type="text" name="codigo" class="form-control" id="message-text"
-                                            value="123ABC" readonly>
+                                            value="" readonly>
                                     </div>
                                     <br>
                                 </div>
@@ -211,11 +199,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="btn-cerrar" type="button" class="btn btn-danger"
-                            data-dismiss="modal">Cerrar</button>
+                        <button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>
                         <button id="btn-modificar" type="button" class="btn btn-warning">Modificar</button>
                         <button id="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
-                        <button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>
+                        <button id="btn-cerrar" type="button" class="btn btn-danger"
+                            data-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div>
@@ -223,6 +211,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
     {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 
@@ -288,6 +277,46 @@
             //     $('.modal-body').removeClass('show-left-only');
             //     $('.modal-body').addClass('animate__animated animate__fadeInRight');
             // });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal2').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var asesorId = button.data('id');
+                var modal = $(this);
+
+                var asesor = obtenerAsesorPorId(
+                    asesorId); // Función que obtiene los datos del asesor por su ID
+
+                if (asesor) {
+                    modal.find('[name="nombre"]').val(asesor.nombre);
+                    modal.find('[name="correo"]').val(asesor.correo);
+                    modal.find('[name="telefono"]').val(asesor.telefono);
+                    modal.find('[name="carnet"]').val(asesor.carnet);
+                    modal.find('[name="codigo"]').val(asesor.codigo);
+
+                    var form = modal.find('form');
+                    var route = form.data('route');
+                    route = route.replace('idCapturado', asesor.id);
+                    form.attr('action', route);
+                }
+
+                function obtenerAsesorPorId(asesorId) {
+                    var asesores =
+                        {!! json_encode($asesores) !!}; // Obtén los datos de los asesores desde tu PHP y conviértelos en un objeto JavaScript
+
+                    for (var i = 0; i < asesores.length; i++) {
+                        if (asesores[i].id === asesorId) {
+                            return asesores[i];
+                        }
+                    }
+
+                    return null; // Si no se encuentra el asesor, devuelve null o realiza alguna otra acción apropiada
+                }
+
+            });
         });
     </script>
 @endsection
