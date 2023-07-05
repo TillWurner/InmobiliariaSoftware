@@ -32,13 +32,6 @@ class AsesorController extends Controller
         return back();
     }
 
-    public function eliminarAsesor($id)
-    {
-        $asesor = Asesor::findOrFail($id);
-        $asesor->delete();
-        return back();
-    }
-
     public function modificarAsesor(Request $request, $id)
     {
         $asesor = Asesor::find($id);
@@ -50,6 +43,13 @@ class AsesorController extends Controller
         $asesor->codigo = $request->input('codigo');
         $asesor->update();
 
+        return back();
+    }
+
+    public function eliminarAsesor($id)
+    {
+        $asesor = Asesor::findOrFail($id);
+        $asesor->delete();
         return back();
     }
 }

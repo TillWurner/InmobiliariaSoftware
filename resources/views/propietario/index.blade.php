@@ -1,7 +1,7 @@
 @extends('layouts.sidebar')
 @section('contenido')
-<link rel="stylesheet" href={{ asset('propietariocss/propietario.css') }}> <!-- PARA USAR 2 PLANTILLAS CSS-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href={{ asset('propietariocss/propietario.css') }}> <!-- PARA USAR 2 PLANTILLAS CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <div class="title2">
         <h1>Listado de Propietarios</h1>
     </div>
@@ -21,39 +21,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Propietario 1</td>
-                    <td>77777777</td>
-                    <td>888888</td>
-                    <td>
-                        <form action="#" method="POST">
-                            <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2">
-                                <ion-icon name="enter-outline"></ion-icon>
-                            </a>
-                            <button type="submit" class="btn btn-link">
-                                <ion-icon name="trash-outline"></ion-icon>
-                            </button>
-                        </form>
+                @foreach ($propietarios as $i => $propietario)
+                    <tr>
+                        <th scope="row">{{ $i + 1 }}</th>
+                        <td>{{ $propietario->nombre }}</td>
+                        <td>{{ $propietario->carnet }}</td>
+                        <td>{{ $propietario->telefono }}</td>
+                        <td>
+                            <form action="{{ route('eliminarPropietario', $propietario->id) }}" method="POST">
+                                @csrf
+                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
+                                    data-id="{{ $propietario->id }}">
+                                    <ion-icon name="enter-outline"></ion-icon>
+                                </a>
+                                <button type="submit" class="btn btn-link">
+                                    <ion-icon name="trash-outline"></ion-icon>
+                                </button>
+                            </form>
 
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Propietario 2</td>
-                    <td>66666666</td>
-                    <td>9999999</td>
-                    <td>
-                        <form action="#" method="POST">
-                            <a href="#" class="btn btn-link">
-                                <ion-icon name="enter-outline"></ion-icon>
-                            </a>
-                            <button type="submit" class="btn btn-link">
-                                <ion-icon name="trash-outline"></ion-icon>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -66,7 +54,8 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Propietario!</h1>
                 </div>
-                <form class="container" method="POST" action="#" enctype="multipart/form-data">
+                <form class="container" method="POST" action="{{ route('registrarPropietario') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="profile-picture-container">
@@ -89,12 +78,11 @@
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Carnet:</label>
-                            <input type="text" name="descripcion" class="form-control" id="message-text"
-                                maxlength="7">
+                            <input type="text" name="carnet" class="form-control" id="message-text" maxlength="7">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Telefono:</label>
-                            <input name="tel" class="form-control" id="message-text" maxlength="8"
+                            <input name="telefono" class="form-control" id="message-text" maxlength="8"
                                 pattern="[0-9]{1,8}">
                         </div>
 
@@ -122,8 +110,11 @@
                     </button>
                 </div>
 
-                <form class="container" method="POST" action="#" enctype="multipart/form-data">
+                <form class="container" method="POST"
+                    action="{{ route('modificarPropietario', ['id' => 'idCapturado']) }}" enctype="multipart/form-data"
+                    data-route="{{ route('modificarPropietario', ['id' => 'idCapturado']) }}">
                     @csrf
+                    @method('PUT')
                     <div class="modal-body show-left-only">
                         <div class="row">
                             <div class="col-md-6">
@@ -143,18 +134,18 @@
                                     </div>
                                 </div>
                                 <!--
-                                <hr class="hr-division">
-                                <div class="datos-transacciones"><br>
-                                    <h6 class="text-center">Total de Transacciones Realizadas</h6>
-                                    <p class="text-center text-white">10 transacciones</p>
-                                    <h6 class="text-center">Transacciones en Procesos</h6>
-                                    <p class="text-center text-white">3 Transacciones</p>
-                                    <div class="btn-container">
-                                        <button type="button" class="btn btn-primary btn-sm btn-center">Ver
-                                            Propiedades</button>
-                                    </div>
-                                </div>
-                            -->
+                                                                <hr class="hr-division">
+                                                                <div class="datos-transacciones"><br>
+                                                                    <h6 class="text-center">Total de Transacciones Realizadas</h6>
+                                                                    <p class="text-center text-white">10 transacciones</p>
+                                                                    <h6 class="text-center">Transacciones en Procesos</h6>
+                                                                    <p class="text-center text-white">3 Transacciones</p>
+                                                                    <div class="btn-container">
+                                                                        <button type="button" class="btn btn-primary btn-sm btn-center">Ver
+                                                                            Propiedades</button>
+                                                                    </div>
+                                                                </div>
+                                                            -->
                             </div>
                             <div class="col-md-6">
                                 <h3 class="text-center">Datos Personales</h3>
@@ -163,17 +154,17 @@
                                     <div class="form-group form-group-edit">
                                         <label for="recipient-name" class="col-form-label">Nombre:</label>
                                         <input name="nombre" type="text" class="form-control" id="recipient-name"
-                                            value="Propietario 1" required readonly>
+                                            value="" required readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Carnet:</label>
                                         <input type="text" name="carnet" class="form-control" id="message-text"
-                                            value="8888888" readonly>
+                                            value="" readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Teléfono:</label>
                                         <input type="tel" name="telefono" class="form-control" id="message-text"
-                                            value="77777777" readonly>
+                                            value="" readonly>
                                     </div>
                                     <br>
                                 </div>
@@ -181,11 +172,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="btn-cerrar" type="button" class="btn btn-danger"
-                            data-dismiss="modal">Cerrar</button>
+                        <button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>
                         <button id="btn-modificar" type="button" class="btn btn-warning">Modificar</button>
                         <button id="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
-                        <button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>
+                        <button id="btn-cerrar" type="button" class="btn btn-danger"
+                            data-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div>
@@ -258,6 +249,44 @@
             //     $('.modal-body').removeClass('show-left-only');
             //     $('.modal-body').addClass('animate__animated animate__fadeInRight');
             // });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal2').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var propietarioId = button.data('id');
+                var modal = $(this);
+
+                var propietario = obtenerAsesorPorId(
+                    propietarioId); // Función que obtiene los datos del propietario por su ID
+
+                if (propietario) {
+                    modal.find('[name="nombre"]').val(propietario.nombre);
+                    modal.find('[name="carnet"]').val(propietario.carnet);
+                    modal.find('[name="telefono"]').val(propietario.telefono);
+
+                    var form = modal.find('form');
+                    var route = form.data('route');
+                    route = route.replace('idCapturado', propietario.id);
+                    form.attr('action', route);
+                }
+
+                function obtenerAsesorPorId(propietarioId) {
+                    var propietarios =
+                        {!! json_encode($propietarios) !!};
+
+                    for (var i = 0; i < propietarios.length; i++) {
+                        if (propietarios[i].id === propietarioId) {
+                            return propietarios[i];
+                        }
+                    }
+
+                    return null;
+                }
+
+            });
         });
     </script>
 @endsection
