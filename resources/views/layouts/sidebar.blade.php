@@ -71,6 +71,9 @@
                 <li class="{{ Request::is('reportes') ? 'active' : '' }}">
                     <a href="/reportes"><i class="fas fa-file"></i> Reportes</a>
                 </li>
+                <li class="{{ Request::is('mapas') ? 'active' : '' }}">
+                    <a href="/mapas"><i class="fas fa-file"></i> Ver Mapa</a>
+                </li>
             </ul>
             <hr class="linea-division">
         </nav>

@@ -6,6 +6,7 @@ use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\InmuebleController;
+use App\Http\Controllers\MapaController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\TransaccionController;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,4 @@ Route::get('/asesores', [AsesorController::class, 'asesores'])->name('asesores')
 Route::get('/transacciones', [TransaccionController::class, 'transacciones'])->name('transacciones');
 Route::get('/reportes', [ReporteController::class, 'reportes'])->name('reportes');
 Route::get('/documentos', [DocumentoController::class, 'documentos'])->name('documentos');
+Route::get('/mapas', [MapaController::class, 'mapas'])->name('mapas');
