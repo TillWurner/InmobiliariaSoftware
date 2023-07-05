@@ -39,6 +39,9 @@ Route::get('/propietarios', [PropietarioController::class, 'propietarios'])->nam
 Route::get('/perfil', [GerenteController::class, 'perfil'])->name('perfil_gerente');
 Route::get('/inmuebles', [InmuebleController::class, 'inmuebles'])->name('inmuebles');
 Route::get('/asesores', [AsesorController::class, 'asesores'])->name('asesores');
+Route::post('/registrarAsesor', [AsesorController::class, 'registrarAsesor'])->name('registrarAsesor');
+Route::put('/modificarAsesor/{id}', [AsesorController::class, 'modificarAsesor'])->name('modificarAsesor');
+Route::post('/eliminarAsesor/{id}', [AsesorController::class, 'eliminarAsesor'])->name('eliminarAsesor');
 Route::get('/transacciones', [TransaccionController::class, 'transacciones'])->name('transacciones');
 Route::get('/reportes', [ReporteController::class, 'reportes'])->name('reportes');
 Route::get('/documentos', [DocumentoController::class, 'documentos'])->name('documentos');
