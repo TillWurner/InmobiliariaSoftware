@@ -30,7 +30,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 
-<body>
+<body style="background-image: url({{asset('/gerentecss/img/fondo2.jpg')}})">
 
     <div class="wrapper">
         <!-- Sidebar  -->
