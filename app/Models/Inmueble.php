@@ -31,4 +31,9 @@ class Inmueble extends Model
     {
         return $this->belongsTo(Asesor::class, 'id_asesor');
     }
+
+    public function transaccion()
+    {
+        return $this->hasMany(Transaccion::class);
+    }
 }
