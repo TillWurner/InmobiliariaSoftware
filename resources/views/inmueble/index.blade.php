@@ -169,8 +169,8 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="btn-container">
-                                                        <button type="button" class="btn btn-primary btn-sm btn-center">
-                                                            Ver Documentos</button>
+                                                        <a type="button" href="/mis-documentos" class="btn btn-primary btn-sm btn-center">
+                                                            Ver Documentos</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">

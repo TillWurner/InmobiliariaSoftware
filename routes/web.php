@@ -50,3 +50,7 @@ Route::get('/transacciones', [TransaccionController::class, 'transacciones'])->n
 Route::get('/reportes', [ReporteController::class, 'reportes'])->name('reportes');
 Route::get('/documentos', [DocumentoController::class, 'documentos'])->name('documentos');
 Route::get('/mapas', [MapaController::class, 'mapas'])->name('mapas');
+Route::post('/registrarGerente', [GerenteController::class, 'registrarGerente'])->name('registrarGerente');
+Route::put('/modificarGerente/{id}', [GerenteController::class, 'modificarGerente'])->name('modificarGerente');
+Route::post('/eliminarGerente/{id}', [GerenteController::class, 'eliminarGerente'])->name('eliminarGerente');
+Route::get('/mis-documentos', [DocumentoController::class, 'misdocumentos'])->name('misdocumentos');

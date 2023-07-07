@@ -172,7 +172,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>
+                        <!--<button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>-->
                         <button id="btn-modificar" type="button" class="btn btn-warning">Modificar</button>
                         <button id="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
                         <button id="btn-cerrar" type="button" class="btn btn-danger"

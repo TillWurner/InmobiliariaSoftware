@@ -5,8 +5,9 @@
         <h1>Listado de Documentos</h1>
     </div>
 
-    {{-- <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@mdo">Nueva Transaccion</button> --}}
+   <!-- <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
+        data-whatever="@mdo">Nuevo
+        Documento</button>-->
     <div class="table">
         <table class="table table-dark table-striped" id="tablita">
             <thead>

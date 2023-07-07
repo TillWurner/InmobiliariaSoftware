@@ -10,4 +10,10 @@ class DocumentoController extends Controller
     {
         return view('documento.index');
     }
+
+    public function misdocumentos()
+    {
+        return view('documento.documento');
+    }
+
 }
