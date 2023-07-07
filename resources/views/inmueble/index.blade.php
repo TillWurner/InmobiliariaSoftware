@@ -192,10 +192,9 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="btn-container">
-                                                    <div class="btn-container">
-                                                        <a type="button" href="{{ route('misdocumentos', ['id' => $inmueble->id]) }}" class="btn btn-primary btn-sm btn-center">
-                                                            Ver Documentos
-                                                        </a>
+                                                    <a type="button" href="{{ route('misdocumentos', ['id' => $inmueble->id]) }}" class="btn btn-primary btn-sm btn-center">
+                                                        Ver Documentos
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -209,14 +208,14 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="btn-container">
-                                                    <a type="button" href="/documentos?x={{ $i }}"
+                                                    <a type="button" href="/documentos?x={{ $inmueble->id }}"
                                                         class="btn btn-primary btn-sm btn-center">
                                                         Agregar Documento</a>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="btn-container">
-                                                    <a type="button" href="/transacciones?x={{ $i }}"
+                                                    <a type="button" href="/transacciones?x={{ $inmueble->id }}"
                                                         class="btn btn-primary btn-sm btn-center">
                                                         Iniciar Nueva Transaccion</a>
                                                 </div>
@@ -225,7 +224,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="btn-container">
-                                                    <a type="button" href="/reportes?x={{ $i }}"
+                                                    <a type="button" href="/reportes?x={{ $inmueble->id }}"
                                                         class="btn btn-primary btn-sm btn-center">
                                                         Agregar Reporte</a>
                                                 </div>
