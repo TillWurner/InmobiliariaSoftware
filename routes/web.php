@@ -41,6 +41,12 @@ Route::put('/modificarPropietario/{id}', [PropietarioController::class, 'modific
 Route::post('/eliminarPropietario/{id}', [PropietarioController::class, 'eliminarPropietario'])->name('eliminarPropietario');
 Route::get('/perfil', [GerenteController::class, 'perfil'])->name('perfil_gerente');
 Route::get('/inmuebles', [InmuebleController::class, 'inmuebles'])->name('inmuebles');
+Route::post('/registrarInmueble', [InmuebleController::class, 'registrarInmueble'])->name('registrarInmueble');
+Route::put('/modificarInmueble/{id}', [InmuebleController::class, 'modificarInmueble'])->name('modificarInmueble');
+Route::post('/eliminarInmueble/{id}', [InmuebleController::class, 'eliminarInmueble'])->name('eliminarInmueble');
+Route::get('/buscar-propietarios', [PropietarioController::class, 'buscarPropietarios'])->name('buscar-propietarios');
+Route::get('/buscar-asesores', [AsesorController::class, 'buscarAsesores'])->name('buscar-asesores');
+Route::post('/asignarAsesor/{id}', [InmuebleController::class, 'asignarAsesor'])->name('asignarAsesor');
 Route::get('/asesores', [AsesorController::class, 'asesores'])->name('asesores');
 Route::post('/registrarAsesor', [AsesorController::class, 'registrarAsesor'])->name('registrarAsesor');
 Route::put('/modificarAsesor/{id}', [AsesorController::class, 'modificarAsesor'])->name('modificarAsesor');

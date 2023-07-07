@@ -46,4 +46,13 @@ class PropietarioController extends Controller
         $propietario->delete();
         return back();
     }
+
+    public function buscarPropietarios(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        $propietarios = Propietario::where('nombre', 'LIKE', '%' . $searchTerm . '%')->get();
+
+        return response()->json($propietarios);
+    }
 }
