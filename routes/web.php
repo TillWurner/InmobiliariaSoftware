@@ -6,6 +6,7 @@ use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\InmuebleController;
+use App\Http\Controllers\MapaController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\TransaccionController;
 use Illuminate\Support\Facades\Route;
@@ -57,3 +58,10 @@ Route::put('/modificarTransaccion/{id}', [TransaccionController::class, 'modific
 Route::post('/eliminarTransaccion/{id}', [TransaccionController::class, 'eliminarTransaccion'])->name('eliminarTransaccion');
 Route::get('/reportes', [ReporteController::class, 'reportes'])->name('reportes');
 Route::get('/documentos', [DocumentoController::class, 'documentos'])->name('documentos');
+Route::get('/mapas', [MapaController::class, 'mapas'])->name('mapas');
+Route::post('/registrarGerente', [GerenteController::class, 'registrarGerente'])->name('registrarGerente');
+Route::put('/modificarGerente/{id}', [GerenteController::class, 'modificarGerente'])->name('modificarGerente');
+Route::post('/eliminarGerente/{id}', [GerenteController::class, 'eliminarGerente'])->name('eliminarGerente');
+Route::get('/mis-documentos/{id}', [DocumentoController::class, 'misdocumentos'])->name('misdocumentos');
+Route::post('/registrarDocumento', [DocumentoController::class, 'registrarDocumento'])->name('registrarDocumento');
+Route::post('/eliminarDocumento/{id}', [DocumentoController::class, 'eliminarDocumento'])->name('eliminarDocumento');

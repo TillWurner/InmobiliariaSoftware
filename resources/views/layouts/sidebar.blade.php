@@ -72,6 +72,9 @@
                 <li class="{{ Request::is('reportes') ? 'active' : '' }}">
                     <a href="/reportes"><i class="fas fa-file"></i> Reportes</a>
                 </li>
+                <li class="{{ Request::is('mapas') ? 'active' : '' }}">
+                    <a href="/mapas"><i class="fas fa-file"></i> Ver Mapa</a>
+                </li>
             </ul>
             <hr class="linea-division">
         </nav>
@@ -100,7 +103,9 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Mi Perfil</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                                    <a class="dropdown-item" href="#" onclick="logout()">
+                                        Cerrar Sesión
+                                    </a>
                                 </div>
                             </li>
                         </ul>
@@ -137,6 +142,24 @@
     <!-- jQuery Custom Scroller CDN -->
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
+    </script>
+
+    
+    <script>
+        function logout() {
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ route('logout') }}';
+
+            var csrfToken = document.createElement('input');
+            csrfToken.type = 'hidden';
+            csrfToken.name = '_token';
+            csrfToken.value = '{{ csrf_token() }}';
+
+            form.appendChild(csrfToken);
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
 
     <script type="text/javascript">
