@@ -53,6 +53,9 @@ Route::post('/registrarAsesor', [AsesorController::class, 'registrarAsesor'])->n
 Route::put('/modificarAsesor/{id}', [AsesorController::class, 'modificarAsesor'])->name('modificarAsesor');
 Route::post('/eliminarAsesor/{id}', [AsesorController::class, 'eliminarAsesor'])->name('eliminarAsesor');
 Route::get('/transacciones', [TransaccionController::class, 'transacciones'])->name('transacciones');
+Route::post('/registrarTransaccion', [TransaccionController::class, 'registrarTransaccion'])->name('registrarTransaccion');
+Route::put('/modificarTransaccion/{id}', [TransaccionController::class, 'modificarTransaccion'])->name('modificarTransaccion');
+Route::post('/eliminarTransaccion/{id}', [TransaccionController::class, 'eliminarTransaccion'])->name('eliminarTransaccion');
 Route::get('/reportes', [ReporteController::class, 'reportes'])->name('reportes');
 Route::get('/documentos', [DocumentoController::class, 'documentos'])->name('documentos');
 Route::get('/mapas', [MapaController::class, 'mapas'])->name('mapas');
