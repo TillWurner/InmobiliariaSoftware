@@ -59,4 +59,6 @@ Route::get('/mapas', [MapaController::class, 'mapas'])->name('mapas');
 Route::post('/registrarGerente', [GerenteController::class, 'registrarGerente'])->name('registrarGerente');
 Route::put('/modificarGerente/{id}', [GerenteController::class, 'modificarGerente'])->name('modificarGerente');
 Route::post('/eliminarGerente/{id}', [GerenteController::class, 'eliminarGerente'])->name('eliminarGerente');
-Route::get('/mis-documentos', [DocumentoController::class, 'misdocumentos'])->name('misdocumentos');
+Route::get('/mis-documentos/{id}', [DocumentoController::class, 'misdocumentos'])->name('misdocumentos');
+Route::post('/registrarDocumento', [DocumentoController::class, 'registrarDocumento'])->name('registrarDocumento');
+Route::post('/eliminarDocumento/{id}', [DocumentoController::class, 'eliminarDocumento'])->name('eliminarDocumento');

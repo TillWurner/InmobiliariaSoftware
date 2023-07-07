@@ -192,8 +192,10 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="btn-container">
-                                                    <button type="button" class="btn btn-primary btn-sm btn-center">
-                                                        Ver Documentos</button>
+                                                    <div class="btn-container">
+                                                        <a type="button" href="{{ route('misdocumentos', ['id' => $inmueble->id]) }}" class="btn btn-primary btn-sm btn-center">
+                                                            Ver Documentos
+                                                        </a>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
