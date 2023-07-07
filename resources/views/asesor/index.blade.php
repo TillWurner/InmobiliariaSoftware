@@ -280,6 +280,7 @@
         });
     </script>
 
+    {{-- para mostrar los datos del asesor --}}
     <script>
         $(document).ready(function() {
             $('#exampleModal2').on('show.bs.modal', function(event) {
@@ -305,7 +306,7 @@
 
                 function obtenerAsesorPorId(asesorId) {
                     var asesores =
-                        {!! json_encode($asesores) !!}; // Obtén los datos de los asesores desde tu PHP y conviértelos en un objeto JavaScript
+                        {!! json_encode($asesores) !!}; // Obtiene los datos de los asesores y los conviérte en un objeto JavaScript
 
                     for (var i = 0; i < asesores.length; i++) {
                         if (asesores[i].id === asesorId) {
@@ -313,10 +314,54 @@
                         }
                     }
 
-                    return null; // Si no se encuentra el asesor, devuelve null o realiza alguna otra acción apropiada
+                    return null; // Si no se encuentra el asesor, devuelve null
                 }
 
             });
         });
+    </script>
+
+    {{-- para mostrar los datos del asesor desde otra vista --}}
+    <script>
+        $(document).ready(function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var id_asesor = urlParams.get('x');
+
+            if (id_asesor && id_asesor === id_asesor) {
+                $('#exampleModal2').modal('show');
+                rellenarDatos(id_asesor);
+            }
+        });
+
+        function rellenarDatos(id_asesor) {
+            var modal = $('#exampleModal2');
+
+            var asesor = obtenerAsesorPorId(
+                id_asesor);
+            if (asesor) {
+                modal.find('[name="nombre"]').val(asesor.nombre);
+                modal.find('[name="correo"]').val(asesor.correo);
+                modal.find('[name="telefono"]').val(asesor.telefono);
+                modal.find('[name="carnet"]').val(asesor.carnet);
+                modal.find('[name="codigo"]').val(asesor.codigo);
+
+                var form = modal.find('form');
+                var route = form.data('route');
+                route = route.replace('idCapturado', asesor.id);
+                form.attr('action', route);
+            }
+
+            function obtenerAsesorPorId(id_asesor) {
+                var asesores =
+                    {!! json_encode($asesores) !!};
+                for (var i = 0; i < asesores.length; i++) {
+                    if (asesores[i].id == id_asesor) {
+                        return asesores[i];
+                    }
+                }
+
+                return null;
+            }
+        }
     </script>
 @endsection

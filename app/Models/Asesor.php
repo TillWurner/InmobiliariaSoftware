@@ -18,4 +18,9 @@ class Asesor extends Model
         'carnet',
         'codigo'
     ];
+
+    public function inmueble()
+    {
+        return $this->hasMany(Inmueble::class);
+    }
 }

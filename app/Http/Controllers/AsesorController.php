@@ -52,4 +52,13 @@ class AsesorController extends Controller
         $asesor->delete();
         return back();
     }
+
+    public function buscarAsesores(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        $asesores = Asesor::where('nombre', 'LIKE', '%' . $searchTerm . '%')->get();
+
+        return response()->json($asesores);
+    }
 }
