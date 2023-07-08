@@ -13,21 +13,26 @@ class DocumentoSeeder extends Seeder
      */
     public function run(): void
     {
+        
         $data = [
             [
                 'descripcion' => "Croquis",
                 'id_inmueble' => "1",
+                'fecha' => "2023-05-10",
             ],
             [
                 'descripcion' => "Mapeo",
                 'id_inmueble' => "1",
+                'fecha' => "2023-07-08",
             ],
             [
                 'descripcion' => "Croquis",
                 'id_inmueble' => "2",
+                'fecha' => "2023-06-10"
             ],
         ];
 
         Documento::insert($data);
+        
     }
 }

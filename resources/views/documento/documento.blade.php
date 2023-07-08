@@ -29,9 +29,9 @@
                 <td>{{ $documento->id_inmueble }}</td>
                 <td>
                     <form action="#" method="POST">
-                        <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2">
+                        <a href="{{ route('descargarDocumento', $documento->archivo) }}" class="btn btn-link" target="_blank">
                             <ion-icon name="enter-outline"></ion-icon>
-                        </a>
+                        </a>                        
                         <button type="submit" class="btn btn-link">
                             <ion-icon name="trash-outline"></ion-icon>
                         </button>
@@ -72,8 +72,8 @@
                     </div>
                     <div class="form-group">
                         <label for="archivo" class="col-form-label">Archivo:</label>
-                        <input type="text" name="archivo" class="form-control" id="archivo">
-                    </div>
+                        <input type="file" name="archivo" class="form-control" id="archivo">
+                    </div>                    
                     <div class="form-group">
                         <label for="fecha" class="col-form-label">Fecha:</label>
                         <input type="date" name="fecha" class="form-control" id="fecha" required>

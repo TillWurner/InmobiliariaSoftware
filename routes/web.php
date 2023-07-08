@@ -11,6 +11,7 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\TransaccionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,7 @@ Route::post('/registrarTransaccion', [TransaccionController::class, 'registrarTr
 Route::put('/modificarTransaccion/{id}', [TransaccionController::class, 'modificarTransaccion'])->name('modificarTransaccion');
 Route::post('/eliminarTransaccion/{id}', [TransaccionController::class, 'eliminarTransaccion'])->name('eliminarTransaccion');
 Route::get('/reportes', [ReporteController::class, 'reportes'])->name('reportes');
-Route::get('/documentos', [DocumentoController::class, 'documentos'])->name('documentos');
+Route::get('/documents', [DocumentoController::class, 'documents'])->name('documents');
 Route::get('/mapas', [MapaController::class, 'mapas'])->name('mapas');
 Route::post('/registrarGerente', [GerenteController::class, 'registrarGerente'])->name('registrarGerente');
 Route::put('/modificarGerente/{id}', [GerenteController::class, 'modificarGerente'])->name('modificarGerente');
@@ -65,3 +66,8 @@ Route::post('/eliminarGerente/{id}', [GerenteController::class, 'eliminarGerente
 Route::get('/mis-documentos/{id}', [DocumentoController::class, 'misdocumentos'])->name('misdocumentos');
 Route::post('/registrarDocumento', [DocumentoController::class, 'registrarDocumento'])->name('registrarDocumento');
 Route::post('/eliminarDocumento/{id}', [DocumentoController::class, 'eliminarDocumento'])->name('eliminarDocumento');
+Route::get('/descargar-documento/{nombreArchivo}', function ($nombreArchivo) {
+    $rutaArchivo = storage_path('app/public/documentos/' . $nombreArchivo);
+
+    return Response::download($rutaArchivo);
+})->name('descargarDocumento');

@@ -33,8 +33,8 @@
                             <form action="{{ route('eliminarGerente', $gerente->id) }}" method="POST">
                                 @csrf
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
-                                    data-id="{{ $gerente->id }}">
-                                    <ion-icon name="enter-outline"></ion-icon>
+                                   data-id="{{ $gerente->id }}" data-foto="{{ asset('storage/fotos-gerentes') . '/' . $gerente->foto }}">
+                                   <ion-icon name="enter-outline"></ion-icon>
                                 </a>
                                 <button type="submit" class="btn btn-link">
                                     <ion-icon name="trash-outline"></ion-icon>
@@ -61,14 +61,13 @@
                     <div class="modal-body">
                         <div class="profile-picture-container">
                             <div class="profile-picture">
-                                <img src="https://www.seekpng.com/png/detail/355-3550337_png-file-male-avatar-png.png"
-                                    alt="Foto de perfil" id="profile-picture">
+                                <img src="" alt="Foto de perfil" id="profile-picture-nuevo">
                                 <label for="file-upload" class="file-upload-label">
                                     <span class="upload-icon">
                                         <i class="fas fa-camera"></i>
                                     </span>
                                 </label>
-                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*">
+                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
                             </div>
                         </div>
 
@@ -77,6 +76,10 @@
                             <input name="nombre" type="text" class="form-control" id="recipient-name" maxlength="50"
                                 required>
                         </div>
+                       <!-- <div class="form-group">
+                            <label for="foto" class="col-form-label">Foto:</label>
+                            <input type="file" name="foto" class="form-control" id="foto">
+                        </div> -->                       
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Correo:</label>
                             <input type="email" name="correo" class="form-control" id="message-text"
@@ -131,21 +134,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 class="text-center">Foto de Perfil</h3>
-                                <hr class="hr-division">
-                                <div class="profile-picture-container text-center">
-                                    <div class="profile-picture">
-                                        <img src="https://www.seekpng.com/png/detail/355-3550337_png-file-male-avatar-png.png"
-                                            alt="Foto de perfil" id="profile-picture">
-                                        <label for="file-upload" class="file-upload-label">
-                                            <span class="upload-icon">
-                                                <i class="fas fa-camera"></i>
-                                            </span>
-                                        </label>
-                                        <input type="file" id="file-upload" class="file-upload-input"
-                                            accept="image/*">
-                                    </div>
+                            <hr class="hr-division">
+                            <div class="profile-picture-container text-center">
+                                <div class="profile-picture">
+                                    <img src="" alt="Foto de perfil" id="profile-picture-ver">
+                                    <label for="file-upload" class="file-upload-label">
+                                        <span class="upload-icon">
+                                            <i class="fas fa-camera"></i>
+                                        </span>
+                                    </label>
+                                    <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
                                 </div>
-                                <hr class="hr-division">
+                            </div>
+                            <hr class="hr-division">
+
                             </div>
                             <div class="col-md-6">
                                 <h3 class="text-center">Datos Personales</h3>
@@ -247,42 +249,42 @@
         });
     </script>
 
-    <script>
-        $(document).ready(function() {
-            $('#exampleModal2').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var gerenteId = button.data('id');
-                var modal = $(this);
+<script>
+    $(document).ready(function() {
+        $('#exampleModal2').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var gerenteId = button.data('id');
+            var fotoUrl = button.data('foto');
+            var modal = $(this);
 
-                var gerente = obtenerGerentePorId(
-                    gerenteId); // Función que obtiene los datos del asesor por su ID
+            var gerente = obtenerGerentePorId(gerenteId); // Función que obtiene los datos del gerente por su ID
 
-                if (gerente) {
-                    modal.find('[name="nombre"]').val(gerente.nombre);
-                    modal.find('[name="correo"]').val(gerente.correo);
-                    modal.find('[name="telefono"]').val(gerente.telefono);
-                    modal.find('[name="carnet"]').val(gerente.carnet);
+            if (gerente) {
+                modal.find('[name="nombre"]').val(gerente.nombre);
+                modal.find('[name="correo"]').val(gerente.correo);
+                modal.find('[name="telefono"]').val(gerente.telefono);
+                modal.find('[name="carnet"]').val(gerente.carnet);
 
-                    var form = modal.find('form');
-                    var route = form.data('route');
-                    route = route.replace('idCapturado', gerente.id);
-                    form.attr('action', route);
-                }
+                var profilePictureId = 'profile-picture-ver';
+               // var fotoUrl = '{{ asset('storage/fotos-gerentes') . '/' . $gerente->foto }}';
 
-                function obtenerGerentePorId(gerenteId) {
-                    var gerentes =
-                        {!! json_encode($gerentes) !!}; // Obtén los datos de los asesores desde tu PHP y conviértelos en un objeto JavaScript
+                modal.find('#profile-picture-ver').attr('src', fotoUrl);
+            }
 
-                    for (var i = 0; i < gerentes.length; i++) {
-                        if (gerentes[i].id === gerenteId) {
-                            return gerentes[i];
-                        }
+            function obtenerGerentePorId(gerenteId) {
+                var gerentes = {!! json_encode($gerentes) !!};
+
+                for (var i = 0; i < gerentes.length; i++) {
+                    if (gerentes[i].id === gerenteId) {
+                        return gerentes[i];
                     }
-
-                    return null; // Si no se encuentra el asesor, devuelve null o realiza alguna otra acción apropiada
                 }
 
-            });
+                return null;
+            }
         });
-    </script>
+    });
+</script>
+
+
 @endsection
