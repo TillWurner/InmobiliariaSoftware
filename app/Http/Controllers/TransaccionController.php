@@ -23,7 +23,7 @@ class TransaccionController extends Controller
         $transaccion = new Transaccion();
         $transaccion->interesado = $interesado;
         $transaccion->fecha = $fecha;
-        $transaccion->id_inmueble = $id_inmueble;
+        $transaccion->inmueble_id = $id_inmueble;
         $transaccion->save();
 
         return redirect()->route('transacciones');

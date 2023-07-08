@@ -68,8 +68,8 @@ body {
     text-align: left;
 }
 
-.costo {
-    text-align: right;
+.descripcion {
+    text-align: left;
     margin-right: 2px;
     font-size: 14px;
 }

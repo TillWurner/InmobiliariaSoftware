@@ -11,11 +11,12 @@
         <table class="table table-dark table-striped" id="tablita">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Casa</th>
+                    <th scope="col"># Casa</th>
+                    {{-- <th scope="col">Casa</th> --}}
                     <th scope="col">Tipo</th>
                     <th scope="col">Propietario</th>
                     <th scope="col">Interesado</th>
+                    <th scope="col">Asesor</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Acciones</th>
                 </tr>
@@ -23,12 +24,13 @@
             <tbody>
                 @foreach ($transacciones as $i => $transaccion)
                     <tr>
-                        <th scope="row">{{ $i + 1 }}</th>
-                        <td><img src="https://img.freepik.com/vector-gratis/hermosa-casa_24877-50819.jpg" alt="casa"
-                                width="100%" height="100%"></td>
+                        <th scope="row">{{ $transaccion->inmueble->id }}</th>
+                        {{-- <td><img src="https://img.freepik.com/vector-gratis/hermosa-casa_24877-50819.jpg" alt="casa"
+                                width="100%" height="100%"></td> --}}
                         <td>{{ $transaccion->inmueble->razon }}</td>
                         <td>{{ $transaccion->inmueble->propietario->nombre }}</td>
                         <td>{{ $transaccion->interesado }}</td>
+                        <td>{{ $transaccion->inmueble->asesor->nombre }}</td>
                         <td>{{ $transaccion->fecha }}</td>
                         <td>
                             <form action="{{ route('eliminarTransaccion', $transaccion->id) }}" method="POST">
@@ -103,8 +105,8 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModal2Label">Transaccion X!</h1>
                 </div>
-                <form class="container" method="POST" action="{{ route('modificarTransaccion', ['id' => 'idCapturado']) }}"
-                    enctype="multipart/form-data"
+                <form class="container" method="POST"
+                    action="{{ route('modificarTransaccion', ['id' => 'idCapturado']) }}" enctype="multipart/form-data"
                     data-route="{{ route('modificarTransaccion', ['id' => 'idCapturado']) }}">
                     @csrf
                     @method('PUT')
@@ -119,8 +121,8 @@
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Interesado:</label>
-                            <input name="interesado" type="text" class="form-control" id="recipient-name"
-                                maxlength="50" readonly required>
+                            <input name="interesado" type="text" class="form-control" id="recipient-name" maxlength="50"
+                                readonly required>
                         </div>
                         {{-- <div class="form-group">
                             <label for="titulo" class="col-form-label">Tipo:</label>

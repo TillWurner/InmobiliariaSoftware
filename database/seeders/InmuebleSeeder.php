@@ -16,23 +16,28 @@ class InmuebleSeeder extends Seeder
         $data = [
             array(
                 'tamano' => 200, 'direccion' => "Barrio Equipetrol", 'precio' => 200000,
-                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 1
+                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 1,
+                'id_asesor' => 1,
             ),
             array(
                 'tamano' => 180, 'direccion' => "Barrio El Cambodromo", 'precio' => 180000,
-                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 2
+                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 2,
+                'id_asesor' => 2,
             ),
             array(
                 'tamano' => 150, 'direccion' => "Barrio Plan 3000", 'precio' => 15000,
-                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 3
+                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 3,
+                'id_asesor' => 3,
             ),
             array(
                 'tamano' => 120, 'direccion' => "Barrio El Palmar", 'precio' => 100000,
-                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 4
+                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 4,
+                'id_asesor' => null,
             ),
             array(
                 'tamano' => 100, 'direccion' => "Barrio Urbari", 'precio' => 12000,
-                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 5
+                'razon' => "venta", 'descripcion' => "Casa en Venta", 'id_propietario' => 5,
+                'id_asesor' => null,
             ),
         ];
 

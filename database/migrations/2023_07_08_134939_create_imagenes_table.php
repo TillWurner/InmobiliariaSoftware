@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transacciones', function (Blueprint $table) {
+        Schema::create('imagenes', function (Blueprint $table) {
             $table->id();
-            $table->string('interesado');
-            $table->date('fecha');
-            $table->unsignedBigInteger('inmueble_id');
-            $table->foreign('inmueble_id')->references('id')->on('inmuebles');
+            $table->string('imagen')->nullable();
+            $table->string('descripcion');
+            $table->unsignedBigInteger('id_inmueble');
+            $table->foreign('id_inmueble')->references('id')->on('inmuebles');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transacciones');
+        Schema::dropIfExists('imagenes');
     }
 };

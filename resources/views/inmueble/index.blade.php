@@ -11,7 +11,7 @@
 
     <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
         data-whatever="@mdo">Nuevo Inmueble</button>
-    <div class="container">
+    <div class="container scrollable-container">
         <div class="row">
             @foreach ($inmuebles as $i => $inmueble)
                 <div class="col-md-4">
@@ -19,8 +19,18 @@
                         <img src="{{ $inmuebleBase }}" width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
                         <div class="info1 d-flex justify-content-between">
                             <div style="clear: both;">
-                                <div class="titulo">Casa {{ $i + 1 }}</div>
-                                <div class="titulo">En {{ $inmueble->razon }}</div>
+                                <div class="titulo">Casa {{ $inmueble->id }}</div>
+                                @if ($inmueble->transaccion->isNotEmpty())
+                                    @if ($inmueble->razon === 'venta')
+                                        <div class="titulo" style="color: red">Vendido</div>
+                                    @elseif($inmueble->razon === 'alquiler')
+                                        <div class="titulo"style="color: red">Alquilado</div>
+                                    @else
+                                        <div class="titulo"style="color: red">Alquilado AT</div>
+                                    @endif
+                                @else
+                                    <div class="titulo">En {{ $inmueble->razon }}</div>
+                                @endif
                             </div>
 
                             <div class="bloque">
@@ -93,8 +103,8 @@
                                                         <label for="tamaño" class="col-form-label">Precio
                                                             ($us):</label>
                                                         <input name="precio" type="text" class="form-control"
-                                                            id="tamaño" value="{{ $inmueble->precio }}" maxlength="10"
-                                                            required readonly>
+                                                            id="tamaño" value="{{ $inmueble->precio }}"
+                                                            maxlength="10" required readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -108,8 +118,7 @@
                                                 <textarea type="text" class="form-control" rows="2" readonly>{{ $inmueble->descripcion }}
                                                     </textarea>
                                             </div><br>
-                                            <form class="container" method="POST"
-                                                action="{{ route('eliminarInmueble', $inmueble->id) }}"
+                                            <form method="POST" action="{{ route('eliminarInmueble', $inmueble->id) }}"
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="btn-container">
@@ -140,8 +149,9 @@
                                             </div>
                                         </div><br>
                                         <div class="btn-container">
-                                            <button type="button" class="btn btn-primary btn-sm btn-center">Ver todas
-                                                las fotos</button>
+                                            <a href="{{ route('imagenes', $inmueble->id) }}" type="button"
+                                                class="btn btn-primary btn-sm btn-center">Ver todas
+                                                las fotos</a>
                                         </div>
                                         <hr class="hr-division">
 
@@ -153,7 +163,7 @@
                                                     Asignar asesor
                                                 </button>
                                             </div>
-                                            <h6 class="text-center escoger-asesor" style="display: none;">Escoge un asesor
+                                            <h6 class="text-center escoger-asesor" style="display: none;">Busca un asesor
                                                 para este inmueble</h6>
                                             <form method="POST" action="{{ route('asignarAsesor', $inmueble->id) }}"
                                                 enctype="multipart/form-data">
@@ -192,22 +202,6 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="btn-container">
-                                                    <a type="button" href="{{ route('misdocumentos', ['id' => $inmueble->id]) }}" class="btn btn-primary btn-sm btn-center">
-                                                        Ver Documentos
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="btn-container">
-                                                    <a type="button" href="#"
-                                                        class="btn btn-primary btn-sm btn-center">
-                                                        Ver Transacciones</a>
-                                                </div>
-                                            </div>
-                                        </div><br>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="btn-container">
                                                     <a type="button" href="/documentos?x={{ $inmueble->id }}"
                                                         class="btn btn-primary btn-sm btn-center">
                                                         Agregar Documento</a>
@@ -215,13 +209,42 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="btn-container">
-                                                    <a type="button" href="/transacciones?x={{ $inmueble->id }}"
+                                                    <a type="button"
+                                                        href="{{ route('misdocumentos', ['id' => $inmueble->id]) }}"
                                                         class="btn btn-primary btn-sm btn-center">
-                                                        Iniciar Nueva Transaccion</a>
+                                                        Ver Documentos
+                                                    </a>
                                                 </div>
-                                            </div><br>
+                                            </div>
                                         </div><br>
                                         <div class="row">
+                                            <div class="col-md-6">
+                                                @if (!$inmueble->transaccion->isNotEmpty())
+                                                    @if ($inmueble->id_asesor !== null)
+                                                        <div class="btn-container">
+                                                            <a type="button" href="/transacciones?x={{ $inmueble->id }}"
+                                                                class="btn btn-primary btn-sm btn-center">
+                                                                Realizar Transaccion
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="btn-container">
+                                                            <a type="button" href="#"
+                                                                class="btn btn-primary btn-sm btn-center realizar-transaccion-btn"
+                                                                data-target="#modal-{{ $inmueble->id }}">
+                                                                Realizar Transaccion
+                                                            </a>
+                                                            @if ($inmueble->id_asesor === null)
+                                                                <br><br>
+                                                                <h6 class="message mensaje-asesor"
+                                                                    style="display: none; color:red;">
+                                                                    Por favor, primero asigna un asesor!</h6>
+                                                            @endif
+                                                        </div>
+                                                    @endif
+                                                @else
+                                                @endif
+                                            </div>
                                             <div class="col-md-6">
                                                 <div class="btn-container">
                                                     <a type="button" href="/reportes?x={{ $inmueble->id }}"
@@ -229,7 +252,15 @@
                                                         Agregar Reporte</a>
                                                 </div>
                                             </div>
-                                        </div>
+                                            {{-- <div class="col-md-6">
+                                                <div class="btn-container">
+                                                    <a type="button" href="#"
+                                                        class="btn btn-primary btn-sm btn-center">
+                                                        Ver Transacciones</a>
+                                                </div>
+                                            </div> --}}
+                                            <br>
+                                        </div><br>
                                     </div>
                                 </div>
                                 <hr>
@@ -238,6 +269,7 @@
                                 <button id="btn-cerrar" type="button" class="btn btn-danger"
                                     data-dismiss="modal">Cerrar</button>
                             </div>
+                            <hr>
                         </div>
                     </div>
                 </div>
@@ -580,7 +612,7 @@
             $('.input-asesor').click(function() {
                 var inputPropietario = $(this);
                 var select = inputPropietario.siblings('.id_asesor');
-
+                $('.mensaje-asesor').hide();
                 if (inputPropietario.val() === '') {
                     select.hide();
                 } else if (select.find('option').length > 1) {
@@ -603,4 +635,18 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.realizar-transaccion-btn').click(function() {
+                var mensajeAsesor = $(this).siblings('.mensaje-asesor');
+
+                if (mensajeAsesor.length && mensajeAsesor.is(':hidden')) {
+                    mensajeAsesor.show();
+                    return false; // Prevenir la acción predeterminada del botón
+                }
+            });
+        });
+    </script>
+
 @endsection

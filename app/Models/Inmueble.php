@@ -36,4 +36,9 @@ class Inmueble extends Model
     {
         return $this->hasMany(Transaccion::class);
     }
+
+    public function imagen()
+    {
+        return $this->hasMany(Transaccion::class);
+    }
 }

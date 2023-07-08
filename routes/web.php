@@ -4,6 +4,7 @@ use App\Http\Controllers\AsesorController;
 use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\GerenteController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PropietarioController;
 use App\Http\Controllers\InmuebleController;
 use App\Http\Controllers\MapaController;
@@ -45,6 +46,9 @@ Route::get('/inmuebles', [InmuebleController::class, 'inmuebles'])->name('inmueb
 Route::post('/registrarInmueble', [InmuebleController::class, 'registrarInmueble'])->name('registrarInmueble');
 Route::put('/modificarInmueble/{id}', [InmuebleController::class, 'modificarInmueble'])->name('modificarInmueble');
 Route::post('/eliminarInmueble/{id}', [InmuebleController::class, 'eliminarInmueble'])->name('eliminarInmueble');
+Route::get('/imagenes/{id}', [ImagenController::class, 'imagenes'])->name('imagenes');
+Route::post('/registrarImagen/{id}', [ImagenController::class, 'registrarImagen'])->name('registrarImagen');
+Route::put('/modificarImagen/{id}', [ImagenController::class, 'modificarImagen'])->name('modificarImagen');
 Route::get('/buscar-propietarios', [PropietarioController::class, 'buscarPropietarios'])->name('buscar-propietarios');
 Route::get('/buscar-asesores', [AsesorController::class, 'buscarAsesores'])->name('buscar-asesores');
 Route::post('/asignarAsesor/{id}', [InmuebleController::class, 'asignarAsesor'])->name('asignarAsesor');

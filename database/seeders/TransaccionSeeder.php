@@ -14,9 +14,9 @@ class TransaccionSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            array('interesado' => "Alberto", 'fecha' => "2023-01-29", 'id_inmueble' => 1),
-            array('interesado' => "Julia", 'fecha' => "2023-02-15", 'id_inmueble' => 2),
-            array('interesado' => "Rodrigo", 'fecha' => "2023-03-07", 'id_inmueble' => 3),
+            array('interesado' => "Alberto", 'fecha' => "2023-01-29", 'inmueble_id' => 1),
+            array('interesado' => "Julia", 'fecha' => "2023-02-15", 'inmueble_id' => 2),
+            array('interesado' => "Rodrigo", 'fecha' => "2023-03-07", 'inmueble_id' => 3),
         ];
 
         Transaccion::insert($data);

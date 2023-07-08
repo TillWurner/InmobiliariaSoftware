@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaccion extends Model
+class Imagen extends Model
 {
     use HasFactory;
 
-    protected $table = 'transacciones';
+    protected $table = 'imagenes';
 
     protected $fillable = [
-        'interesado',
-        'fecha',
+        'imagen',
+        'descripcion',
         'inmueble_id',
     ];
 

@@ -6,7 +6,8 @@ body {
 }
 
 .table {
-    height: 30vh;
+    height: 57vh;
+    overflow-y: scroll;
     padding-top: 30px;
     padding-right: 80px;
     padding-bottom: 50px;
