@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 
 class DocumentoController extends Controller
 {
-    public function documentos()
+    public function documents()
     {
-        return view('documento.index');
+        $documentos = Documento::all();
+        return view('documento.index', ['documentos' => $documentos]);
     }
 
     public function misdocumentos($id)
@@ -22,19 +23,21 @@ class DocumentoController extends Controller
 
     public function registrarDocumento(Request $request)
     {
-        $descripcion = $request->input('descripcion');
-        $archivo = $request->input('archivo');
-        $fecha = $request->input('fecha');
-        $id_inmueble = $request->input('id_inmueble');
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo');
+            $nombreArchivo = uniqid() . '.' . $archivo->getClientOriginalExtension();
+            $archivo->storeAs('public/documentos', $nombreArchivo);
     
-        $documento = new Documento();
-        $documento->descripcion = $descripcion;
-        $documento->archivo = $archivo;
-        $documento->fecha = $fecha;
-        $documento->id_inmueble = $id_inmueble;
-        $documento->save();
+            // Guardar el nombre del archivo en la base de datos
+            $documento = new Documento;
+            $documento->descripcion = $request->input('descripcion');
+            $documento->archivo = $nombreArchivo;
+            $documento->fecha = $request->input('fecha');
+            $documento->id_inmueble = $request->input('id_inmueble');
+            $documento->save();
     
         return back();
+        }
     }
     
     public function eliminarDocumento($id)

@@ -16,6 +16,7 @@ class GerenteSeeder extends Seeder
         $data = [
             [
                 'nombre' => "Jose",
+                'foto' => "WhatsApp Image 2023-06-19 at 05.16.52.jpeg",
                 'telefono' => 69180490,
                 'correo' => "jose@gmail.com",
                 'password' => "123456789",

@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GerenteSeeder::class);
         $this->call(InmuebleSeeder::class);
         $this->call(TransaccionSeeder::class);
-        $this->call(DocumentoSeeder::class);
+       // $this->call(DocumentoSeeder::class);
     }
 }

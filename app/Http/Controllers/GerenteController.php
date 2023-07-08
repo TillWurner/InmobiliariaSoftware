@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Gerente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class GerenteController extends Controller
 {
@@ -27,7 +29,26 @@ class GerenteController extends Controller
         $gerente->telefono = $request->input('telefono');
         $gerente->correo = $request->input('correo');
         $gerente->carnet = $request->input('carnet');
-        $gerente->update();
+
+        if ($request->hasFile('foto')) {
+            // Obtener la foto anterior del gerente
+            $fotoAnterior = $gerente->foto;
+
+            // Guardar la nueva foto
+            $foto = $request->file('foto');
+            $fotoNombre = $foto->getClientOriginalName();
+            $foto->storeAs('public/fotos-gerentes', $fotoNombre);
+
+            // Actualizar el campo 'foto' del gerente con el nombre de la nueva foto
+            $gerente->foto = $fotoNombre;
+
+            // Eliminar la foto anterior si existe
+            if ($fotoAnterior) {
+                Storage::delete('public/fotos-gerentes/' . $fotoAnterior);
+            }
+        }
+
+        $gerente->save();
 
         return back();
     }
@@ -39,12 +60,21 @@ class GerenteController extends Controller
         $carnet = $request->input('carnet');
         $password = $request->input('contrasena');
 
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $fotoNombre = $foto->getClientOriginalName();
+            $foto->storeAs('public/fotos-gerentes', $fotoNombre);
+        } else {
+            $fotoNombre = null;
+        }
+
         $gerente = new Gerente();
         $gerente->nombre = $nombre;
         $gerente->telefono = $telefono;
         $gerente->correo = $correo;
         $gerente->carnet = $carnet;
         $gerente->password = $password;
+        $gerente->foto = $fotoNombre;
         $gerente->save();
 
         return back();

@@ -13,6 +13,7 @@ class Gerente extends Model
 
     protected $fillable = [
         'nombre',
+        'foto',
         'telefono',
         'correo',
         'password',

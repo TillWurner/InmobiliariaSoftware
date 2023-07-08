@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('gerentes', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('foto')->nullable();
             $table->integer('telefono');
             $table->string('correo')->unique();
             $table->string('password');
