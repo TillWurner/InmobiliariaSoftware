@@ -11,7 +11,7 @@
         <table class="table table-dark table-striped" id="tablita">
             <thead>
                 <tr>
-                    <th scope="col"># Casa</th>
+                    <th scope="col">Nro Inmueble</th>
                     {{-- <th scope="col">Casa</th> --}}
                     <th scope="col">Tipo</th>
                     <th scope="col">Propietario</th>
@@ -103,7 +103,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModal2Label">Transaccion X!</h1>
+                    <h1 class="modal-title fs-5" id="exampleModal2Label">Transaccion {{ $i + 1 }}</h1>
                 </div>
                 <form class="container" method="POST"
                     action="{{ route('modificarTransaccion', ['id' => 'idCapturado']) }}" enctype="multipart/form-data"
@@ -112,7 +112,7 @@
                     @method('PUT')
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">ID del Inmueble:</label>
+                            <label for="recipient-name" class="col-form-label">Nro Inmueble:</label>
                             <input name="id_inmueble" type="text" class="form-control" id="id-casa" readonly required>
                             {{-- Este atributo se rellanara solo, porque esta relacionado con el inmueble --}}
                             {{-- <label for="recipient-name" class="col-form-label">Propietario:</label>
@@ -203,7 +203,7 @@
                 var transaccion = obtenerTransaccionPorId(
                     transaccion_id);
                 if (transaccion) {
-                    modal.find('[name="id_inmueble"]').val(transaccion.id_inmueble);
+                    modal.find('[name="id_inmueble"]').val(transaccion.inmueble_id);
                     modal.find('[name="interesado"]').val(transaccion.interesado);
 
                     var form = modal.find('form');
