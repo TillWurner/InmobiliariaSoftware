@@ -37,8 +37,7 @@ class GerenteController extends Controller
             // Guardar la nueva foto
             $foto = $request->file('foto');
             $fotoNombre = $foto->getClientOriginalName();
-            $foto->storeAs('public/fotos-gerentes', $fotoNombre);
-
+            $foto->move(public_path('fotos/fotos-gerentes'), $fotoNombre);
             // Actualizar el campo 'foto' del gerente con el nombre de la nueva foto
             $gerente->foto = $fotoNombre;
 
@@ -63,7 +62,7 @@ class GerenteController extends Controller
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
             $fotoNombre = $foto->getClientOriginalName();
-            $foto->storeAs('public/fotos-gerentes', $fotoNombre);
+            $foto->move(public_path('fotos/fotos-gerentes'), $fotoNombre);
         } else {
             $fotoNombre = null;
         }
@@ -83,6 +82,7 @@ class GerenteController extends Controller
     public function eliminarGerente($id)
     {
         $gerente = Gerente::findOrFail($id);
+        Storage::delete('fotos/fotos-gerentes/' . $gerente->foto);
         $gerente->delete();
         return back();
     }
