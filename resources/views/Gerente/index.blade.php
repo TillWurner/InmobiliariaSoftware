@@ -33,7 +33,8 @@
                             <form action="{{ route('eliminarGerente', $gerente->id) }}" method="POST">
                                 @csrf
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
-                                   data-id="{{ $gerente->id }}" data-foto="{{ asset('storage/fotos-gerentes') . '/' . $gerente->foto }}">
+                                   data-id="{{ $gerente->id }}" data-foto="{{ asset('fotos/fotos-gerentes/' . $gerente->foto) }}"
+                                   >
                                    <ion-icon name="enter-outline"></ion-icon>
                                 </a>
                                 <button type="submit" class="btn btn-link">
@@ -125,9 +126,7 @@
                     </button>
                 </div>
 
-                <form class="container" method="POST" action="{{ route('modificarGerente', ['id' => 'idCapturado']) }}"
-                    enctype="multipart/form-data" data-route="{{ route('modificarGerente', ['id' => 'idCapturado']) }}">
-
+                <form class="container" method="POST" action="{{ route('modificarGerente', ['id' => $gerente->id]) }}" enctype="multipart/form-data" data-route="{{ route('modificarGerente', ['id' => $gerente->id]) }}">
                     @csrf
                     @method('PUT')
                     <div class="modal-body show-left-only">
