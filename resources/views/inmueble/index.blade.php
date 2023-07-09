@@ -26,7 +26,7 @@
                                     @elseif($inmueble->razon === 'alquiler')
                                         <div class="titulo"style="color: red">Alquilado</div>
                                     @else
-                                        <div class="titulo"style="color: red">Alquilado AT</div>
+                                        <div class="titulo"style="color: red">Anticretizado</div>
                                     @endif
                                 @else
                                     <div class="titulo">En {{ $inmueble->razon }}</div>
@@ -52,7 +52,8 @@
                     <div class="modal-dialog modal-xl" role="document">
                         <div class="modal-content modal-edit">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="modalLabel{{ $loop->iteration }}">Información del Inmueble
+                                <h1 class="modal-title fs-5 titulos-modal" id="modalLabel{{ $loop->iteration }}">
+                                    Información del Inmueble
                                 </h1>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -64,99 +65,72 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <hr class="hr-division">
-                                        <h3 class="text-center">Foto de Perfil</h3>
+                                        <h3 class="text-center titulos-modal">Datos del Inmueble</h3>
                                         <hr class="hr-division">
-                                        <div class="profile-picture-container text-center">
-                                            <div class="profile-picture">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png"
-                                                    alt="Foto de perfil" id="profile-picture">
+                                        <div class="form-group form-group-edit">
+                                            <label for="titulo" class="col-form-label">Propietario:</label>
+                                            <input type="text" class="form-control"
+                                                value="{{ $inmueble->propietario->nombre }}" readonly>
+                                        </div>
+                                        <div class="form-group form-group-edit">
+                                            <label for="recipient-name" class="col-form-label">Direccion:</label>
+                                            <input name="direccion" type="text" class="form-control" id="recipient-name"
+                                                value="{{ $inmueble->direccion }}" maxlength="20" required readonly>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group form-group-edit">
+                                                    <label for="tamaño" class="col-form-label">Tamaño
+                                                        (mts²)
+                                                        :</label>
+                                                    <input name="tamaño" type="text" class="form-control" id="tamaño"
+                                                        value="{{ $inmueble->tamano }}" maxlength="10" required readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-group-edit">
+                                                    <label for="tamaño" class="col-form-label">Precio
+                                                        ($us):</label>
+                                                    <input name="precio" type="text" class="form-control" id="tamaño"
+                                                        value="{{ $inmueble->precio }}" maxlength="10" required readonly>
+                                                </div>
                                             </div>
                                         </div>
-                                        <hr class="hr-division">
-                                        <h3 class="text-center">Datos del Inmueble</h3>
-                                        <hr class="hr-division">
-                                        <div class="profile-info">
-                                            <div class="form-group form-group-edit">
-                                                <label for="titulo" class="col-form-label">Propietario:</label>
-                                                <input type="text" class="form-control"
-                                                    value="{{ $inmueble->propietario->nombre }}" readonly>
-                                            </div>
-                                            <div class="form-group form-group-edit">
-                                                <label for="recipient-name" class="col-form-label">Direccion:</label>
-                                                <input name="direccion" type="text" class="form-control"
-                                                    id="recipient-name" value="{{ $inmueble->direccion }}" maxlength="20"
-                                                    required readonly>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-edit">
-                                                        <label for="tamaño" class="col-form-label">Tamaño
-                                                            (mts²)
-                                                            :</label>
-                                                        <input name="tamaño" type="text" class="form-control"
-                                                            id="tamaño" value="{{ $inmueble->tamano }}" maxlength="10"
-                                                            required readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-edit">
-                                                        <label for="tamaño" class="col-form-label">Precio
-                                                            ($us):</label>
-                                                        <input name="precio" type="text" class="form-control"
-                                                            id="tamaño" value="{{ $inmueble->precio }}"
-                                                            maxlength="10" required readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group form-group-edit">
-                                                <label for="estado" class="col-form-label">Estado:</label>
+                                        <div class="form-group form-group-edit">
+                                            <label for="estado" class="col-form-label">Estado:</label>
+
+                                            @if ($inmueble->transaccion->isNotEmpty())
+                                                @if ($inmueble->razon === 'venta')
+                                                    <input type="text" class="form-control" value="Vendido" readonly>
+                                                @elseif($inmueble->razon === 'alquiler')
+                                                    <input type="text" class="form-control" value="Alquilado"
+                                                        readonly>
+                                                @else
+                                                    <input type="text" class="form-control" value="Anticretizado"
+                                                        readonly>
+                                                @endif
+                                            @else
                                                 <input type="text" class="form-control"
                                                     value="En {{ $inmueble->razon }}" readonly>
-                                            </div>
-                                            <div class="form-group form-group-edit">
-                                                <label for="descripcion" class="col-form-label">Descripcion:</label>
-                                                <textarea type="text" class="form-control" rows="2" readonly>{{ $inmueble->descripcion }}
-                                                    </textarea>
-                                            </div><br>
-                                            <form method="POST" action="{{ route('eliminarInmueble', $inmueble->id) }}"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="btn-container">
-                                                    <button type="submit" class="btn btn-danger btn-sm btn-center">
-                                                        Eliminar Inmueble</button>
-                                                </div>
-                                            </form>
+                                            @endif
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <hr class="hr-division">
-                                        <h3 class="text-center">Imagenes del Inmueble</h3>
-                                        <hr class="hr-division">
-                                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                            <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
-                                                        alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
-                                                        alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
-                                                        alt="...">
-                                                </div>
-                                            </div>
+                                        <div class="form-group form-group-edit">
+                                            <label for="descripcion" class="col-form-label">Descripcion:</label>
+                                            <input type="text" class="form-control"
+                                                value="{{ $inmueble->descripcion }}" readonly>
                                         </div><br>
-                                        <div class="btn-container">
-                                            <a href="{{ route('imagenes', $inmueble->id) }}" type="button"
-                                                class="btn btn-primary btn-sm btn-center">Ver todas
-                                                las fotos</a>
-                                        </div>
-                                        <hr class="hr-division">
-
+                                        <form method="POST" action="{{ route('eliminarInmueble', $inmueble->id) }}"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="btn-container">
+                                                <button type="submit" class="btn btn-danger btn-sm btn-center">
+                                                    Eliminar Inmueble</button>
+                                            </div>
+                                        </form>
                                         @if ($inmueble->id_asesor == null)
-                                            <h6 class="text-center no-asesor">[no tiene asignado un asesor]</h6>
+                                            <hr class="hr-division">
+                                            <h5 class="text-center titulos-modal">No tiene asignado un Asesor</h5>
+                                            <hr class="hr-division">
                                             <div class="btn-container">
                                                 <button type="button"
                                                     class="btn btn-primary btn-sm btn-center btn-asignar">
@@ -184,7 +158,8 @@
                                                 </div>
                                             </form>
                                         @else
-                                            <h5 class="text-center">Asesor Asignado</h5>
+                                            <hr class="hr-division">
+                                            <h5 class="text-center titulos-modal">Asesor Asignado</h5>
                                             <hr class="hr-division">
                                             <p class="text-center" style="color: black; font-family: bold">
                                                 {{ $inmueble->asesor->nombre }}
@@ -195,9 +170,34 @@
                                                     Ver Asesor</a>
                                             </div>
                                         @endif
-
+                                    </div>
+                                    <div class="col-md-6">
                                         <hr class="hr-division">
-                                        <h5 class="text-center">Otras Opciones</h5>
+                                        <h3 class="text-center titulos-modal">Imagenes del Inmueble</h3>
+                                        <hr class="hr-division">
+                                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
+                                                        alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
+                                                        alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
+                                                        alt="...">
+                                                </div>
+                                            </div>
+                                        </div><br>
+                                        <div class="btn-container">
+                                            <a href="{{ route('imagenes', $inmueble->id) }}" type="button"
+                                                class="btn btn-primary btn-sm btn-center">Ver todas
+                                                las imagenes</a>
+                                        </div><br><br><br>
+                                        <hr class="hr-division">
+                                        <h5 class="text-center titulos-modal">Otras Opciones</h5>
                                         <hr class="hr-division">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -388,20 +388,8 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
-                        <div class="profile-picture-container">
-                            <div class="profile-picture">
-                                <img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png" alt="Foto de perfil"
-                                    id="profile-picture">
-                                <label for="file-upload" class="file-upload-label">
-                                    <span class="upload-icon">
-                                        <i class="fas fa-camera"></i>
-                                    </span>
-                                </label>
-                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*">
-                            </div>
-                        </div>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Propietario:</label>
+                            <label for="recipient-name" class="col-form-label">Busca un Propietario:</label>
                             <input name="propietario" type="text" class="form-control" id="input-propietario"
                                 required>
                             <select name="id_propietario" id="id_propietario" class="form-control"

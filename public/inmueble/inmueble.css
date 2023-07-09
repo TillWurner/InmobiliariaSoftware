@@ -90,6 +90,11 @@ body {
     font-weight: bold;
 }
 
+.titulos-modal {
+    font-weight: bold;
+    color: #d8b145;
+}
+
 .zoom-image {
     cursor: pointer;
     transition: transform 0.3s;
@@ -250,7 +255,7 @@ body {
 
 .hr-division {
     border-width: 5px;
-    border-color: #333;
+    border-color: #d8b145;
 }
 
 .img-smaller {
@@ -259,7 +264,8 @@ body {
 }
 
 .form-group-edit {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.15rem;
+    margin-top: 1px;
 }
 
 .scrollable-container {

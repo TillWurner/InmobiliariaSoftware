@@ -98,7 +98,7 @@
                                     aria-expanded="false">
                                     <img src="https://thumbs.dreamstime.com/b/imagen-del-pasaporte-de-un-hombre-de-negocios-hisp%C3%A1nico-con-el-traje-54531886.jpg"
                                         class="img-fluid rounded-circle mr-2 avatar">
-                                    Kevin Gustavo
+                                    {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Mi Perfil</a>
@@ -144,7 +144,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
     </script>
 
-    
+
     <script>
         function logout() {
             var form = document.createElement('form');
