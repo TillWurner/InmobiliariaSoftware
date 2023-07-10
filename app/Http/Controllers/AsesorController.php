@@ -97,4 +97,15 @@ class AsesorController extends Controller
         $asesores = Asesor::all();
         return response()->json($asesores);
     }
+
+    public function buscar($id)
+    {
+        $asesor = Asesor::find($id);
+        
+        if ($asesor) {
+            return response()->json($asesor);
+        } else {
+            return response()->json(['error' => 'Propietario no encontrado'], 404);
+        }
+    }
 }

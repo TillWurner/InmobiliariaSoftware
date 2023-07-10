@@ -91,4 +91,15 @@ class PropietarioController extends Controller
         $propietarios = Propietario::all();
         return response()->json($propietarios);
     }
+
+    public function buscar($id)
+    {
+        $propietario = Propietario::find($id);
+        
+        if ($propietario) {
+            return response()->json($propietario);
+        } else {
+            return response()->json(['error' => 'Propietario no encontrado'], 404);
+        }
+    }
 }

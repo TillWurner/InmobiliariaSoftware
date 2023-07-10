@@ -83,3 +83,7 @@ Route::get('/propietarios/json', [PropietarioController::class, 'json']);
 Route::get('/inmuebles/json', [InmuebleController::class, 'json']);  
 Route::get('/documentos/json', [DocumentoController::class, 'json']);  
 Route::get('/transacciones/json', [TransaccionController::class, 'json']);  
+
+/*Buscador*/
+Route::get('/propietarios/{id}',[PropietarioController::class, 'buscar']);
+Route::get('/asesores/{id}',[AsesorController::class, 'buscar']);
