@@ -34,11 +34,14 @@
                         <td>
                             <form action="{{ route('eliminarAsesor', $asesor->id) }}" method="POST">
                                 @csrf
-                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
-                                    data-id="{{ $asesor->id }}">
-                                    <ion-icon name="enter-outline"></ion-icon>
-                                </a>
-                                <button type="submit" class="btn btn-link">
+                                    @php
+                                        $foto = $asesor->foto ? asset('fotos/fotos-asesores/' . $asesor->foto) : asset('fotos/defecto/defecto.png');
+                                    @endphp
+                                    <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
+                                       data-id="{{ $asesor->id }}" data-foto="{{ $foto }}">
+                                       <ion-icon name="enter-outline"></ion-icon>
+                                    </a>
+                                   <button type="submit" class="btn btn-link">
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </button>
                             </form>
@@ -71,7 +74,7 @@
                                         <i class="fas fa-camera"></i>
                                     </span>
                                 </label>
-                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*">
+                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
                             </div>
                         </div>
 
@@ -129,9 +132,7 @@
                     </button>
                 </div>
 
-                <form class="container" method="POST" action="{{ route('modificarAsesor', ['id' => 'idCapturado']) }}"
-                    enctype="multipart/form-data" data-route="{{ route('modificarAsesor', ['id' => 'idCapturado']) }}">
-
+                    <form class="container" method="POST" action="{{ route('modificarAsesor', ['id' => $asesor->id]) }}" enctype="multipart/form-data" data-route="{{ route('modificarAsesor', ['id' => $asesor->id]) }}">
                     @csrf
                     @method('PUT')
                     <div class="modal-body show-left-only">
@@ -141,15 +142,13 @@
                                 <hr class="hr-division">
                                 <div class="profile-picture-container text-center">
                                     <div class="profile-picture">
-                                        <img src="https://www.seekpng.com/png/detail/355-3550337_png-file-male-avatar-png.png"
-                                            alt="Foto de perfil" id="profile-picture">
+                                        <img src="" alt="Foto de perfil" id="profile-picture-ver">
                                         <label for="file-upload" class="file-upload-label">
                                             <span class="upload-icon">
                                                 <i class="fas fa-camera"></i>
                                             </span>
                                         </label>
-                                        <input type="file" id="file-upload" class="file-upload-input"
-                                            accept="image/*">
+                                        <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
                                     </div>
                                 </div>
                                 <hr class="hr-division">
@@ -286,6 +285,7 @@
             $('#exampleModal2').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var asesorId = button.data('id');
+                var fotoUrl = button.data('foto');
                 var modal = $(this);
 
                 var asesor = obtenerAsesorPorId(
@@ -298,6 +298,8 @@
                     modal.find('[name="carnet"]').val(asesor.carnet);
                     modal.find('[name="codigo"]').val(asesor.codigo);
 
+                    var profilePictureId = 'profile-picture-ver';
+                    modal.find('#profile-picture-ver').attr('src', fotoUrl);
                     var form = modal.find('form');
                     var route = form.data('route');
                     route = route.replace('idCapturado', asesor.id);

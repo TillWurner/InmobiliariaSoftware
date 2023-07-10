@@ -47,5 +47,11 @@ class DocumentoController extends Controller
         return back();
     }
 
+    public function json()
+    {
+        $documentos = Documento::all();
+        return response()->json($documentos);
+    }
+
 
 }

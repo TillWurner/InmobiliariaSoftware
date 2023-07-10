@@ -65,4 +65,9 @@ class InmuebleController extends Controller
         $inmueble->save();
         return back();
     }
+    public function json()
+    {
+        $inmuebles = Inmueble::all();
+        return response()->json($inmuebles);
+    }
 }

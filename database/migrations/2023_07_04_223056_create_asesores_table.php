@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('asesores', function (Blueprint $table) {
             $table->id();
-            $table->string('foto')->nullable();
             $table->string('nombre');
+            $table->string('foto')->nullable();
             $table->string('correo');
             $table->integer('telefono');
             $table->string('carnet');

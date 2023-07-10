@@ -45,4 +45,11 @@ class TransaccionController extends Controller
         $transaccion->delete();
         return back();
     }
+
+    public function json()
+    {
+        $transacciones = Transaccion::all();
+        return response()->json($transacciones);
+    }
+
 }

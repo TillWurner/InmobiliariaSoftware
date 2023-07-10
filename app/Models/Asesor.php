@@ -13,6 +13,7 @@ class Asesor extends Model
 
     protected $fillable = [
         'nombre',
+        'foto',
         'correo',
         'telefono',
         'carnet',

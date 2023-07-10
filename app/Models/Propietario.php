@@ -12,8 +12,8 @@ class Propietario extends Model
     protected $table = 'propietarios';
 
     protected $fillable = [
-        'foto',
         'nombre',
+        'foto',
         'carnet',
         'telefono',
     ];

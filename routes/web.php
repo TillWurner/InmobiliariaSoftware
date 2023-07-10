@@ -75,3 +75,11 @@ Route::get('/descargar-documento/{nombreArchivo}', function ($nombreArchivo) {
 
     return Response::download($rutaArchivo);
 })->name('descargarDocumento');
+
+/*JSONS*/
+Route::get('/gerentes/json', [GerenteController::class, 'json']);  
+Route::get('/asesores/json', [AsesorController::class, 'json']);  
+Route::get('/propietarios/json', [PropietarioController::class, 'json']);  
+Route::get('/inmuebles/json', [InmuebleController::class, 'json']);  
+Route::get('/documentos/json', [DocumentoController::class, 'json']);  
+Route::get('/transacciones/json', [TransaccionController::class, 'json']);  

@@ -87,5 +87,10 @@ class GerenteController extends Controller
         return back();
     }
 
+    public function json()
+    {
+        $gerentes = Gerente::all();
+        return response()->json($gerentes);
+    }
 
 }

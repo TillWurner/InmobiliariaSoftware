@@ -32,11 +32,13 @@
                         <td> <!--class="d-flex"-->
                             <form action="{{ route('eliminarGerente', $gerente->id) }}" method="POST">
                                 @csrf
+                                @php
+                                $foto = $gerente->foto ? asset('fotos/fotos-gerentes/' . $gerente->foto) : asset('fotos/defecto/defecto.png');
+                                @endphp
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
-                                   data-id="{{ $gerente->id }}" data-foto="{{ asset('fotos/fotos-gerentes/' . $gerente->foto) }}"
-                                   >
-                                   <ion-icon name="enter-outline"></ion-icon>
-                                </a>
+                                data-id="{{ $gerente->id }}" data-foto="{{ $foto }}">
+                                <ion-icon name="enter-outline"></ion-icon>
+                             </a>
                                 <button type="submit" class="btn btn-link">
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </button>
@@ -62,7 +64,7 @@
                     <div class="modal-body">
                         <div class="profile-picture-container">
                             <div class="profile-picture">
-                                <img src="" alt="Foto de perfil" id="profile-picture-nuevo">
+                                <img src="https://www.seekpng.com/png/detail/355-3550337_png-file-male-avatar-png.png">
                                 <label for="file-upload" class="file-upload-label">
                                     <span class="upload-icon">
                                         <i class="fas fa-camera"></i>
