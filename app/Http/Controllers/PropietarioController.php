@@ -40,6 +40,8 @@ class PropietarioController extends Controller
 
     public function modificarPropietario(Request $request, $id)
     {
+
+        $id = $request->route('id'); // Obtener el ID del asesor de la ruta
         $propietario = Propietario::find($id);
 
         $propietario->nombre = $request->input('nombre');
@@ -72,10 +74,18 @@ class PropietarioController extends Controller
     public function eliminarPropietario($id)
     {
         $propietario = Propietario::findOrFail($id);
+
+        // Verificar si el propietario tiene inmuebles asociados
+        if ($propietario->inmuebles()->exists()) {
+            return back()->with('error', 'No se puede borrar el propietario porque tiene inmuebles asociados');
+        }
+
         Storage::delete('fotos/fotos-propietarios/' . $propietario->foto);
         $propietario->delete();
+
         return back();
     }
+
 
     public function buscarPropietarios(Request $request)
     {
@@ -95,7 +105,7 @@ class PropietarioController extends Controller
     public function buscar($id)
     {
         $propietario = Propietario::find($id);
-        
+
         if ($propietario) {
             return response()->json($propietario);
         } else {

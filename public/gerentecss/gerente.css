@@ -237,3 +237,8 @@ tbody {
 .btn-center {
     display: inline-block;
 }
+.form-error {
+    color: black;
+}
+
+

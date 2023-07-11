@@ -26,7 +26,7 @@ class Inmueble extends Model
     {
         return $this->belongsTo(Propietario::class, 'id_propietario');
     }
-
+    
     public function asesor()
     {
         return $this->belongsTo(Asesor::class, 'id_asesor');

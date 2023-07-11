@@ -29,19 +29,27 @@
                         <td>{{ $gerente->telefono }}</td>
                         <td>{{ $gerente->correo }}</td>
                         <td>{{ $gerente->carnet }}</td>
-                        <td> <!--class="d-flex"-->
+                        <td>
                             <form action="{{ route('eliminarGerente', $gerente->id) }}" method="POST">
                                 @csrf
                                 @php
-                                $foto = $gerente->foto ? asset('fotos/fotos-gerentes/' . $gerente->foto) : asset('fotos/defecto/defecto.png');
+                                    $foto = $gerente->foto ? asset('fotos/fotos-gerentes/' . $gerente->foto) : asset('fotos/defecto/defecto.png');
                                 @endphp
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
-                                data-id="{{ $gerente->id }}" data-foto="{{ $foto }}">
-                                <ion-icon name="enter-outline"></ion-icon>
-                             </a>
-                                <button type="submit" class="btn btn-link">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </button>
+                                    data-id="{{ $gerente->id }}" data-foto="{{ $foto }}">
+                                    <ion-icon name="enter-outline"></ion-icon>
+                                </a>
+
+                                @if ($i === 0 && count($gerentes) === 1)
+                                    <a href="#" class="btn btn-link btn-trash"
+                                        onclick="alert('No se puede eliminar el único gerente.'); return false;">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </a>
+                                @else
+                                    <button type="submit" class="btn btn-link">
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </button>
+                                @endif
                             </form>
                         </td>
                     </tr>
@@ -50,7 +58,6 @@
         </table>
     </div>
 
-    {{-- MODAL NUEVO GERENTE --}}
     <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -58,7 +65,7 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Gerente!</h1>
                 </div>
-                <form class="container" method="POST" action="{{ route('registrarGerente') }}" 
+                <form class="container" method="POST" action="{{ route('registrarGerente') }}"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
@@ -70,7 +77,8 @@
                                         <i class="fas fa-camera"></i>
                                     </span>
                                 </label>
-                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
+                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*"
+                                    name="foto">
                             </div>
                         </div>
 
@@ -79,29 +87,33 @@
                             <input name="nombre" type="text" class="form-control" id="recipient-name" maxlength="50"
                                 required>
                         </div>
-                       <!-- <div class="form-group">
-                            <label for="foto" class="col-form-label">Foto:</label>
-                            <input type="file" name="foto" class="form-control" id="foto">
-                        </div> -->                       
+
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Correo:</label>
                             <input type="email" name="correo" class="form-control" id="message-text"
                                 placeholder="correo@example.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                                 required>
                         </div>
+
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Contraseña:</label>
                             <input name="contrasena" type="password" class="form-control" id="recipient-name" maxlength="10"
                                 required>
                         </div>
+
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Telefono:</label>
+                            <label for="message-text" class="col-form-label">Teléfono:</label>
                             <input name="telefono" class="form-control" id="message-text" maxlength="8"
-                                pattern="[0-9]{1,8}">
+                                pattern="[0-9]{1,8}" required>
+                            <small class="form-text  form-error">El teléfono debe tener máximo 8 dígitos numéricos.</small>
                         </div>
+
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Carnet:</label>
-                            <input type="text" name="carnet" class="form-control" id="message-text" maxlength="7">
+                            <input type="text" name="carnet" class="form-control" id="message-text" maxlength="12"
+                                pattern="[A-Za-z0-9]{1,12}" required>
+                            <small class="form-text form-error">El carnet debe tener máximo 12 caracteres
+                                alfanuméricos.</small>
                         </div>
 
                     </div>
@@ -128,26 +140,22 @@
                     </button>
                 </div>
 
-                <form class="container" method="POST" action="{{ route('modificarGerente', ['id' => $gerente->id]) }}" enctype="multipart/form-data" data-route="{{ route('modificarGerente', ['id' => $gerente->id]) }}">
+                <form class="container" method="POST" action="{{ route('modificarGerente', ['id' => 'idCapturado']) }}"
+                    enctype="multipart/form-data" data-route="{{ route('modificarGerente', ['id' => 'idCapturado']) }}">
+
                     @csrf
                     @method('PUT')
                     <div class="modal-body show-left-only">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3 class="text-center">Foto de Perfil</h3>
-                            <hr class="hr-division">
-                            <div class="profile-picture-container text-center">
-                                <div class="profile-picture">
-                                    <img src="" alt="Foto de perfil" id="profile-picture-ver">
-                                    <label for="file-upload" class="file-upload-label">
-                                        <span class="upload-icon">
-                                            <i class="fas fa-camera"></i>
-                                        </span>
-                                    </label>
-                                    <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
+                                <hr class="hr-division">
+                                <div class="profile-picture-container text-center">
+                                    <div class="profile-picture">
+                                        <img src="" alt="Foto de perfil" id="profile-picture-ver">
+                                    </div>
                                 </div>
-                            </div>
-                            <hr class="hr-division">
+                                <hr class="hr-division">
 
                             </div>
                             <div class="col-md-6">
@@ -166,13 +174,13 @@
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Teléfono:</label>
-                                        <input type="tel" name="telefono" class="form-control" id="message-text"
-                                            value="" readonly>
+                                        <input type="tel" name="telefono" maxlength="8" pattern="[0-9]{1,8}"
+                                            class="form-control" id="message-text" value="" readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Carnet:</label>
-                                        <input type="text" name="carnet" class="form-control" id="message-text"
-                                            value="" readonly>
+                                        <input type="text" name="carnet" maxlength="12" pattern="{1,12}"
+                                            class="form-control" id="message-text" value="" readonly>
                                     </div>
                                     <br>
                                 </div>
@@ -180,7 +188,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                       <!-- <button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>-->
+                        <!-- <button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>-->
                         <button id="btn-modificar" type="button" class="btn btn-warning">Modificar</button>
                         <button id="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
                         <button id="btn-cerrar" type="button" class="btn btn-danger"
@@ -250,42 +258,45 @@
         });
     </script>
 
-<script>
-    $(document).ready(function() {
-        $('#exampleModal2').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var gerenteId = button.data('id');
-            var fotoUrl = button.data('foto');
-            var modal = $(this);
+    <script>
+        $(document).ready(function() {
+            $('#exampleModal2').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var gerenteId = button.data('id');
+                var fotoUrl = button.data('foto');
+                var modal = $(this);
 
-            var gerente = obtenerGerentePorId(gerenteId); // Función que obtiene los datos del gerente por su ID
+                var gerente = obtenerGerentePorId(
+                    gerenteId); // Función que obtiene los datos del gerente por su ID
 
-            if (gerente) {
-                modal.find('[name="nombre"]').val(gerente.nombre);
-                modal.find('[name="correo"]').val(gerente.correo);
-                modal.find('[name="telefono"]').val(gerente.telefono);
-                modal.find('[name="carnet"]').val(gerente.carnet);
+                if (gerente) {
+                    modal.find('[name="nombre"]').val(gerente.nombre);
+                    modal.find('[name="correo"]').val(gerente.correo);
+                    modal.find('[name="telefono"]').val(gerente.telefono);
+                    modal.find('[name="carnet"]').val(gerente.carnet);
 
-                var profilePictureId = 'profile-picture-ver';
-               // var fotoUrl = '{{ asset('storage/fotos-gerentes') . '/' . $gerente->foto }}';
+                    var profilePictureId = 'profile-picture-ver';
+                    // var fotoUrl = '{{ asset('storage/fotos-gerentes') . '/' . $gerente->foto }}';
 
-                modal.find('#profile-picture-ver').attr('src', fotoUrl);
-            }
-
-            function obtenerGerentePorId(gerenteId) {
-                var gerentes = {!! json_encode($gerentes) !!};
-
-                for (var i = 0; i < gerentes.length; i++) {
-                    if (gerentes[i].id === gerenteId) {
-                        return gerentes[i];
-                    }
+                    modal.find('#profile-picture-ver').attr('src', fotoUrl);
+                    var form = modal.find('form');
+                    var route = form.data('route');
+                    route = route.replace('idCapturado', gerente.id);
+                    form.attr('action', route);
                 }
 
-                return null;
-            }
+                function obtenerGerentePorId(gerenteId) {
+                    var gerentes = {!! json_encode($gerentes) !!};
+
+                    for (var i = 0; i < gerentes.length; i++) {
+                        if (gerentes[i].id === gerenteId) {
+                            return gerentes[i];
+                        }
+                    }
+
+                    return null;
+                }
+            });
         });
-    });
-</script>
-
-
+    </script>
 @endsection

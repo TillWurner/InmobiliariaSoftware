@@ -18,8 +18,8 @@ class Propietario extends Model
         'telefono',
     ];
 
-    public function inmueble()
+    public function inmuebles()
     {
-        return $this->hasMany(Inmueble::class);
+        return $this->hasMany(Inmueble::class, 'id_propietario');
     }
 }

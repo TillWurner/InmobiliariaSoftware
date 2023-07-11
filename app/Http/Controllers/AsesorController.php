@@ -42,39 +42,42 @@ class AsesorController extends Controller
         return back();
     }
 
-    public function modificarAsesor(Request $request, $id)
+    public function modificarAsesor(Request $request)
     {
+        $id = $request->route('id'); // Obtener el ID del asesor de la ruta
         $asesor = Asesor::find($id);
 
-        $asesor->nombre = $request->input('nombre');
-        $asesor->correo = $request->input('correo');
-        $asesor->telefono = $request->input('telefono');
-        $asesor->carnet = $request->input('carnet');
-        $asesor->codigo = $request->input('codigo');
+        if ($asesor) {
+            $asesor->nombre = $request->input('nombre');
+            $asesor->correo = $request->input('correo');
+            $asesor->telefono = $request->input('telefono');
+            $asesor->carnet = $request->input('carnet');
+            $asesor->codigo = $request->input('codigo');
 
-        if ($request->hasFile('foto')) {
-            // Obtener la foto anterior del gerente
-            $fotoAnterior = $asesor->foto;
+            if ($request->hasFile('foto')) {
+                // Obtener la foto anterior del asesor
+                $fotoAnterior = $asesor->foto;
 
-            // Guardar la nueva foto
-            $foto = $request->file('foto');
-            $fotoNombre = $foto->getClientOriginalName();
-            $foto->move(public_path('fotos/fotos-asesores'), $fotoNombre);
-            // Actualizar el campo 'foto' del gerente con el nombre de la nueva foto
-            $asesor->foto = $fotoNombre;
+                // Guardar la nueva foto
+                $foto = $request->file('foto');
+                $fotoNombre = $foto->getClientOriginalName();
+                $foto->move(public_path('fotos/fotos-asesores'), $fotoNombre);
 
-            // Eliminar la foto anterior si existe
-            if ($fotoAnterior) {
-                Storage::delete('public/fotos-asesores/' . $fotoAnterior);
+                // Actualizar el campo 'foto' del asesor con el nombre de la nueva foto
+                $asesor->foto = $fotoNombre;
+
+                // Eliminar la foto anterior si existe
+                if ($fotoAnterior) {
+                    Storage::delete('fotos/fotos-asesores/' . $fotoAnterior);
+                }
             }
+
+            $asesor->save();
         }
-
-
-
-        $asesor->update();
 
         return back();
     }
+
 
     public function eliminarAsesor($id)
     {
@@ -101,7 +104,7 @@ class AsesorController extends Controller
     public function buscar($id)
     {
         $asesor = Asesor::find($id);
-        
+
         if ($asesor) {
             return response()->json($asesor);
         } else {

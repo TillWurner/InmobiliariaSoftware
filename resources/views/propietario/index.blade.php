@@ -31,20 +31,24 @@
                             <form action="{{ route('eliminarPropietario', $propietario->id) }}" method="POST">
                                 @csrf
                                 @php
-                                        $foto = $propietario->foto ? asset('fotos/fotos-propietarios/' . $propietario->foto) : asset('fotos/defecto/defecto.png');
+                                    $foto = $propietario->foto ? asset('fotos/fotos-propietarios/' . $propietario->foto) : asset('fotos/defecto/defecto.png');
                                 @endphp
-                                    <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
-                                       data-id="{{ $propietario->id }}" data-foto="{{ $foto }}">
-                                       <ion-icon name="enter-outline"></ion-icon>
-                                    </a>
+                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
+                                    data-id="{{ $propietario->id }}" data-foto="{{ $foto }}">
+                                    <ion-icon name="enter-outline"></ion-icon>
+                                </a>
                                 <button type="submit" class="btn btn-link">
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </button>
                             </form>
-
                         </td>
                     </tr>
                 @endforeach
+                @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
             </tbody>
         </table>
     </div>
@@ -69,7 +73,8 @@
                                         <i class="fas fa-camera"></i>
                                     </span>
                                 </label>
-                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
+                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*"
+                                    name="foto">
                             </div>
                         </div>
 
@@ -112,7 +117,10 @@
                     </button>
                 </div>
 
-                <form class="container" method="POST" action="{{ route('modificarPropietario', ['id' => $propietario->id]) }}" enctype="multipart/form-data" data-route="{{ route('modificarPropietario', ['id' => $propietario->id]) }}">
+                <form class="container" method="POST"
+                    action="{{ route('modificarPropietario', ['id' => 'idCapturado']) }}" enctype="multipart/form-data"
+                    data-route="{{ route('modificarPropietario', ['id' => 'idCapturado']) }}">
+
                     @csrf
                     @method('PUT')
                     <div class="modal-body show-left-only">
@@ -128,22 +136,10 @@
                                                 <i class="fas fa-camera"></i>
                                             </span>
                                         </label>
-                                        <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
+                                        <input type="file" id="file-upload" class="file-upload-input"
+                                            accept="image/*" name="foto">
                                     </div>
                                 </div>
-                                <!--
-                                                                        <hr class="hr-division">
-                                                                        <div class="datos-transacciones"><br>
-                                                                            <h6 class="text-center">Total de Transacciones Realizadas</h6>
-                                                                            <p class="text-center text-white">10 transacciones</p>
-                                                                            <h6 class="text-center">Transacciones en Procesos</h6>
-                                                                            <p class="text-center text-white">3 Transacciones</p>
-                                                                            <div class="btn-container">
-                                                                                <button type="button" class="btn btn-primary btn-sm btn-center">Ver
-                                                                                    Propiedades</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    -->
                             </div>
                             <div class="col-md-6">
                                 <h3 class="text-center">Datos Personales</h3>

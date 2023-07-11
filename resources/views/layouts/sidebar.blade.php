@@ -31,7 +31,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
-<body style="background-image: url({{ asset('/gerentecss/img/fondo2.jpg') }})">
+<body style="background-image: url({{ asset('/gerentecss/img/fondoCentury5.jpg') }}) ; margin: 0;
+padding: 0; background-size: cover;
+background-repeat: no-repeat;
+background-position: center center">
 
     <div class="wrapper">
         <!-- Sidebar  -->

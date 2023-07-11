@@ -34,14 +34,14 @@
                         <td>
                             <form action="{{ route('eliminarAsesor', $asesor->id) }}" method="POST">
                                 @csrf
-                                    @php
-                                        $foto = $asesor->foto ? asset('fotos/fotos-asesores/' . $asesor->foto) : asset('fotos/defecto/defecto.png');
-                                    @endphp
-                                    <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
-                                       data-id="{{ $asesor->id }}" data-foto="{{ $foto }}">
-                                       <ion-icon name="enter-outline"></ion-icon>
-                                    </a>
-                                   <button type="submit" class="btn btn-link">
+                                @php
+                                    $foto = $asesor->foto ? asset('fotos/fotos-asesores/' . $asesor->foto) : asset('fotos/defecto/defecto.png');
+                                @endphp
+                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
+                                    data-id="{{ $asesor->id }}" data-foto="{{ $foto }}">
+                                    <ion-icon name="enter-outline"></ion-icon>
+                                </a>
+                                <button type="submit" class="btn btn-link">
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </button>
                             </form>
@@ -74,7 +74,8 @@
                                         <i class="fas fa-camera"></i>
                                     </span>
                                 </label>
-                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
+                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*"
+                                    name="foto">
                             </div>
                         </div>
 
@@ -132,7 +133,8 @@
                     </button>
                 </div>
 
-                    <form class="container" method="POST" action="{{ route('modificarAsesor', ['id' => $asesor->id]) }}" enctype="multipart/form-data" data-route="{{ route('modificarAsesor', ['id' => $asesor->id]) }}">
+                <form class="container" method="POST" action="{{ route('modificarAsesor', ['id' => 'idCapturado']) }}"
+                    enctype="multipart/form-data" data-route="{{ route('modificarAsesor', ['id' => 'idCapturado']) }}">
                     @csrf
                     @method('PUT')
                     <div class="modal-body show-left-only">
@@ -143,12 +145,6 @@
                                 <div class="profile-picture-container text-center">
                                     <div class="profile-picture">
                                         <img src="" alt="Foto de perfil" id="profile-picture-ver">
-                                        <label for="file-upload" class="file-upload-label">
-                                            <span class="upload-icon">
-                                                <i class="fas fa-camera"></i>
-                                            </span>
-                                        </label>
-                                        <input type="file" id="file-upload" class="file-upload-input" accept="image/*" name="foto">
                                     </div>
                                 </div>
                                 <hr class="hr-division">
@@ -288,8 +284,7 @@
                 var fotoUrl = button.data('foto');
                 var modal = $(this);
 
-                var asesor = obtenerAsesorPorId(
-                    asesorId); // Función que obtiene los datos del asesor por su ID
+                var asesor = obtenerAsesorPorId(asesorId);
 
                 if (asesor) {
                     modal.find('[name="nombre"]').val(asesor.nombre);
@@ -307,8 +302,7 @@
                 }
 
                 function obtenerAsesorPorId(asesorId) {
-                    var asesores =
-                        {!! json_encode($asesores) !!}; // Obtiene los datos de los asesores y los conviérte en un objeto JavaScript
+                    var asesores = {!! json_encode($asesores) !!};
 
                     for (var i = 0; i < asesores.length; i++) {
                         if (asesores[i].id === asesorId) {
@@ -316,9 +310,8 @@
                         }
                     }
 
-                    return null; // Si no se encuentra el asesor, devuelve null
+                    return null;
                 }
-
             });
         });
     </script>

@@ -21,8 +21,10 @@ class GerenteController extends Controller
         return view('Gerente.profile');
     }
 
-    public function modificarGerente(Request $request, $id)
+    public function modificarGerente(Request $request)
     {
+
+        $id = $request->route('id'); // Obtener el ID del asesor de la ruta
         $gerente = Gerente::find($id);
 
         $gerente->nombre = $request->input('nombre');
