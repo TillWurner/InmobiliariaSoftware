@@ -1,6 +1,3 @@
-const {
-    default: axion
-} = require('axios');
 const express = require('express');
 
 const app = express();
