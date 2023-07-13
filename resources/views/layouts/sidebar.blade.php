@@ -280,7 +280,7 @@ background-position: center center">
         const csrfToken = '{{ csrf_token() }}';
         import { io } from "socket.io-client";
     
-        const socket = io("http://34.151.234.12",{
+        const socket = io("http://34.151.234.12:3000",{
             transports: ["websocket"],
         });
 
