@@ -2,7 +2,7 @@
 @section('contenido')
     <link rel="stylesheet" href={{ asset('documentocss/documento.css') }}>
     <div class="title2">
-        <h1>Listado de Documentos</h1>
+        <h1 class="lista">Listado de Documentos</h1>
     </div>
 
    <!-- <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
@@ -31,10 +31,10 @@
                         <td>
                             <form action="#" method="POST">
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2">
-                                    <ion-icon name="enter-outline"></ion-icon>
+                                    <i class="fa-solid fa-right-to-bracket"></i>
                                 </a>
                                 <button type="submit" class="btn btn-link">
-                                    <ion-icon name="trash-outline"></ion-icon>
+                                    <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
                         </td>

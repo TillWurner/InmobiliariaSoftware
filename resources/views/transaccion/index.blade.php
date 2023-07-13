@@ -2,7 +2,7 @@
 @section('contenido')
     <link rel="stylesheet" href={{ asset('transaccion/transaccion.css') }}>
     <div class="title2">
-        <h1>Listado de Transacciones</h1>
+        <h1 class="lista">Listado de Transacciones</h1>
     </div>
 
     {{-- <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
@@ -30,17 +30,17 @@
                         <td>{{ $transaccion->inmueble->razon }}</td>
                         <td>{{ $transaccion->inmueble->propietario->nombre }}</td>
                         <td>{{ $transaccion->interesado }}</td>
-                        <td>{{ $transaccion->inmueble->asesor->nombre }}</td>
+                        <td>{{ $transaccion->inmueble->user->nombre }}</td>
                         <td>{{ $transaccion->fecha }}</td>
                         <td>
                             <form action="{{ route('eliminarTransaccion', $transaccion->id) }}" method="POST">
                                 @csrf
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
                                     data-id="{{ $transaccion->id }}">
-                                    <ion-icon name="enter-outline"></ion-icon>
+                                    <i class="fa-solid fa-right-to-bracket fa-sm"></i>
                                 </a>
                                 <button type="submit" class="btn btn-link" id="btnEliminar">
-                                    <ion-icon name="trash-outline"></ion-icon>
+                                    <i class="fa-solid fa-trash fa-sm"></i>
                                 </button>
                             </form>
                         </td>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inmueble;
+use App\Models\Notificacion;
 use App\Models\Propietario;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InmuebleController extends Controller
@@ -11,7 +13,8 @@ class InmuebleController extends Controller
     public function inmuebles()
     {
         $inmuebles = Inmueble::all();
-        return view('inmueble.index', ['inmuebles' => $inmuebles]);
+        $asesores = User::where('tipo', 'Asesor')->get();
+        return view('inmueble.index', ['inmuebles' => $inmuebles, 'asesores' => $asesores]);
     }
 
     public function registrarInmueble(Request $request)
@@ -22,6 +25,7 @@ class InmuebleController extends Controller
         $precio = $request->input('precio');
         $razon = $request->input('razon');
         $descripcion = $request->input('descripcion');
+        $coordenada = $request->input('coordenada');
 
         $inmueble = new Inmueble();
         $inmueble->id_propietario = $id_propietario;
@@ -30,6 +34,7 @@ class InmuebleController extends Controller
         $inmueble->precio = $precio;
         $inmueble->razon = $razon;
         $inmueble->descripcion = $descripcion;
+        $inmueble->coordenada = $coordenada;
         $inmueble->save();
 
         return back();
@@ -62,12 +67,44 @@ class InmuebleController extends Controller
 
         $inmueble = Inmueble::find($id_inmueble);
         $inmueble->id_asesor = $id_asesor;
-        $inmueble->save();
-        return back();
+        $inmueble->update();
+
+        $id_inmueble = $request->input('id_inmueble');
+        $mensaje = "Inmueble Asignado -> ID: " . $id_inmueble;
+
+        $notificacion = new Notificacion();
+        $notificacion->mensaje = $mensaje;
+        $notificacion->id_asesor = $id_asesor;
+        $notificacion->id_inmueble = $id_inmueble;
+        $notificacion->save();
     }
+
+    public function asignar(Request $request)
+    {
+        $id_inmueble = $request->input('id_inmueble');
+        return $id_inmueble;
+    }
+
     public function json()
     {
         $inmuebles = Inmueble::all();
         return response()->json($inmuebles);
+    }
+
+    public function inmueble($id = null, $idNotificacion = null)
+    {
+        $inmueble = null;
+        $inmuebles = null;
+
+        if ($id !== null) {
+            $inmueble = Inmueble::findOrFail($id);
+            $notificacion = Notificacion::findOrFail($idNotificacion);
+            $notificacion->delete();
+        } else {
+            $inmuebles = Inmueble::all();
+        }
+
+        // return view('inmueble.inmueblesAsesor', ['inmueble' => $inmueble, 'inmuebles' => $inmuebles]);
+        return back();
     }
 }

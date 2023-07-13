@@ -15,8 +15,8 @@ class TransaccionSeeder extends Seeder
     {
         $data = [
             array('interesado' => "Alberto", 'fecha' => "2023-01-29", 'inmueble_id' => 1),
-            array('interesado' => "Julia", 'fecha' => "2023-02-15", 'inmueble_id' => 2),
-            array('interesado' => "Rodrigo", 'fecha' => "2023-03-07", 'inmueble_id' => 3),
+            // array('interesado' => "Julia", 'fecha' => "2023-02-15", 'inmueble_id' => 2),
+            // array('interesado' => "Rodrigo", 'fecha' => "2023-03-07", 'inmueble_id' => 3),
         ];
 
         Transaccion::insert($data);

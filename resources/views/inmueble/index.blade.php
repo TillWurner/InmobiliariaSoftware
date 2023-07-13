@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href={{ asset('inmueble/inmueble.css') }}>
     <div class="title2">
-        <h1>Listado de Inmuebles</h1>
+        <h1 class="lista">Listado de Inmuebles</h1>
     </div>
 
     <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
@@ -16,7 +16,18 @@
             @foreach ($inmuebles as $i => $inmueble)
                 <div class="col-md-4">
                     <div class="image-container">
-                        <img src="{{ $inmuebleBase }}" width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
+                        @if ($i + 1 == 1)
+                            <img src="{{ $inmuebleBase }}" width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
+                        @elseif($i + 1 == 2)
+                            <img src="https://www.bienesonline.com/bolivia/photos/urbanizacion-del-valle-casas-en-pre-venta-CAV48511623287920-784.jpg"
+                                width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
+                        @elseif($i + 1 == 3)
+                            <img src="https://img10.naventcdn.com/avisos/18/00/66/91/06/81/720x532/371120136.jpg"
+                                width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
+                        @else
+                            <img src="https://imgs.nestimg.com/casa_con_recamara_en_planta_baja_para_estrenar_argenta_residencial_3860001682069216715.jpg"
+                                width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
+                        @endif
                         <div class="info1 d-flex justify-content-between">
                             <div style="clear: both;">
                                 <div class="titulo">Casa {{ $inmueble->id }}</div>
@@ -91,8 +102,9 @@
                                                 <div class="form-group form-group-edit">
                                                     <label for="tamaño" class="col-form-label">Precio
                                                         ($us):</label>
-                                                    <input name="precio" type="text" class="form-control" id="tamaño"
-                                                        value="{{ $inmueble->precio }}" maxlength="10" required readonly>
+                                                    <input name="precio" type="text" class="form-control"
+                                                        id="tamaño" value="{{ $inmueble->precio }}" maxlength="10"
+                                                        required readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,20 +151,25 @@
                                             </div>
                                             <h6 class="text-center escoger-asesor" style="display: none;">Busca un asesor
                                                 para este inmueble</h6>
-                                            <form method="POST" action="{{ route('asignarAsesor', $inmueble->id) }}"
+                                            <form id="formulario" method="POST"
+                                                action="{{ route('asignarAsesor', $inmueble->id) }}"
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-group asignar-asesor" style="display: none;">
-                                                    <input name="asesor" type="text"
+                                                    <input id="nombre-asesor" name="asesor" type="text"
                                                         class="form-control input-asesor"
                                                         style="width: 50%; margin: 0 auto;" required>
-                                                    <select name="id_asesor" class="form-control id_asesor"
+
+                                                    <select id="asesores-{{ $inmueble->id }}" name="id_asesor"
+                                                        class="form-control id_asesor" id="as-{{ $loop->iteration }}"
                                                         style="display: none; width: 50%; margin: 0 auto;"></select>
                                                 </div>
 
                                                 <div class="btn-container asignar-asesor" style="display: none;">
                                                     <button type="submit"
-                                                        class="btn btn-success btn-sm btn-aceptar-asesor">Aceptar</button>
+                                                        class="btn btn-success btn-sm btn-aceptar-asesor"
+                                                        data-id-inmueble="{{ $inmueble->id }}"
+                                                        data-nombre-asesor="">Aceptar</button>
                                                     <button type="button"
                                                         class="btn btn-danger btn-sm btn-cancelar-asesor">Cancelar</button>
                                                 </div>
@@ -162,10 +179,10 @@
                                             <h5 class="text-center titulos-modal">Asesor Asignado</h5>
                                             <hr class="hr-division">
                                             <p class="text-center" style="color: black; font-family: bold">
-                                                {{ $inmueble->asesor->nombre }}
+                                                {{ $inmueble->user->nombre }}
                                             </p>
                                             <div class="btn-container">
-                                                <a type="button" href="/asesores?x={{ $inmueble->asesor->id }}"
+                                                <a type="button" href="/asesores?x={{ $inmueble->user->id }}"
                                                     class="btn btn-primary btn-sm btn-center">
                                                     Ver Asesor</a>
                                             </div>
@@ -177,36 +194,62 @@
                                         <hr class="hr-division">
                                         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner">
-                                                <div class="carousel-item active">
-                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
-                                                        alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
-                                                        alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
-                                                        alt="...">
-                                                </div>
+                                                @if ($i + 1 == 1)
+                                                    <div class="carousel-item active">
+                                                        <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
+                                                            alt="...">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
+                                                            alt="...">
+                                                    </div>
+                                                @elseif($i + 1 == 2)
+                                                    <div class="carousel-item active">
+                                                        <img src="https://www.bienesonline.com/bolivia/photos/urbanizacion-del-valle-casas-en-pre-venta-CAV48511623287920-784.jpg"
+                                                            class="d-block w-100 img-smaller" alt="...">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="https://www.bienesonline.com/bolivia/photos/urbanizacion-del-valle-casas-en-pre-venta-CAV48511623287920-784.jpg"
+                                                            class="d-block w-100 img-smaller" alt="...">
+                                                    </div>
+                                                @elseif($i + 1 == 3)
+                                                    <div class="carousel-item active">
+                                                        <img src="https://img10.naventcdn.com/avisos/18/00/66/91/06/81/720x532/371120136.jpg"
+                                                            class="d-block w-100 img-smaller" alt="...">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="https://img10.naventcdn.com/avisos/18/00/66/91/06/81/720x532/371120136.jpg"
+                                                            class="d-block w-100 img-smaller" alt="...">
+                                                    </div>
+                                                @else
+                                                    <div class="carousel-item active">
+                                                        <img src="https://imgs.nestimg.com/casa_con_recamara_en_planta_baja_para_estrenar_argenta_residencial_3860001682069216715.jpg"
+                                                            class="d-block w-100 img-smaller" alt="...">
+                                                    </div>
+                                                    <div class="carousel-item">
+                                                        <img src="https://imgs.nestimg.com/casa_con_recamara_en_planta_baja_para_estrenar_argenta_residencial_3860001682069216715.jpg"
+                                                            class="d-block w-100 img-smaller" alt="...">
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div><br>
                                         <div class="btn-container">
                                             <a href="{{ route('imagenes', $inmueble->id) }}" type="button"
-                                                class="btn btn-primary btn-sm btn-center">Ver todas
+                                                class="btn btn-primary btn-sm btn-center">Ver
+                                                todas
                                                 las imagenes</a>
                                         </div><br><br><br>
                                         <hr class="hr-division">
                                         <h5 class="text-center titulos-modal">Otras Opciones</h5>
                                         <hr class="hr-division">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            {{-- <div class="col-md-6">
                                                 <div class="btn-container">
                                                     <a type="button" href="/documentos?x={{ $inmueble->id }}"
                                                         class="btn btn-primary btn-sm btn-center">
                                                         Agregar Documento</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-md-6">
                                                 <div class="btn-container">
                                                     <a type="button"
@@ -218,40 +261,42 @@
                                             </div>
                                         </div><br>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                @if (!$inmueble->transaccion->isNotEmpty())
-                                                    @if ($inmueble->id_asesor !== null)
-                                                        <div class="btn-container">
-                                                            <a type="button" href="/transacciones?x={{ $inmueble->id }}"
-                                                                class="btn btn-primary btn-sm btn-center">
-                                                                Realizar Transaccion
-                                                            </a>
-                                                        </div>
+                                            @role('gerente')
+                                                <div class="col-md-6">
+                                                    @if (!$inmueble->transaccion->isNotEmpty())
+                                                        @if ($inmueble->id_asesor !== null)
+                                                            <div class="btn-container">
+                                                                <a type="button" href="/transacciones?x={{ $inmueble->id }}"
+                                                                    class="btn btn-primary btn-sm btn-center">
+                                                                    Realizar Transaccion
+                                                                </a>
+                                                            </div>
+                                                        @else
+                                                            <div class="btn-container">
+                                                                <a type="button" href="#"
+                                                                    class="btn btn-primary btn-sm btn-center realizar-transaccion-btn"
+                                                                    data-target="#modal-{{ $inmueble->id }}">
+                                                                    Realizar Transaccion
+                                                                </a>
+                                                                @if ($inmueble->id_asesor === null)
+                                                                    <br><br>
+                                                                    <h6 class="message mensaje-asesor"
+                                                                        style="display: none; color:red;">
+                                                                        Por favor, primero asigna un asesor!</h6>
+                                                                @endif
+                                                            </div>
+                                                        @endif
                                                     @else
-                                                        <div class="btn-container">
-                                                            <a type="button" href="#"
-                                                                class="btn btn-primary btn-sm btn-center realizar-transaccion-btn"
-                                                                data-target="#modal-{{ $inmueble->id }}">
-                                                                Realizar Transaccion
-                                                            </a>
-                                                            @if ($inmueble->id_asesor === null)
-                                                                <br><br>
-                                                                <h6 class="message mensaje-asesor"
-                                                                    style="display: none; color:red;">
-                                                                    Por favor, primero asigna un asesor!</h6>
-                                                            @endif
-                                                        </div>
                                                     @endif
-                                                @else
-                                                @endif
-                                            </div>
-                                            <div class="col-md-6">
+                                                </div>
+                                            @endrole()
+                                            {{-- <div class="col-md-6">
                                                 <div class="btn-container">
                                                     <a type="button" href="/reportes?x={{ $inmueble->id }}"
                                                         class="btn btn-primary btn-sm btn-center">
                                                         Agregar Reporte</a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             {{-- <div class="col-md-6">
                                                 <div class="btn-container">
                                                     <a type="button" href="#"
@@ -403,6 +448,10 @@
                             <label for="recipient-name" class="col-form-label">Direccion:</label>
                             <input name="direccion" type="text" class="form-control" id="recipient-name"
                                 maxlength="20" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Coordenada:</label>
+                            <input name="coordenada" type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -600,7 +649,7 @@
             $('.input-asesor').click(function() {
                 var inputPropietario = $(this);
                 var select = inputPropietario.siblings('.id_asesor');
-                $('.mensaje-asesor').hide();
+
                 if (inputPropietario.val() === '') {
                     select.hide();
                 } else if (select.find('option').length > 1) {
@@ -637,4 +686,48 @@
         });
     </script>
 
+    <script type="module">
+        import {
+            io
+        } from "socket.io-client";
+
+        const socket = io("http://127.0.0.1:3000", {
+            transports: ["websocket"],
+        });
+
+        const formulario = document.getElementById("formulario");
+        let id_inmueble, id_asesor, id_gerente;
+
+        @foreach ($inmuebles as $inmueble)
+            const selectAsesor{{ $inmueble->id }} = document.getElementById('asesores-{{ $inmueble->id }}');
+            if (selectAsesor{{ $inmueble->id }} !== null) {
+                selectAsesor{{ $inmueble->id }}.addEventListener('change', function() {
+                    const valorSeleccionado = selectAsesor{{ $inmueble->id }}.value;
+                    if (valorSeleccionado !== "") {
+                        id_asesor = valorSeleccionado;
+                        // alert(id_asesor);
+                    } else {
+                        // Como el select esta oculto no va hacer nada.
+                    }
+                });
+            }
+        @endforeach
+
+
+        document.querySelectorAll('.btn-aceptar-asesor').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                id_inmueble = this.dataset.idInmueble;
+                id_asesor = id_asesor;
+                id_gerente = {{ auth()->user()->id }};
+                // formulario.submit();
+
+                socket.emit("asignacion-inmueble", {
+                    id_inmueble: id_inmueble,
+                    id_asesor: id_asesor,
+                    id_gerente: id_gerente
+                });
+            });
+        });
+    </script>
 @endsection

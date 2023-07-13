@@ -2,44 +2,45 @@
 @section('contenido')
     <link rel="stylesheet" href={{ asset('reportecss/reporte.css') }}>
     <div class="title2">
-        <h1>Reportes</h1>
+        <h1 class="lista">Reportes</h1>
     </div>
     <div class="document-container">
+
         <body>
             <div class="section">
                 <div class="title">Listado de Gerentes</div>
-                <button class="button" id="generar-pdf-gerente" >Generar PDF</button>
+                <button class="button" id="generar-pdf-gerente">Generar PDF</button>
                 <button class="button" id="generar-csv-gerente">Generar CSV</button>
             </div>
 
             <div class="section">
                 <div class="title">Listado de Asesores</div>
-                <button class="button" id="generar-pdf-asesor" >Generar PDF</button>
+                <button class="button" id="generar-pdf-asesor">Generar PDF</button>
                 <button class="button" id="generar-csv-asesor">Generar CSV</button>
             </div>
 
             <div class="section">
                 <div class="title">Listado de Propietarios</div>
-                <button class="button" id="generar-pdf-propietario" >Generar PDF</button>
+                <button class="button" id="generar-pdf-propietario">Generar PDF</button>
                 <button class="button" id="generar-csv-propietario">Generar CSV</button>
             </div>
-        
+
             <div class="section">
                 <div class="title">Listado de Inmuebles</div>
-                <button class="button" id="generar-pdf-inmueble" >Generar PDF</button>
-                <button class="button" id="generar-csv-inmueble" >Generar CSV</button>
+                <button class="button" id="generar-pdf-inmueble">Generar PDF</button>
+                <button class="button" id="generar-csv-inmueble">Generar CSV</button>
             </div>
 
             <div class="section">
                 <div class="title">Listado de Documentos</div>
-                <button class="button" id="generar-pdf-documento" >Generar PDF</button>
-                <button class="button" id="generar-csv-documento" >Generar CSV</button>
+                <button class="button" id="generar-pdf-documento">Generar PDF</button>
+                <button class="button" id="generar-csv-documento">Generar CSV</button>
             </div>
-        
+
             <div class="section">
                 <div class="title">Listado de transacciones</div>
-                <button class="button" id="generar-pdf-transaccion" >Generar PDF</button>
-                <button class="button" id="generar-csv-transaccion" >Generar CSV</button>
+                <button class="button" id="generar-pdf-transaccion">Generar PDF</button>
+                <button class="button" id="generar-csv-transaccion">Generar CSV</button>
             </div>
         </body>
     </div>
@@ -63,12 +64,17 @@
                         gerente.telefono,
                         gerente.carnet,
                     ]);
-                
+
                     // Crear un nuevo documento PDF
                     var docDefinition = {
-                        content: [
-                            { text: 'Listado de Gerentes', fontSize: 18, bold: true },
-                            { text: '\n\n' },
+                        content: [{
+                                text: 'Listado de Gerentes',
+                                fontSize: 18,
+                                bold: true
+                            },
+                            {
+                                text: '\n\n'
+                            },
                             {
                                 table: {
                                     headerRows: 1,
@@ -80,7 +86,7 @@
                             }
                         ]
                     };
-                
+
                     // Generar el PDF y descargarlo
                     pdfMake.createPdf(docDefinition).download('gerentes.pdf');
                 });
@@ -97,18 +103,19 @@
                         gerente.telefono,
                         gerente.carnet
                     ]);
-                
+
                     // Crear el contenido del archivo CSV
                     var csvContent = 'Nombre,Correo,Telefono,Carnet\n' + gerentesData.join('\n');
-                
+
                     // Crear un objeto Blob con el contenido del archivo CSV
-                    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                
+                    var blob = new Blob([csvContent], {
+                        type: 'text/csv;charset=utf-8;'
+                    });
+
                     // Descargar el archivo CSV
                     saveAs(blob, 'gerentes.csv');
                 });
         });
-
     </script>
 
     <!--Asesores-->
@@ -126,12 +133,17 @@
                         asesor.carnet,
                         asesor.codigo
                     ]);
-                
+
                     // Crear un nuevo documento PDF
                     var docDefinition = {
-                        content: [
-                            { text: 'Listado de Asesores', fontSize: 18, bold: true },
-                            { text: '\n\n' },
+                        content: [{
+                                text: 'Listado de Asesores',
+                                fontSize: 18,
+                                bold: true
+                            },
+                            {
+                                text: '\n\n'
+                            },
                             {
                                 table: {
                                     headerRows: 1,
@@ -143,7 +155,7 @@
                             }
                         ]
                     };
-                
+
                     // Generar el PDF y descargarlo
                     pdfMake.createPdf(docDefinition).download('asesores.pdf');
                 });
@@ -161,23 +173,24 @@
                         asesor.carnet,
                         asesor.codigo
                     ]);
-                
+
                     // Crear el contenido del archivo CSV
                     var csvContent = 'Nombre,Correo,Telefono,Carnet,Codigo\n' + asesoresData.join('\n');
-                
+
                     // Crear un objeto Blob con el contenido del archivo CSV
-                    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                
+                    var blob = new Blob([csvContent], {
+                        type: 'text/csv;charset=utf-8;'
+                    });
+
                     // Descargar el archivo CSV
                     saveAs(blob, 'asesores.csv');
                 });
         });
-
     </script>
 
-     <!--Propietarios-->
+    <!--Propietarios-->
 
-     <script>
+    <script>
         // Código para generar un PDF a partir de los datos de los propietarios
         document.getElementById('generar-pdf-propietario').addEventListener('click', function() {
             fetch('/propietarios/json')
@@ -188,12 +201,17 @@
                         propietario.telefono,
                         propietario.carnet
                     ]);
-                
+
                     // Crear un nuevo documento PDF
                     var docDefinition = {
-                        content: [
-                            { text: 'Listado de Propietarios', fontSize: 18, bold: true },
-                            { text: '\n\n' },
+                        content: [{
+                                text: 'Listado de Propietarios',
+                                fontSize: 18,
+                                bold: true
+                            },
+                            {
+                                text: '\n\n'
+                            },
                             {
                                 table: {
                                     headerRows: 1,
@@ -205,7 +223,7 @@
                             }
                         ]
                     };
-                
+
                     // Generar el PDF y descargarlo
                     pdfMake.createPdf(docDefinition).download('propietarios.pdf');
                 });
@@ -221,23 +239,24 @@
                         propietario.telefono,
                         propietario.carnet
                     ]);
-                
+
                     // Crear el contenido del archivo CSV
                     var csvContent = 'Nombre,Telefono,Carnet\n' + propietariosData.join('\n');
-                
+
                     // Crear un objeto Blob con el contenido del archivo CSV
-                    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                
+                    var blob = new Blob([csvContent], {
+                        type: 'text/csv;charset=utf-8;'
+                    });
+
                     // Descargar el archivo CSV
                     saveAs(blob, 'propietarios.csv');
                 });
         });
+    </script>
 
-     </script>
+    <!--Inmuebles-->
 
-     <!--Inmuebles-->
-
-     <script>
+    <script>
         // Código para generar un PDF a partir de los datos de los inmuebles
         document.getElementById('generar-pdf-inmueble').addEventListener('click', function() {
             fetch('/inmuebles/json')
@@ -253,24 +272,31 @@
                         inmueble.id_propietario,
                         inmueble.id_asesor
                     ]);
-                
+
                     // Crear un nuevo documento PDF
                     var docDefinition = {
-                        content: [
-                            { text: 'Listado de Inmuebles', fontSize: 18, bold: true },
-                            { text: '\n\n' },
+                        content: [{
+                                text: 'Listado de Inmuebles',
+                                fontSize: 18,
+                                bold: true
+                            },
+                            {
+                                text: '\n\n'
+                            },
                             {
                                 table: {
                                     headerRows: 1,
                                     body: [
-                                        ['Coordenada', 'Tamaño', 'Dirección', 'Precio', 'Razón', 'Descripción', 'Id Propietario', 'Id Asesor'],
+                                        ['Coordenada', 'Tamaño', 'Dirección', 'Precio', 'Razón',
+                                            'Descripción', 'Id Propietario', 'Id Asesor'
+                                        ],
                                         ...inmueblesData
                                     ]
                                 }
                             }
                         ]
                     };
-                
+
                     // Generar el PDF y descargarlo
                     pdfMake.createPdf(docDefinition).download('inmuebles.pdf');
                 });
@@ -291,23 +317,26 @@
                         inmueble.id_propietario,
                         inmueble.id_asesor
                     ]);
-                
+
                     // Crear el contenido del archivo CSV
-                    var csvContent = 'Coordenada,Tamaño,Dirección,Precio,Razón,Descripción,Id Propietario,Id Asesor\n' + inmueblesData.join('\n');
-                
+                    var csvContent =
+                        'Coordenada,Tamaño,Dirección,Precio,Razón,Descripción,Id Propietario,Id Asesor\n' +
+                        inmueblesData.join('\n');
+
                     // Crear un objeto Blob con el contenido del archivo CSV
-                    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                
+                    var blob = new Blob([csvContent], {
+                        type: 'text/csv;charset=utf-8;'
+                    });
+
                     // Descargar el archivo CSV
                     saveAs(blob, 'inmuebles.csv');
                 });
         });
+    </script>
 
-     </script>
+    <!--Documentos-->
 
-     <!--Documentos-->
-
-     <script>
+    <script>
         // Código para generar un PDF a partir de los datos de los documentos
         document.getElementById('generar-pdf-documento').addEventListener('click', function() {
             fetch('/documentos/json')
@@ -319,12 +348,17 @@
                         documento.fecha,
                         documento.id_inmueble
                     ]);
-                
+
                     // Crear un nuevo documento PDF
                     var docDefinition = {
-                        content: [
-                            { text: 'Listado de Documentos', fontSize: 18, bold: true },
-                            { text: '\n\n' },
+                        content: [{
+                                text: 'Listado de Documentos',
+                                fontSize: 18,
+                                bold: true
+                            },
+                            {
+                                text: '\n\n'
+                            },
                             {
                                 table: {
                                     headerRows: 1,
@@ -336,7 +370,7 @@
                             }
                         ]
                     };
-                
+
                     // Generar el PDF y descargarlo
                     pdfMake.createPdf(docDefinition).download('documentos.pdf');
                 });
@@ -353,23 +387,24 @@
                         documento.fecha,
                         documento.id_inmueble
                     ]);
-                
+
                     // Crear el contenido del archivo CSV
                     var csvContent = 'Descripción,Archivo,Fecha,Id Inmueble\n' + documentosData.join('\n');
-                
+
                     // Crear un objeto Blob con el contenido del archivo CSV
-                    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                
+                    var blob = new Blob([csvContent], {
+                        type: 'text/csv;charset=utf-8;'
+                    });
+
                     // Descargar el archivo CSV
                     saveAs(blob, 'documentos.csv');
                 });
         });
+    </script>
 
-     </script>
+    <!--Transacciones-->
 
-     <!--Transacciones-->
-
-     <script>
+    <script>
         // Código para generar un PDF a partir de los datos de las transacciones
         document.getElementById('generar-pdf-transaccion').addEventListener('click', function() {
             fetch('/transacciones/json')
@@ -380,12 +415,17 @@
                         transaccion.fecha,
                         transaccion.inmueble_id
                     ]);
-                
+
                     // Crear un nuevo documento PDF
                     var docDefinition = {
-                        content: [
-                            { text: 'Listado de Transacciones', fontSize: 18, bold: true },
-                            { text: '\n\n' },
+                        content: [{
+                                text: 'Listado de Transacciones',
+                                fontSize: 18,
+                                bold: true
+                            },
+                            {
+                                text: '\n\n'
+                            },
                             {
                                 table: {
                                     headerRows: 1,
@@ -397,12 +437,12 @@
                             }
                         ]
                     };
-                
+
                     // Generar el PDF y descargarlo
                     pdfMake.createPdf(docDefinition).download('transacciones.pdf');
                 });
         });
-        
+
         // Código para generar un CSV a partir de los datos de las transacciones
         document.getElementById('generar-csv-transaccion').addEventListener('click', function() {
             fetch('/transacciones/json')
@@ -413,18 +453,18 @@
                         transaccion.fecha,
                         transaccion.inmueble_id
                     ]);
-                
+
                     // Crear el contenido del archivo CSV
                     var csvContent = 'Interesado,Fecha,Id Inmueble\n' + transaccionesData.join('\n');
-                
+
                     // Crear un objeto Blob con el contenido del archivo CSV
-                    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                
+                    var blob = new Blob([csvContent], {
+                        type: 'text/csv;charset=utf-8;'
+                    });
+
                     // Descargar el archivo CSV
                     saveAs(blob, 'transacciones.csv');
                 });
         });
-
-     </script>
-
+    </script>
 @endsection

@@ -3,12 +3,14 @@
     <link rel="stylesheet" href={{ asset('propietariocss/propietario.css') }}> <!-- PARA USAR 2 PLANTILLAS CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <div class="title2">
-        <h1>Listado de Propietarios</h1>
+        <h1 class="lista">Listado de Propietarios</h1>
     </div>
 
-    <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@mdo">Nuevo
-        Propietario</button>
+    @role('gerente')
+        <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
+            data-whatever="@mdo">Nuevo
+            Propietario</button>
+    @endrole
     <div class="table">
         <table class="table table-dark table-striped" id="tablita">
             <thead>
@@ -35,20 +37,23 @@
                                 @endphp
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
                                     data-id="{{ $propietario->id }}" data-foto="{{ $foto }}">
-                                    <ion-icon name="enter-outline"></ion-icon>
+                                    <i class="fa-solid fa-right-to-bracket fa-sm"></i>
+
                                 </a>
-                                <button type="submit" class="btn btn-link">
-                                    <ion-icon name="trash-outline"></ion-icon>
-                                </button>
+                                @role('gerente')
+                                    <button type="submit" class="btn btn-link">
+                                        <i class="fa-solid fa-trash fa-sm"></i>
+                                    </button>
+                                @endrole
                             </form>
                         </td>
                     </tr>
                 @endforeach
                 @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </tbody>
         </table>
     </div>
@@ -167,7 +172,9 @@
                     </div>
                     <div class="modal-footer">
                         <!--<button id="btn-transacciones" type="button" class="btn btn-primary">Ver Mas</button>-->
-                        <button id="btn-modificar" type="button" class="btn btn-warning">Modificar</button>
+                        @role('gerete')
+                            <button id="btn-modificar" type="button" class="btn btn-warning">Modificar</button>
+                        @endrole('asesor')
                         <button id="btn-guardar" type="submit" class="btn btn-success">Guardar</button>
                         <button id="btn-cerrar" type="button" class="btn btn-danger"
                             data-dismiss="modal">Cerrar</button>

@@ -3,7 +3,7 @@
     <link rel="stylesheet" href={{ asset('asesor/asesor.css') }}>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <div class="title2">
-        <h1>Listado de Asesores</h1>
+        <h1 class="lista">Listado de Asesores</h1>
     </div>
 
     <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
@@ -27,7 +27,7 @@
                     <tr>
                         <th scope="row">{{ $i + 1 }}</th>
                         <td>{{ $asesor->nombre }}</td>
-                        <td>{{ $asesor->correo }}</td>
+                        <td>{{ $asesor->email }}</td>
                         <td>{{ $asesor->telefono }}</td>
                         <td>{{ $asesor->carnet }}</td>
                         <td>{{ $asesor->codigo }}</td>
@@ -39,10 +39,10 @@
                                 @endphp
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
                                     data-id="{{ $asesor->id }}" data-foto="{{ $foto }}">
-                                    <ion-icon name="enter-outline"></ion-icon>
+                                    <i class="fa-solid fa-right-to-bracket fa-sm"></i>
                                 </a>
                                 <button type="submit" class="btn btn-link">
-                                    <ion-icon name="trash-outline"></ion-icon>
+                                    <i class="fa-solid fa-trash fa-sm"></i>
                                 </button>
                             </form>
 
@@ -86,13 +86,13 @@
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">Correo:</label>
-                            <input type="email" name="correo" class="form-control" id="message-text"
-                                placeholder="correo@example.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                            <input type="email" name="email" class="form-control" id="message-text"
+                                placeholder="email@example.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                                 required>
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Contraseña:</label>
-                            <input name="contrasena" type="password" class="form-control" id="recipient-name" maxlength="10"
+                            <input name="password" type="password" class="form-control" id="recipient-name" maxlength="10"
                                 required>
                         </div>
                         <div class="form-group">
@@ -154,8 +154,9 @@
                                     <h6 class="text-center">Transacciones en Procesos</h6>
                                     <p class="text-center text-white">3 Transacciones</p>
                                     <div class="btn-container">
-                                        <button type="button" class="btn btn-primary btn-sm btn-center">Ver
-                                            Propiedades</button>
+                                        <a href="{{ route('inmueble') }}" type="button"
+                                            class="btn btn-primary btn-sm btn-center">Ver
+                                            Propiedades</a>
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +171,7 @@
                                     </div>
                                     <div class="form-group form-group-edit">
                                         <label for="message-text" class="col-form-label">Correo:</label>
-                                        <input type="email" name="correo" class="form-control" id="message-text"
+                                        <input type="email" name="email" class="form-control" id="message-text"
                                             value="" required readonly>
                                     </div>
                                     <div class="form-group form-group-edit">
@@ -214,14 +215,14 @@
         var btnModificar = document.getElementById("btn-modificar");
 
         var nombreInput = document.querySelector('#exampleModal2 input[name="nombre"]');
-        var correoInput = document.querySelector('#exampleModal2 input[name="correo"]');
+        var emailInput = document.querySelector('#exampleModal2 input[name="email"]');
         var telefonoInput = document.querySelector('#exampleModal2 input[name="telefono"]');
         var carnetInput = document.querySelector('#exampleModal2 input[name="carnet"]');
         var codigoInput = document.querySelector('#exampleModal2 input[name="codigo"]');
 
         btnModificar.addEventListener('click', function() {
             nombreInput.removeAttribute('readonly');
-            correoInput.removeAttribute('readonly');
+            emailInput.removeAttribute('readonly');
             telefonoInput.removeAttribute('readonly');
             carnetInput.removeAttribute('readonly');
             codigoInput.removeAttribute('readonly');
@@ -288,7 +289,7 @@
 
                 if (asesor) {
                     modal.find('[name="nombre"]').val(asesor.nombre);
-                    modal.find('[name="correo"]').val(asesor.correo);
+                    modal.find('[name="email"]').val(asesor.email);
                     modal.find('[name="telefono"]').val(asesor.telefono);
                     modal.find('[name="carnet"]').val(asesor.carnet);
                     modal.find('[name="codigo"]').val(asesor.codigo);
@@ -335,7 +336,7 @@
                 id_asesor);
             if (asesor) {
                 modal.find('[name="nombre"]').val(asesor.nombre);
-                modal.find('[name="correo"]').val(asesor.correo);
+                modal.find('[name="email"]').val(asesor.email);
                 modal.find('[name="telefono"]').val(asesor.telefono);
                 modal.find('[name="carnet"]').val(asesor.carnet);
                 modal.find('[name="codigo"]').val(asesor.codigo);

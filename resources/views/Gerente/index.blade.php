@@ -27,7 +27,7 @@
                         <th scope="row">{{ $i + 1 }}</th>
                         <td>{{ $gerente->nombre }}</td>
                         <td>{{ $gerente->telefono }}</td>
-                        <td>{{ $gerente->correo }}</td>
+                        <td>{{ $gerente->email }}</td>
                         <td>{{ $gerente->carnet }}</td>
                         <td>
                             <form action="{{ route('eliminarGerente', $gerente->id) }}" method="POST">
@@ -37,17 +37,17 @@
                                 @endphp
                                 <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2"
                                     data-id="{{ $gerente->id }}" data-foto="{{ $foto }}">
-                                    <ion-icon name="enter-outline"></ion-icon>
+                                    <i class="fa-solid fa-right-to-bracket fa-sm"></i>
                                 </a>
 
                                 @if ($i === 0 && count($gerentes) === 1)
                                     <a href="#" class="btn btn-link btn-trash"
                                         onclick="alert('No se puede eliminar el único gerente.'); return false;">
-                                        <ion-icon name="trash-outline"></ion-icon>
+                                        <i class="fa-solid fa-trash fa-sm"></i>
                                     </a>
                                 @else
                                     <button type="submit" class="btn btn-link">
-                                        <ion-icon name="trash-outline"></ion-icon>
+                                        <i class="fa-solid fa-trash fa-sm"></i>
                                     </button>
                                 @endif
                             </form>
@@ -271,7 +271,7 @@
 
                 if (gerente) {
                     modal.find('[name="nombre"]').val(gerente.nombre);
-                    modal.find('[name="correo"]').val(gerente.correo);
+                    modal.find('[name="correo"]').val(gerente.email);
                     modal.find('[name="telefono"]').val(gerente.telefono);
                     modal.find('[name="carnet"]').val(gerente.carnet);
 

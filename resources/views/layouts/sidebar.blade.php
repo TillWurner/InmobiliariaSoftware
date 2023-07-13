@@ -1,3 +1,18 @@
+@role('asesor')
+    @php
+        $cantidad_notificaciones = App\Models\Notificacion::where('id_asesor', Auth::user()->id)->count();
+        $notificaciones = App\Models\Notificacion::where('id_asesor', Auth::user()->id)->get();
+        if ($notificaciones->isNotEmpty()) {
+            $mensaje = '<p>Buenas noticias!</p><p>Te asignaron nuevos inmuebles</p><hr>';
+            foreach ($notificaciones as $item) {
+                $mensaje .= '<a href="' . route('inmueble', ['id' => $item->id_inmueble, 'idNotificacion' => $item->id]) . '">' . $item->mensaje . '</a><hr>';
+            }
+        } else {
+            $mensaje = 'No hay nada nuevo!';
+        }
+    @endphp
+@endrole()
+
 <!DOCTYPE html>
 <html>
 
@@ -20,18 +35,31 @@
     <link rel="stylesheet" type="text/css"
         href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    {{-- Para que funcione Socket IO --}}
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+        integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous">
+    </script>
+    <script type="importmap">
+        {
+            "imports": {
+                "socket.io-client": "https://cdn.socket.io/4.3.2/socket.io.esm.min.js"
+            }
+        }
+    </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
     </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
     </script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    {{-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script> --}}
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 
-<body style="background-image: url({{ asset('/gerentecss/img/fondoCentury5.jpg') }}) ; margin: 0;
+<body
+    style="background-image: url({{ asset('/gerentecss/img/fondoCentury5.jpg') }}) ; margin: 0;
 padding: 0; background-size: cover;
 background-repeat: no-repeat;
 background-position: center center">
@@ -51,33 +79,69 @@ background-position: center center">
 
             <hr class="linea-division">
             <ul class="list-unstyled margin-icon-sidebar">
-                <li class="{{ Request::is('home') ? 'active' : '' }}">
-                    <a href="/home"><i class="fas fa-home"></i> Inicio</a>
-                </li>
-                <li class="{{ Request::is('gerentes') ? 'active' : '' }}">
-                    <a href="/gerentes"><i class="fas fa-user-tie"></i> Gerentes</a>
-                </li>
-                <li class="{{ Request::is('asesores') ? 'active' : '' }}">
-                    <a href="/asesores"><i class="fas fa-user-tie"></i> Asesores</a>
-                </li>
-                <li class="{{ Request::is('propietarios') ? 'active' : '' }}">
-                    <a href="/propietarios"><i class="fas fa-user"></i> Propietarios</a>
-                </li>
-                <li class="{{ Request::is('inmuebles') ? 'active' : '' }}">
-                    <a href="/inmuebles"><i class="fas fa-building"></i> Inmuebles</a>
-                </li>
-                <li class="{{ Request::is('documents') ? 'active' : '' }}">
-                    <a href="/documents"><i class="fas fa-folder"></i> Documentos</a>
-                </li>
-                <li class="{{ Request::is('transacciones') ? 'active' : '' }}">
-                    <a href="/transacciones"><i class="fas fa-handshake"></i> Transacciones</a>
-                </li>
-                <li class="{{ Request::is('reportes') ? 'active' : '' }}">
-                    <a href="/reportes"><i class="fas fa-file"></i> Reportes</a>
-                </li>
-                <li class="{{ Request::is('mapas') ? 'active' : '' }}">
-                    <a href="/mapas"><i class="fas fa-file"></i> Ver Mapa</a>
-                </li>
+                @role('admin')
+                    <li class="{{ Request::is('home') ? 'active' : '' }}">
+                        <a href="/home"><i class="fas fa-home"></i> Inicio</a>
+                    </li>
+                    <li class="{{ Request::is('gerentes') ? 'active' : '' }}">
+                        <a href="/gerentes"><i class="fas fa-user-tie"></i> Gerentes</a>
+                    </li>
+                    <li class="{{ Request::is('asesores') ? 'active' : '' }}">
+                        <a href="/asesores"><i class="fas fa-user-tie"></i> Asesores</a>
+                    </li>
+                    <li class="{{ Request::is('propietarios') ? 'active' : '' }}">
+                        <a href="/propietarios"><i class="fas fa-user"></i> Propietarios</a>
+                    </li>
+                @endrole
+                @role('gerente')
+                    <li class="{{ Request::is('home') ? 'active' : '' }}">
+                        <a href="/home"><i class="fas fa-home"></i> Inicio</a>
+                    </li>
+                    <li class="{{ Request::is('asesores') ? 'active' : '' }}">
+                        <a href="/asesores"><i class="fas fa-user-tie"></i> Asesores</a>
+                    </li>
+                    <li class="{{ Request::is('propietarios') ? 'active' : '' }}">
+                        <a href="/propietarios"><i class="fas fa-user"></i> Propietarios</a>
+                    </li>
+                    <li class="{{ Request::is('inmuebles') ? 'active' : '' }}">
+                        <a href="/inmuebles"><i class="fas fa-building"></i> Inmuebles</a>
+                    </li>
+                    <li class="{{ Request::is('documents') ? 'active' : '' }}">
+                        <a href="/documents"><i class="fas fa-folder"></i> Documentos</a>
+                    </li>
+                    <li class="{{ Request::is('transacciones') ? 'active' : '' }}">
+                        <a href="/transacciones"><i class="fas fa-handshake"></i> Transacciones</a>
+                    </li>
+                    <li class="{{ Request::is('reportes') ? 'active' : '' }}">
+                        <a href="/reportes"><i class="fas fa-file"></i> Reportes</a>
+                    </li>
+                    <li class="{{ Request::is('mapas') ? 'active' : '' }}">
+                        <a href="/mapas"><i class="fas fa-file"></i> Ver Mapa</a>
+                    </li>
+                @endrole
+                @role('asesor')
+                    <li class="{{ Request::is('home') ? 'active' : '' }}">
+                        <a href="/home"><i class="fas fa-home"></i> Inicio</a>
+                    </li>
+                    <li class="{{ Request::is('propietarios') ? 'active' : '' }}">
+                        <a href="/propietarios"><i class="fas fa-user"></i> Propietarios</a>
+                    </li>
+                    <li class="{{ Request::is('inmuebles') ? 'active' : '' }}">
+                        <a href="/inmuebles"><i class="fas fa-building"></i> Inmuebles</a>
+                    </li>
+                    <li class="{{ Request::is('documents') ? 'active' : '' }}">
+                        <a href="/documents"><i class="fas fa-folder"></i> Documentos</a>
+                    </li>
+                    <li class="{{ Request::is('transacciones') ? 'active' : '' }}">
+                        <a href="/transacciones"><i class="fas fa-handshake"></i> Transacciones</a>
+                    </li>
+                    <li class="{{ Request::is('reportes') ? 'active' : '' }}">
+                        <a href="/reportes"><i class="fas fa-file"></i> Reportes</a>
+                    </li>
+                    <li class="{{ Request::is('mapas') ? 'active' : '' }}">
+                        <a href="/mapas"><i class="fas fa-file"></i> Ver Mapa</a>
+                    </li>
+                @endrole
             </ul>
             <hr class="linea-division">
         </nav>
@@ -94,6 +158,7 @@ background-position: center center">
                         aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-cog"></i>
                     </button>
+                    <h5 style="margin-left: 10px">Haz iniciado como {{ Auth::user()->tipo }}</h5>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item dropdown">
@@ -101,7 +166,7 @@ background-position: center center">
                                     aria-expanded="false">
                                     <img src="https://thumbs.dreamstime.com/b/imagen-del-pasaporte-de-un-hombre-de-negocios-hisp%C3%A1nico-con-el-traje-54531886.jpg"
                                         class="img-fluid rounded-circle mr-2 avatar">
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->nombre }}
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="#">Mi Perfil</a>
@@ -113,11 +178,13 @@ background-position: center center">
                             </li>
                         </ul>
                     </div>
-                    <button type="button" class="btn btn-outline-dark btn-bell" data-toggle="popover"
-                        data-content="Mensaje de notificación">
-                        <a href="#"><i class="fas fa-bell"></i> <span
-                                class="badge badge-pill badge-light">1</span></a>
-                    </button>
+                    @role('asesor')
+                        <button id="mensaje" type="button" class="btn btn-outline-dark btn-bell"
+                            data-toggle="popover" data-content="{{ $mensaje }}">
+                            <a href="#"><i class="fas fa-bell"></i> <span id="cantidad_notificaciones"
+                                    class="badge badge-pill badge-light">{{ $cantidad_notificaciones }}</span></a>
+                        </button>
+                    @endrole()
                 </div>
             </nav>
 
@@ -207,6 +274,54 @@ background-position: center center">
             });
         });
     </script>
+
+    {{-- Envio y recibo de datos con Socket IO --}}
+    <script type="module">
+        const csrfToken = '{{ csrf_token() }}';
+        import { io } from "socket.io-client";
+    
+        const socket = io("http://127.0.0.1:3000",{
+            transports: ["websocket"],
+        });
+
+        const mensaje = document.querySelector("#mensaje");
+        const cantidad_notificaciones = document.querySelector("#cantidad_notificaciones");
+    
+        @role('asesor')
+        socket.on('notificacion', (data) => {
+            data._token = csrfToken;
+            if (data.id_asesor == {{ auth()->user()->id }}) {
+                const url = `{{ route("asignarAsesor", ":id_inmueble") }}`;
+                const id_inmueble = data.id_inmueble;
+                const urlWithParam = url.replace(':id_inmueble', id_inmueble);
+                $.ajax({
+                    url: urlWithParam,
+                    method: 'POST',
+                    data: data,
+                    error: function(error) {
+                    console.error('Error al enviar los datos al controlador:', error);
+                }
+            });
+
+            
+                console.log(data);
+                $.ajax({
+                    url: '/notificacion/'+data.id_asesor,
+                    method: 'GET',
+                    success: function(resultado) {
+                        cantidad_notificaciones.innerHTML = resultado.cantidad_notificaciones;
+                        mensaje.dataset.content = resultado.mensaje;
+                        $(mensaje).popover('show');
+                    },
+                    error: function(error) {
+                        console.error('Error al obtener los datos:', error);
+                    }
+                });
+            }
+        });
+        @endrole()
+    </script>
+
 </body>
 
 </html>
