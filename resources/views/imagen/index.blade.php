@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href={{ asset('imagen/imagen.css') }}>
     <div class="title2">
-        <h1>Imagenes del Inmueble</h1>
+        <h1 class="lista">Imagenes del Inmueble</h1>
     </div>
 
     <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
@@ -21,32 +21,54 @@
                                 <img src="{{ $imagenBase }}" width="100%" alt="Imagen"
                                     class="brillo-imagen zoom-image">
                             @else
-                                <img src="{{ $imagen->imagen }}" width="100%" alt="Imagen"
-                                    class="brillo-imagen zoom-image">
+                                <img src="{{ asset('fotos/fotos-inmuebles/' . $imagen->imagen) }}" width="100%"
+                                    alt="Imagen" class="brillo-imagen zoom-image">
                             @endif
                             <div class="info1 d-flex justify-content-between">
                                 <div style="clear: both;">
                                     <div class="titulo">Imagen {{ $imagen->id }}</div>
                                     <div class="descripcion">{{ $imagen->descripcion }}</div>
                                 </div>
+                                @if ($imagen->destacado)
+                                    <div class="bloque">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Estrella_amarilla.png"
+                                            alt="star" width="25px" height="25px">
+                                    </div>
+                                @endif
                             </div>
+
                             <div class="info2 d-flex justify-content-between">
-                                <button class="btn btn-warning btn-sm" data-toggle="modal"
+                                <form method="POST"
+                                    action="{{ route('destacarImagen', ['id' => $imagen->id, 'idInmueble' => $id]) }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="btn-container">
+                                        <button class="btn btn-warning btn-sm">Destacar</button>
+                                    </div>
+                                </form>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#modalMod{{ $loop->iteration }}">Modificar</button>
-                                <button class="btn btn-danger btn-sm" data-toggle="modal"
-                                    data-target="#modalMod{{ $loop->iteration }}">Eliminar</button>
+                                <form method="POST" action="{{ route('eliminarImagen', $imagen->id) }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="btn-container">
+                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                    </div>
+                                </form>
+
                             </div>
                         </div><br><br><br>
                     </div>
 
-                    {{-- MODAL MODIFICAR INMUEBLE --}}
+                    {{-- MODAL MODIFICAR DESCRIPCION --}}
 
                     <div class="modal" id="modalMod{{ $loop->iteration }}" tabindex="-1" role="dialog"
                         aria-labelledby="modalModLabel{{ $loop->iteration }}" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="modalModLabel{{ $loop->iteration }}">Modificar Imagen!
+                                    <h1 class="modal-title fs-5" id="modalModLabel{{ $loop->iteration }}">Modificar
+                                        Descripcion!
                                     </h1>
                                 </div>
                                 <form class="container" method="POST" action="{{ route('modificarImagen', $imagen->id) }}"
@@ -54,20 +76,6 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
-                                        <div class="profile-picture-container">
-                                            <div class="profile-picture">
-                                                <img src="https://cdn-icons-png.flaticon.com/512/9073/9073032.png"
-                                                    alt="Foto de perfil" id="profile-picture">
-                                                <label for="file-upload" class="file-upload-label">
-                                                    <span class="upload-icon">
-                                                        <i class="fas fa-camera"></i>
-                                                    </span>
-                                                </label>
-                                                <input type="file" id="file-upload" class="file-upload-input"
-                                                    accept="image/*">
-                                            </div>
-                                        </div>
-                                        <br>
                                         <div class="form-group text-center">
                                             <label for="recipient-name" class="col-form-label"
                                                 style="font-weight: bold;">Descripcion:</label>
@@ -94,14 +102,14 @@
                     <img src="" alt="Imagen Ampliada">
                 </div>
             @else
-                <div style="color: white; font-size: 50px; margin-top: 90px">
+                <div class="lista" style="color: rgb(253, 173, 0); font-size: 50px; margin-top: 90px">
                     NO HAY IMAGENES SUBIDAS !!!
                 </div>
             @endif
         </div>
     </div>
 
-    {{-- MODAL NUEVO INMUEBLE --}}
+    {{-- MODAL NUEVA IMAGEN --}}
 
     <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -123,7 +131,8 @@
                                         <i class="fas fa-camera"></i>
                                     </span>
                                 </label>
-                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*">
+                                <input type="file" id="file-upload" class="file-upload-input" accept="image/*"
+                                    name="foto">
                             </div>
                         </div>
                         <br>

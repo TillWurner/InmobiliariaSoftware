@@ -164,12 +164,22 @@ background-position: center center">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown" href="#" role="button" data-toggle="dropdown"
                                     aria-expanded="false">
-                                    <img src="https://thumbs.dreamstime.com/b/imagen-del-pasaporte-de-un-hombre-de-negocios-hisp%C3%A1nico-con-el-traje-54531886.jpg"
-                                        class="img-fluid rounded-circle mr-2 avatar">
+                                    @role('gerente')
+                                        <img src="{{ asset('fotos/fotos-gerentes/' . Auth::user()->foto) }}"
+                                            class="img-fluid rounded-circle mr-2 avatar">
+                                    @endrole()
+                                    @role('asesor')
+                                        <img src="{{ asset('fotos/fotos-asesores/' . Auth::user()->foto) }}"
+                                            class="img-fluid rounded-circle mr-2 avatar">
+                                    @endrole()
+                                    @role('admin')
+                                        <img src="https://thumbs.dreamstime.com/b/imagen-del-pasaporte-de-un-hombre-de-negocios-hisp%C3%A1nico-con-el-traje-54531886.jpg"
+                                            class="img-fluid rounded-circle mr-2 avatar">
+                                    @endrole()
                                     {{ Auth::user()->nombre }}
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Mi Perfil</a>
+                                    {{-- <a class="dropdown-item" href="#">Mi Perfil</a> --}}
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" onclick="logout()">
                                         Cerrar Sesión
@@ -280,7 +290,7 @@ background-position: center center">
         const csrfToken = '{{ csrf_token() }}';
         import { io } from "socket.io-client";
     
-        const socket = io("http://34.151.234.12:3000/",{
+        const socket = io("http://127.0.0.1:3000/",{
             transports: ["websocket"],
         });
 

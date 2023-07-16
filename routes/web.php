@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/imagenes/{id}', [ImagenController::class, 'imagenes'])->name('imagenes');
     Route::post('/registrarImagen/{id}', [ImagenController::class, 'registrarImagen'])->name('registrarImagen');
     Route::put('/modificarImagen/{id}', [ImagenController::class, 'modificarImagen'])->name('modificarImagen');
+    Route::post('/eliminarImagen/{id}', [ImagenController::class, 'eliminarImagen'])->name('eliminarImagen');
+    Route::post('/destacarImagen/{id}/{idInmueble}', [ImagenController::class, 'destacarImagen'])->name('destacarImagen');
     Route::get('/buscar-propietarios', [PropietarioController::class, 'buscarPropietarios'])->name('buscar-propietarios');
     Route::get('/buscar-asesores', [UserController::class, 'buscarAsesores'])->name('buscar-asesores');
     Route::post('/asignarAsesor/{id}', [InmuebleController::class, 'asignarAsesor'])->name('asignarAsesor');

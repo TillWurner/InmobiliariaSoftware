@@ -1,9 +1,5 @@
 @extends('layouts.sidebar')
 @section('contenido')
-    @php
-        $inmuebleBase = 'https://static.wixstatic.com/media/63b041_e98452ee67e3450eb6936162bd357726~mv2_d_8333_5729_s_4_2.jpg/v1/fill/w_1000,h_688,al_c,q_85,usm_0.66_1.00_0.01/63b041_e98452ee67e3450eb6936162bd357726~mv2_d_8333_5729_s_4_2.jpg';
-    @endphp
-
     <link rel="stylesheet" href={{ asset('inmueble/inmueble.css') }}>
     <div class="title2">
         <h1 class="lista">Listado de Inmuebles</h1>
@@ -14,19 +10,16 @@
     <div class="container scrollable-container">
         <div class="row">
             @foreach ($inmuebles as $i => $inmueble)
+                @php
+                    $inmueble->imagen = $inmueble->imagenes->where('destacado', true)->first();
+                @endphp
                 <div class="col-md-4">
                     <div class="image-container">
-                        @if ($i + 1 == 1)
-                            <img src="{{ $inmuebleBase }}" width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
-                        @elseif($i + 1 == 2)
-                            <img src="https://www.bienesonline.com/bolivia/photos/urbanizacion-del-valle-casas-en-pre-venta-CAV48511623287920-784.jpg"
-                                width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
-                        @elseif($i + 1 == 3)
-                            <img src="https://img10.naventcdn.com/avisos/18/00/66/91/06/81/720x532/371120136.jpg"
-                                width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
+                        @if ($inmueble->imagen)
+                            <img src="{{ asset('fotos/fotos-inmuebles/' . $inmueble->imagen->imagen) }}" width="100%"
+                                alt="Imagen" class="brillo-inmueble zoom-image">
                         @else
-                            <img src="https://imgs.nestimg.com/casa_con_recamara_en_planta_baja_para_estrenar_argenta_residencial_3860001682069216715.jpg"
-                                width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
+                            <img src="{{ $inmuebleBase }}" width="100%" alt="Imagen" class="brillo-inmueble zoom-image">
                         @endif
                         <div class="info1 d-flex justify-content-between">
                             <div style="clear: both;">
@@ -102,9 +95,8 @@
                                                 <div class="form-group form-group-edit">
                                                     <label for="tamaño" class="col-form-label">Precio
                                                         ($us):</label>
-                                                    <input name="precio" type="text" class="form-control"
-                                                        id="tamaño" value="{{ $inmueble->precio }}" maxlength="10"
-                                                        required readonly>
+                                                    <input name="precio" type="text" class="form-control" id="tamaño"
+                                                        value="{{ $inmueble->precio }}" maxlength="10" required readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -193,45 +185,25 @@
                                         <h3 class="text-center titulos-modal">Imagenes del Inmueble</h3>
                                         <hr class="hr-division">
                                         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+
                                             <div class="carousel-inner">
-                                                @if ($i + 1 == 1)
-                                                    <div class="carousel-item active">
-                                                        <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
-                                                            alt="...">
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
-                                                            alt="...">
-                                                    </div>
-                                                @elseif($i + 1 == 2)
-                                                    <div class="carousel-item active">
-                                                        <img src="https://www.bienesonline.com/bolivia/photos/urbanizacion-del-valle-casas-en-pre-venta-CAV48511623287920-784.jpg"
-                                                            class="d-block w-100 img-smaller" alt="...">
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img src="https://www.bienesonline.com/bolivia/photos/urbanizacion-del-valle-casas-en-pre-venta-CAV48511623287920-784.jpg"
-                                                            class="d-block w-100 img-smaller" alt="...">
-                                                    </div>
-                                                @elseif($i + 1 == 3)
-                                                    <div class="carousel-item active">
-                                                        <img src="https://img10.naventcdn.com/avisos/18/00/66/91/06/81/720x532/371120136.jpg"
-                                                            class="d-block w-100 img-smaller" alt="...">
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img src="https://img10.naventcdn.com/avisos/18/00/66/91/06/81/720x532/371120136.jpg"
-                                                            class="d-block w-100 img-smaller" alt="...">
-                                                    </div>
+                                                @if ($inmueble->imagenes->isNotEmpty())
+                                                    @php $active = true; @endphp
+                                                    @foreach ($inmueble->imagenes as $item)
+                                                        <div class="carousel-item {{ $active ? 'active' : '' }}">
+                                                            <img src="{{ asset('fotos/fotos-inmuebles/' . $item->imagen) }}"
+                                                                class="d-block w-100 img-smaller" alt="...">
+                                                        </div>
+                                                        @php $active = false; @endphp
+                                                    @endforeach
                                                 @else
                                                     <div class="carousel-item active">
-                                                        <img src="https://imgs.nestimg.com/casa_con_recamara_en_planta_baja_para_estrenar_argenta_residencial_3860001682069216715.jpg"
-                                                            class="d-block w-100 img-smaller" alt="...">
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img src="https://imgs.nestimg.com/casa_con_recamara_en_planta_baja_para_estrenar_argenta_residencial_3860001682069216715.jpg"
-                                                            class="d-block w-100 img-smaller" alt="...">
+                                                        <img src="{{ $inmuebleBase }}" class="d-block w-100 img-smaller"
+                                                            alt="...">
                                                     </div>
                                                 @endif
                                             </div>
+
                                         </div><br>
                                         <div class="btn-container">
                                             <a href="{{ route('imagenes', $inmueble->id) }}" type="button"
@@ -691,7 +663,7 @@
             io
         } from "socket.io-client";
 
-        const socket = io("http://34.151.234.12:3000/", {
+        const socket = io("http://127.0.0.1:3000/", {
             transports: ["websocket"],
         });
 

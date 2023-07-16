@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('imagen')->nullable();
             $table->string('descripcion');
-            $table->unsignedBigInteger('id_inmueble');
-            $table->foreign('id_inmueble')->references('id')->on('inmuebles');
+            $table->boolean('destacado')->nullable();
+            $table->unsignedBigInteger('inmueble_id');
+            $table->foreign('inmueble_id')->references('id')->on('inmuebles');
             $table->timestamps();
         });
     }

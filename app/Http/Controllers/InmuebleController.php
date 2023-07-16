@@ -12,9 +12,10 @@ class InmuebleController extends Controller
 {
     public function inmuebles()
     {
-        $inmuebles = Inmueble::all();
+        $inmuebles = Inmueble::with('imagenes')->get();
         $asesores = User::where('tipo', 'Asesor')->get();
-        return view('inmueble.index', ['inmuebles' => $inmuebles, 'asesores' => $asesores]);
+        $inmuebleBase = 'https://static.wixstatic.com/media/63b041_e98452ee67e3450eb6936162bd357726~mv2_d_8333_5729_s_4_2.jpg/v1/fill/w_1000,h_688,al_c,q_85,usm_0.66_1.00_0.01/63b041_e98452ee67e3450eb6936162bd357726~mv2_d_8333_5729_s_4_2.jpg';
+        return view('inmueble.index', ['inmuebles' => $inmuebles, 'asesores' => $asesores, 'inmuebleBase' => $inmuebleBase]);
     }
 
     public function registrarInmueble(Request $request)

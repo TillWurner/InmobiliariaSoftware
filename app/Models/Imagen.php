@@ -10,10 +10,13 @@ class Imagen extends Model
     use HasFactory;
 
     protected $table = 'imagenes';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
+        'id',
         'imagen',
         'descripcion',
+        'destacado',
         'inmueble_id',
     ];
 

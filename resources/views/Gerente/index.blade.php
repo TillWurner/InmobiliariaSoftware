@@ -3,7 +3,7 @@
     <link rel="stylesheet" href={{ asset('gerentecss/gerente.css') }}> <!-- PARA USAR 2 PLANTILLAS CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <div class="title2">
-        <h1>Listado de Gerentes</h1>
+        <h1 class="lista">Listado de Gerentes</h1>
     </div>
 
     <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
