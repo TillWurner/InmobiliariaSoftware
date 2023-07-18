@@ -16,7 +16,7 @@ class InmuebleSeeder extends Seeder
         $data = [
             array(
                 'tamano' => 120,
-                'coordenada' => "-17.752781577337004, -63.177066606387434",
+                'coordenada' => "-17.854289, -63.165559",
                 'direccion' => "Barrio El Palmar",
                 'precio' => 100000,
                 'razon' => "venta",
@@ -26,7 +26,7 @@ class InmuebleSeeder extends Seeder
             ),
             array(
                 'tamano' => 100,
-                'coordenada' => "-17.72743929430809, -63.16693858528513",
+                'coordenada' => "-17.796943, -63.198882",
                 'direccion' => "Barrio Urbari",
                 'precio' => 12000,
                 'razon' => "venta",
@@ -36,8 +36,8 @@ class InmuebleSeeder extends Seeder
             ),
             array(
                 'tamano' => 200,
-                'coordenada' => "-17.72743929430809, -63.16693858528513",
-                'direccion' => "Barrio ZA",
+                'coordenada' => "-17.800546, -63.193740",
+                'direccion' => "Barrio Lujan",
                 'precio' => 22000,
                 'razon' => "venta",
                 'descripcion' => "Casita en Venta",
