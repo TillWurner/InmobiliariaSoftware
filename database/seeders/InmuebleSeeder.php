@@ -22,7 +22,7 @@ class InmuebleSeeder extends Seeder
                 'razon' => "venta",
                 'descripcion' => "Casa en Venta",
                 'id_propietario' => 4,
-                'id_asesor' => 4,
+                'id_asesor' => 3,
             ),
             array(
                 'tamano' => 100,

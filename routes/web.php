@@ -57,6 +57,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/buscar-propietarios', [PropietarioController::class, 'buscarPropietarios'])->name('buscar-propietarios');
     Route::get('/buscar-asesores', [UserController::class, 'buscarAsesores'])->name('buscar-asesores');
     Route::post('/asignarAsesor/{id}', [InmuebleController::class, 'asignarAsesor'])->name('asignarAsesor');
+
+    Route::get('/coordenadas', [InmuebleController::class, 'obtenerInmueblesConCoordenadas'])->name('coordenadas');
+
     Route::get('/notificacion/{idAsesor}', [NotificacionController::class, 'notificacion'])->name('notificacion');
     Route::get('/inmueble-asesor/{id?}/{idNotificacion?}', [InmuebleController::class, 'inmueble'])->name('inmueble');
     Route::post('/asignar', [InmuebleController::class, 'asignar'])->name('asignar');

@@ -9,7 +9,7 @@ class ImagenController extends Controller
 {
     public function imagenes($id)
     {
-        $imagenes = Imagen::where('inmueble_id', $id)->get();
+        $imagenes = Imagen::where('inmueble_id', $id)->orderBy('id')->get();
 
         return view('imagen.index', ['imagenes' => $imagenes, 'id' => $id]);
     }

@@ -26,7 +26,7 @@
                             @endif
                             <div class="info1 d-flex justify-content-between">
                                 <div style="clear: both;">
-                                    <div class="titulo">Imagen {{ $imagen->id }}</div>
+                                    <div class="titulo">Imagen {{ $i + 1 }}</div>
                                     <div class="descripcion">{{ $imagen->descripcion }}</div>
                                 </div>
                                 @if ($imagen->destacado)
@@ -36,27 +36,39 @@
                                     </div>
                                 @endif
                             </div>
-
-                            <div class="info2 d-flex justify-content-between">
-                                <form method="POST"
-                                    action="{{ route('destacarImagen', ['id' => $imagen->id, 'idInmueble' => $id]) }}"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="btn-container">
-                                        <button class="btn btn-warning btn-sm">Destacar</button>
-                                    </div>
-                                </form>
-                                <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#modalMod{{ $loop->iteration }}">Modificar</button>
-                                <form method="POST" action="{{ route('eliminarImagen', $imagen->id) }}"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="btn-container">
-                                        <button class="btn btn-danger btn-sm">Eliminar</button>
-                                    </div>
-                                </form>
-
-                            </div>
+                            @if (!$imagen->destacado)
+                                <div class="info2 d-flex justify-content-between">
+                                    <form method="POST"
+                                        action="{{ route('destacarImagen', ['id' => $imagen->id, 'idInmueble' => $id]) }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="btn-container">
+                                            <button class="btn btn-warning btn-sm">Destacar</button>
+                                        </div>
+                                    </form>
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#modalMod{{ $loop->iteration }}">Modificar</button>
+                                    <form method="POST" action="{{ route('eliminarImagen', $imagen->id) }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="btn-container">
+                                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @else
+                                <div class="info2 d-flex justify-content-between">
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#modalMod{{ $loop->iteration }}">Modificar</button>
+                                    <form method="POST" action="{{ route('eliminarImagen', $imagen->id) }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="btn-container">
+                                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
                         </div><br><br><br>
                     </div>
 

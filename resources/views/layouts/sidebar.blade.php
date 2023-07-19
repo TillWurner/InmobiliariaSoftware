@@ -123,9 +123,6 @@ background-position: center center">
                     <li class="{{ Request::is('home') ? 'active' : '' }}">
                         <a href="/home"><i class="fas fa-home"></i> Inicio</a>
                     </li>
-                    <li class="{{ Request::is('propietarios') ? 'active' : '' }}">
-                        <a href="/propietarios"><i class="fas fa-user"></i> Propietarios</a>
-                    </li>
                     <li class="{{ Request::is('inmuebles') ? 'active' : '' }}">
                         <a href="/inmuebles"><i class="fas fa-building"></i> Inmuebles</a>
                     </li>
@@ -134,9 +131,6 @@ background-position: center center">
                     </li>
                     <li class="{{ Request::is('transacciones') ? 'active' : '' }}">
                         <a href="/transacciones"><i class="fas fa-handshake"></i> Transacciones</a>
-                    </li>
-                    <li class="{{ Request::is('reportes') ? 'active' : '' }}">
-                        <a href="/reportes"><i class="fas fa-file"></i> Reportes</a>
                     </li>
                     <li class="{{ Request::is('mapas') ? 'active' : '' }}">
                         <a href="/mapas"><i class="fas fa-file"></i> Ver Mapa</a>
@@ -290,7 +284,7 @@ background-position: center center">
         const csrfToken = '{{ csrf_token() }}';
         import { io } from "socket.io-client";
     
-        const socket = io("http://127.0.0.1:3000/",{
+        const socket = io("http://34.151.234.12:3000/",{
             transports: ["websocket"],
         });
 

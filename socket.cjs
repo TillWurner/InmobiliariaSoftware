@@ -20,6 +20,13 @@ io.on('connection', (socket) => {
         io.emit('notificacion', data);
         console.log("enviado")
     });
+
+    socket.on('coordenadas-inmueble', (data) => {
+        console.log('Coordenadas recibidas del cliente:', data.coordenada_inmueble);
+
+        io.emit('mapa', data);
+        console.log("enviado-coordenada")
+    });
 });
 
 server.listen(3000, () => {
