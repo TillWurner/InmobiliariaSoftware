@@ -97,4 +97,4 @@ Route::get('/transacciones/json', [TransaccionController::class, 'json']);
 
 /*Buscador*/
 Route::get('/propietarios/{id}', [PropietarioController::class, 'buscar']);
-Route::get('/asesores/{id}', [AsesorController::class, 'buscar']);
+Route::get('/asesores/{id}', [UserController::class, 'buscar']);

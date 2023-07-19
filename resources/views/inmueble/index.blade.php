@@ -1023,12 +1023,12 @@
                 id_asesor = id_asesor;
                 id_gerente = {{ auth()->user()->id }};
 
-                // Almacenar el estado del modal antes de recargar la página
-                localStorage.setItem('modalState', JSON.stringify({
-                    id_inmueble: id_inmueble,
-                    id_asesor: id_asesor,
-                    id_gerente: id_gerente
-                }));
+                // // Almacenar el estado del modal antes de recargar la página
+                // localStorage.setItem('modalState', JSON.stringify({
+                //     id_inmueble: id_inmueble,
+                //     id_asesor: id_asesor,
+                //     id_gerente: id_gerente
+                // }));
 
                 socket.emit("asignacion-inmueble", {
                     id_inmueble: id_inmueble,

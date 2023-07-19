@@ -194,4 +194,15 @@ class UserController extends Controller
         $gerentes = User::where('tipo', 'Gerente')->get();
         return response()->json($gerentes);
     }
+
+    public function buscar($id)
+    {
+        $asesor = User::find($id);
+
+        if ($asesor) {
+            return response()->json($asesor);
+        } else {
+            return response()->json(['error' => 'Propietario no encontrado'], 404);
+        }
+    }
 }
