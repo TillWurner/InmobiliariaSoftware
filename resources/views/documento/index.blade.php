@@ -30,13 +30,13 @@
                         <td>{{ $documento->id_inmueble }}</td>
                         <td>
                             <form action="#" method="POST">
-                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2">
+                                <a href="https://servicios.infoleg.gob.ar/infolegInternet/anexos/315000-319999/316544/res412-01.pdf" class="btn btn-link" target="_blank">
                                     <i class="fa-solid fa-right-to-bracket"></i>
                                 </a>
                                 <button type="submit" class="btn btn-link">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
-                            </form>
+                            </form>   
                         </td>
                     </tr>
                     @endforeach
