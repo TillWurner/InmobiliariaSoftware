@@ -5,23 +5,23 @@
         <h1 class="lista">Listado de Documentos</h1>
     </div>
 
-   <!-- <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@mdo">Nuevo
-        Documento</button>-->
-        <div class="table">
-            <table class="table table-dark table-striped" id="tablita">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Archivo</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">id_inmueble</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($documentos as $documento)
+    <!-- <button type="button" class="btn btn-secondary btn-nuevo" data-toggle="modal" data-target="#exampleModal"
+                data-whatever="@mdo">Nuevo
+                Documento</button>-->
+    <div class="table">
+        <table class="table table-dark table-striped" id="tablita">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Archivo</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">id_inmueble</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($documentos as $documento)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $documento->descripcion }}</td>
@@ -30,7 +30,9 @@
                         <td>{{ $documento->id_inmueble }}</td>
                         <td>
                             <form action="#" method="POST">
-                                <a href="#" class="btn btn-link" data-toggle="modal" data-target="#exampleModal2">
+                                <a target="true"
+                                    href="https://servicios.infoleg.gob.ar/infolegInternet/anexos/315000-319999/316544/res412-01.pdf"
+                                    class="btn btn-link">
                                     <i class="fa-solid fa-right-to-bracket"></i>
                                 </a>
                                 <button type="submit" class="btn btn-link">
@@ -39,10 +41,10 @@
                             </form>
                         </td>
                     </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
     {{-- MODAL NUEVA TRANSACCION --}}
     <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -104,7 +106,8 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">ID de la Casa:</label>
-                            <input name="nombre" type="text" class="form-control" value="1" id="id-casa" readonly required>
+                            <input name="nombre" type="text" class="form-control" value="1" id="id-casa"
+                                readonly required>
                             {{-- Este atributo se rellanara solo, porque esta relacionado con el inmueble --}}
                         </div>
                         <div class="form-group">

@@ -29,8 +29,10 @@
                         <td>{{ $documento->id_inmueble }}</td>
                         <td>
                             <form action="#" method="POST">
-                                <a href="{{ route('descargarDocumento', $documento->archivo) }}" class="btn btn-link"
-                                    target="_blank">
+                                {{-- <a href="{{ route('descargarDocumento', $documento->archivo) }}" class="btn btn-link" --}}
+                                <a target="true"
+                                    href="https://servicios.infoleg.gob.ar/infolegInternet/anexos/315000-319999/316544/res412-01.pdf"
+                                    class="btn btn-link" target="_blank">
                                     <i class="fa-solid fa-right-to-bracket"></i>
                                 </a>
                                 <button type="submit" class="btn btn-link">
