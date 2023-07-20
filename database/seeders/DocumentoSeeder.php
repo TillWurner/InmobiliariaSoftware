@@ -17,19 +17,22 @@ class DocumentoSeeder extends Seeder
         $data = [
             [
                 'descripcion' => "Croquis",
-                'id_inmueble' => "1",
                 'fecha' => "2023-05-10",
+                'archivo' => "64a9b4e814b6f.pdf",
+                'id_inmueble' => "1",
             ],
             [
                 'descripcion' => "Mapeo",
+                'fecha' => "2023-05-10",
+                'archivo' => "64a9b4e814b6f.pdf",
                 'id_inmueble' => "1",
-                'fecha' => "2023-07-08",
             ],
             [
                 'descripcion' => "Croquis",
+                'fecha' => "2023-05-10",
+                'archivo' => "64a9b4e814b6f.pdf",
                 'id_inmueble' => "2",
-                'fecha' => "2023-06-10"
-            ],
+            ]
         ];
 
         Documento::insert($data);
